@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>通过 Linux 子系统在 Windows 10 上安装 Ubuntu &#8212; blog.huangz.me</title>
+    <title>快速阅读的秘诀 &#8212; blog.huangz.me</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -14,8 +14,8 @@
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="修改 Ubuntu 软件更新源" href="change-ubuntu-software-source.html" />
-    <link rel="prev" title="使用 V2Ray 代理访问外网" href="across-the-wall.html" />
+    <link rel="next" title="2020" href="../2020/index.html" />
+    <link rel="prev" title="2021" href="index.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -53,8 +53,8 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../2021/index.html">2021</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">2020</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">2021</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../2020/index.html">2020</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2019/index.html">2019</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2018/index.html">2018</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2017/index.html">2017</a></li>
@@ -76,7 +76,7 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">通过 Linux 子系统在 Windows 10 上安装 Ubuntu</a></li>
+<li><a class="reference internal" href="#">快速阅读的秘诀</a></li>
 </ul>
 </ul>
 </li>
@@ -86,11 +86,11 @@
               
                 
   <li>
-    <a href="across-the-wall.html" title="Previous Chapter: 使用 V2Ray 代理访问外网"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; 使用 V2Ray 代理访问外网</span>
+    <a href="index.html" title="Previous Chapter: 2021"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; 2021</span>
     </a>
   </li>
   <li>
-    <a href="change-ubuntu-software-source.html" title="Next Chapter: 修改 Ubuntu 软件更新源"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">修改 Ubuntu 软件更新源 &raquo;</span>
+    <a href="../2020/index.html" title="Next Chapter: 2020"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">2020 &raquo;</span>
     </a>
   </li>
               
@@ -117,40 +117,51 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="linux-windows-10-ubuntu">
-<h1>通过 Linux 子系统在 Windows 10 上安装 Ubuntu<a class="headerlink" href="#linux-windows-10-ubuntu" title="Permalink to this headline">¶</a></h1>
-<img alt="../_images/wsl-screenfetch.png" src="../_images/wsl-screenfetch.png" />
-<p>Windows 10 的 <a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/about">Linux 子系统</a>（Windows Subsystem for Linux，WSL）特性能够让我们在 Windows 平台上直接运行 Linux 系统及其之上的众多软件，
-比如 bash 、Git 、Python 、Ruby 等等。</p>
-<p>因为 WSL 是一个可选的特性，
-所以我们在使用它之前必须先开启它，
-具体的步骤是：</p>
-<ol class="arabic simple">
-<li><p>在 Windows 系统的搜索框键入“powershell”，然后右键点击弹出的“Windows PowerShell“，选择“以管理员身份运行“。</p></li>
-<li><p>在弹出的 PowerShell 窗口输入命令 <code class="docutils literal notranslate"><span class="pre">Enable-WindowsOptionalFeature</span> <span class="pre">-Online</span> <span class="pre">-FeatureName</span> <span class="pre">Microsoft-Windows-Subsystem-Linux</span></code> ，然后回车。</p></li>
-<li><p>命令要求重启电脑以完成操作，再次按下回车键，重启电脑。</p></li>
-</ol>
-<img alt="../_images/enable-wsl.png" src="../_images/enable-wsl.png" />
-<p>重启系统之后，
-我们只要打开“Microsoft Store”并在搜索框中输入“Linux”，
-然后就会看到相应的 WSL 引导页面，
-点击“获取这些应用“即可进入 Linux 发行版选择页面。</p>
-<img alt="../_images/store-wsl.png" src="../_images/store-wsl.png" />
-<p>Windows 为 WSL 提供了 Ubuntu 、SUSE 、Kali 等多种 Linux 发行版可选，
-我们选择 Ubuntu 并点击“获取”，然后再点击“安装”即可。</p>
-<img alt="../_images/install-wsl-ubuntu.png" src="../_images/install-wsl-ubuntu.png" />
-<p>安装完毕之后，
-点击“启动”即可启动 Ubuntu 系统，
-然后还会要求设置 UNIX 密码。</p>
-<img alt="../_images/wsl-set-pswd.png" src="../_images/wsl-set-pswd.png" />
-<p>最后，
-因为 WSL 初始安装的只是迷你版本的 Ubuntu 系统，
-所以为了正常使用，
-别忘了在安装系统之后执行 <code class="docutils literal notranslate"><span class="pre">apt</span> <span class="pre">update</span></code> 命令和 <code class="docutils literal notranslate"><span class="pre">apt</span> <span class="pre">upgrade</span></code> 命令安装和更新系统中的软件。</p>
-<div class="line-block">
-<div class="line">感叹 Windows 居然爱上了 Linux 的黄健宏</div>
-<div class="line">2020.2.6</div>
-</div>
+  <div class="section" id="id1">
+<h1>快速阅读的秘诀<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>年末总结，
+很多人都少不了晒一下今年自己读了多少书、看了多少电影、听了多少音乐等等。
+如果你细心观察，
+就会发现大部分人一年的阅读量大概都在二三十本以内，
+少一点的可能只有十本八本，
+但有一些人却可能会有上百本甚至好几百本。</p>
+<p>这中间的巨大差异是怎么来的？
+不排除有人因为虚荣心而“报大数”，
+但能够快速阅读书籍的人也确实是存在的。
+不过其中的秘密并不在于阅读快的人使用了某种快速阅读技巧，
+而在于不同人群之间的知识积累差异。</p>
+<p>当你刚开始接触某个领域的时候，
+阅读该领域的书籍通常是非常耗时的 ——
+因为你接触到的一切知识都是新的，
+所以你需要花时间去消化它们。
+但随着你在该领域浸淫的时间越长，
+掌握的知识越多，
+阅读该领域书籍所需的时间也会变得越来越短。</p>
+<p>举个例子，
+当你刚开始学习算法并阅读第一本算法书的时候，
+你不懂的知识可能有 90% ；
+但是当你阅读第二本算法书的时候，
+你不懂的知识可能只有 50% ，
+而第三本可能只有 30% 。
+以此类推，
+当你读了十本八本算法书之后，
+再拿到一本算法书，
+你可能只需要看看它的目录然后再翻个十页八页就能够把它看完了。
+因为书上95% 的知识点你已经掌握，
+你唯一需要补充的就是书中新出现的 5% 而已。</p>
+<p>了解了这个秘密之后，
+我们就应该坦诚地面对自己“读书慢”的问题：
+读书读的慢并不是一件坏事，
+相反，
+这恰恰说明你在学习一些以前没接触过的新知识，
+这是一件非常棒的事情。
+你唯一需要做的就是耐着性子继续学习，
+丰富自己在该领域的知识积累，
+等到你的积累多起来了以后，
+你迟早也会读的越来越快。</p>
+<p>有些事情，
+慢慢来会比较快，
+读书也一样。</p>
 </div>
 
 
