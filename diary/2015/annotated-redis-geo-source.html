@@ -3,12 +3,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Redis GEO 源码注释 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -121,11 +122,11 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="redis-geo">
+  <section id="redis-geo">
 <h1>Redis GEO 源码注释<a class="headerlink" href="#redis-geo" title="Permalink to this headline">¶</a></h1>
 <p>Redis 的 GEO 特性主要由 <code class="docutils literal notranslate"><span class="pre">geo.h</span></code> 和 <code class="docutils literal notranslate"><span class="pre">geo.c</span></code> 两个文件实现，
 本文对这两个文件进行了详细的注释。</p>
-<div class="section" id="geo-h">
+<section id="geo-h">
 <h2><code class="docutils literal notranslate"><span class="pre">geo.h</span></code><a class="headerlink" href="#geo-h" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef __GEO_H__</span>
 <span class="cp">#define __GEO_H__</span>
@@ -171,8 +172,8 @@
 <span class="cp">#endif</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="geo-c">
+</section>
+<section id="geo-c">
 <h2><code class="docutils literal notranslate"><span class="pre">geo.c</span></code><a class="headerlink" href="#geo-c" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
 <span class="cm"> * Copyright (c) 2014, Matt Stancliff &lt;matt@genges.com&gt;.</span>
@@ -607,19 +608,19 @@
 <span class="p">}</span>
 
 <span class="cm">/* Sort comparators for qsort() */</span>
-<span class="k">static</span> <span class="kt">int</span> <span class="n">sort_gp_asc</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="nf">sort_gp_asc</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">const</span> <span class="k">struct</span> <span class="nc">geoPoint</span> <span class="o">*</span><span class="n">gpa</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">gpb</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
     <span class="cm">/* We can&#39;t do adist - bdist because they are doubles and</span>
 <span class="cm">     * the comparator returns an int. */</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">gpa</span><span class="o">-&gt;</span><span class="n">dist</span> <span class="o">&gt;</span> <span class="n">gpb</span><span class="o">-&gt;</span><span class="n">dist</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">gpa</span><span class="o">-&gt;</span><span class="n">dist</span> <span class="o">==</span> <span class="n">gpb</span><span class="o">-&gt;</span><span class="n">dist</span><span class="p">)</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">gpa</span><span class="o">-&gt;</span><span class="n">dist</span> <span class="o">==</span> <span class="n">gpb</span><span class="o">-&gt;</span><span class="n">dist</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
     <span class="k">else</span>
         <span class="k">return</span> <span class="mi">-1</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="k">static</span> <span class="kt">int</span> <span class="n">sort_gp_desc</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">static</span> <span class="kt">int</span> <span class="nf">sort_gp_desc</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">sort_gp_asc</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
 <span class="p">}</span>
 
@@ -628,7 +629,7 @@
 <span class="cm"> * ==================================================================== */</span>
 
 <span class="cm">/* GEOADD key long lat name [long2 lat2 name2 ... longN latN nameN] */</span>
-<span class="kt">void</span> <span class="n">geoaddCommand</span><span class="p">(</span><span class="n">client</span> <span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">geoaddCommand</span><span class="p">(</span><span class="n">client</span> <span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="c1">// 参数合法性检查</span>
     <span class="cm">/* Check arguments number for sanity. */</span>
@@ -697,7 +698,7 @@
 <span class="cm">/* GEORADIUS key x y radius unit [WITHDIST] [WITHHASH] [WITHCOORD] [ASC|DESC]</span>
 <span class="cm"> *                               [COUNT count]</span>
 <span class="cm"> * GEORADIUSBYMEMBER key member radius unit ... options ... */</span>
-<span class="kt">void</span> <span class="n">georadiusGeneric</span><span class="p">(</span><span class="n">client</span> <span class="o">*</span><span class="n">c</span><span class="p">,</span> <span class="kt">int</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">georadiusGeneric</span><span class="p">(</span><span class="n">client</span> <span class="o">*</span><span class="n">c</span><span class="p">,</span> <span class="kt">int</span> <span class="n">type</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">robj</span> <span class="o">*</span><span class="n">key</span> <span class="o">=</span> <span class="n">c</span><span class="o">-&gt;</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
 
     <span class="cm">/* Look up the requested zset */</span>
@@ -862,12 +863,12 @@
 <span class="p">}</span>
 
 <span class="cm">/* GEORADIUS wrapper function. */</span>
-<span class="kt">void</span> <span class="n">georadiusCommand</span><span class="p">(</span><span class="n">client</span> <span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">georadiusCommand</span><span class="p">(</span><span class="n">client</span> <span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">georadiusGeneric</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">RADIUS_COORDS</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="cm">/* GEORADIUSBYMEMBER wrapper function. */</span>
-<span class="kt">void</span> <span class="n">georadiusByMemberCommand</span><span class="p">(</span><span class="n">client</span> <span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">georadiusByMemberCommand</span><span class="p">(</span><span class="n">client</span> <span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">georadiusGeneric</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">RADIUS_MEMBER</span><span class="p">);</span>
 <span class="p">}</span>
 
@@ -875,7 +876,7 @@
 <span class="cm"> *</span>
 <span class="cm"> * Returns an array with an 11 characters geohash representation of the</span>
 <span class="cm"> * position of the specified elements. */</span>
-<span class="kt">void</span> <span class="n">geohashCommand</span><span class="p">(</span><span class="n">client</span> <span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">geohashCommand</span><span class="p">(</span><span class="n">client</span> <span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">char</span> <span class="o">*</span><span class="n">geoalphabet</span><span class="o">=</span> <span class="s">&quot;0123456789bcdefghjkmnpqrstuvwxyz&quot;</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>
 
@@ -936,7 +937,7 @@
 <span class="cm"> *</span>
 <span class="cm"> * Returns an array of two-items arrays representing the x,y position of each</span>
 <span class="cm"> * element specified in the arguments. For missing elements NULL is returned. */</span>
-<span class="kt">void</span> <span class="n">geoposCommand</span><span class="p">(</span><span class="n">client</span> <span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">geoposCommand</span><span class="p">(</span><span class="n">client</span> <span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">j</span><span class="p">;</span>
 
     <span class="cm">/* Look up the requested zset */</span>
@@ -975,7 +976,7 @@
 <span class="cm"> * Return the distance, in meters by default, otherwise accordig to &quot;unit&quot;,</span>
 <span class="cm"> * between points ele1 and ele2. If one or more elements are missing NULL</span>
 <span class="cm"> * is returned. */</span>
-<span class="kt">void</span> <span class="n">geodistCommand</span><span class="p">(</span><span class="n">client</span> <span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">geodistCommand</span><span class="p">(</span><span class="n">client</span> <span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">double</span> <span class="n">to_meter</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 
     <span class="cm">/* Check if there is the unit to extract, otherwise assume meters. */</span>
@@ -1019,8 +1020,8 @@
 <div class="line">黄健宏</div>
 <div class="line">2015.8.9</div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
     </div>
@@ -1035,7 +1036,7 @@
     </p>
     <p>
         &copy; Copyright 2021, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.0.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

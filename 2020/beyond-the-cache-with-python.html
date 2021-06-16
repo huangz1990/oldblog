@@ -3,12 +3,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>使用 Python 配合 Redis 超越缓存 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -125,7 +126,7 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="python-redis">
+  <section id="python-redis">
 <h1>使用 Python 配合 Redis 超越缓存<a class="headerlink" href="#python-redis" title="Permalink to this headline">¶</a></h1>
 <img alt="../_images/python-code.jpg" src="../_images/python-code.jpg" />
 <div class="line-block">
@@ -152,7 +153,7 @@ Redis 的确是一个很棒的缓存，
 如果你对 <code class="docutils literal notranslate"><span class="pre">async/await</span></code> 不熟悉的话，
 那么可以去看看<a class="reference external" href="https://redislabs.com/blog/async-await-programming-basics-python-examples/">这篇文章</a>，
 里面提到了 <code class="docutils literal notranslate"><span class="pre">async/await</span></code> 对提升性能的帮助。</p>
-<div class="section" id="id2">
+<section id="id2">
 <h2>使用 Redis 构建队列<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>Redis 提供了字符串、哈希、集合和列表等多种数据结构可供使用。
 这些数据结构都是储存数据的好帮手，
@@ -165,81 +166,49 @@ Redis 的确是一个很棒的缓存，
 <img alt="../_images/redis-as-queue.png" src="../_images/redis-as-queue.png" />
 <p>作为例子，
 下面这段在队列里面添加了一些大脚兽的踪迹。</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">asyncio</span>
- <span class="kn">import</span> <span class="nn">aioredis</span>
-
- <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-
-   <span class="n">redis</span> <span class="o">=</span> <span class="k">await</span> <span class="n">aioredis</span><span class="o">.</span><span class="n">create_redis</span><span class="p">(</span><span class="s1">&#39;redis://:foobared@localhost:6379/0&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-
-   <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
-     <span class="n">add_to_queue</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="s1">&#39;Possible vocalizations east of Makanda&#39;</span><span class="p">),</span>
-     <span class="n">add_to_queue</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="s1">&#39;Sighting near the Columbia River&#39;</span><span class="p">),</span>
-     <span class="n">add_to_queue</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="s1">&#39;Chased by a tall hairy creature&#39;</span><span class="p">)</span>
-   <span class="p">)</span>
-
-   <span class="n">redis</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-   <span class="k">await</span> <span class="n">redis</span><span class="o">.</span><span class="n">wait_closed</span><span class="p">()</span>
-
- <span class="k">def</span> <span class="nf">add_to_queue</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
-   <span class="k">return</span> <span class="n">redis</span><span class="o">.</span><span class="n">rpush</span><span class="p">(</span><span class="s1">&#39;bigfoot:sightings:received&#39;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
-
- <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="linenos"> 2</span> <span class="kn">import</span> <span class="nn">aioredis</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span> <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span>   <span class="n">redis</span> <span class="o">=</span> <span class="k">await</span> <span class="n">aioredis</span><span class="o">.</span><span class="n">create_redis</span><span class="p">(</span><span class="s1">&#39;redis://:foobared@localhost:6379/0&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>   <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
+<span class="linenos"> 9</span>     <span class="n">add_to_queue</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="s1">&#39;Possible vocalizations east of Makanda&#39;</span><span class="p">),</span>
+<span class="linenos">10</span>     <span class="n">add_to_queue</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="s1">&#39;Sighting near the Columbia River&#39;</span><span class="p">),</span>
+<span class="linenos">11</span>     <span class="n">add_to_queue</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="s1">&#39;Chased by a tall hairy creature&#39;</span><span class="p">)</span>
+<span class="linenos">12</span>   <span class="p">)</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span>   <span class="n">redis</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="linenos">15</span>   <span class="k">await</span> <span class="n">redis</span><span class="o">.</span><span class="n">wait_closed</span><span class="p">()</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span> <span class="k">def</span> <span class="nf">add_to_queue</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<span class="linenos">18</span>   <span class="k">return</span> <span class="n">redis</span><span class="o">.</span><span class="n">rpush</span><span class="p">(</span><span class="s1">&#39;bigfoot:sightings:received&#39;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>这个程序非常直接。
 我们只需要在第 18 行调用 <code class="docutils literal notranslate"><span class="pre">redis.rpush</span></code> ，
 就能够将指定的元素推入到队列。
 接下来是从队列另一端读取元素的代码，
 同样非常简单。</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">asyncio</span>
- <span class="kn">import</span> <span class="nn">aioredis</span>
-
- <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pp</span>
-
- <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-
-   <span class="n">redis</span> <span class="o">=</span> <span class="k">await</span> <span class="n">aioredis</span><span class="o">.</span><span class="n">create_redis</span><span class="p">(</span><span class="s1">&#39;redis://:foobared@localhost:6379/0&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-
-   <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-     <span class="n">sighting</span> <span class="o">=</span> <span class="k">await</span> <span class="n">redis</span><span class="o">.</span><span class="n">blpop</span><span class="p">(</span><span class="s1">&#39;bigfoot:sightings:received&#39;</span><span class="p">)</span>
-     <span class="n">pp</span><span class="p">(</span><span class="n">sighting</span><span class="p">)</span>
-
- <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="linenos"> 2</span> <span class="kn">import</span> <span class="nn">aioredis</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span> <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pp</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span> <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>   <span class="n">redis</span> <span class="o">=</span> <span class="k">await</span> <span class="n">aioredis</span><span class="o">.</span><span class="n">create_redis</span><span class="p">(</span><span class="s1">&#39;redis://:foobared@localhost:6379/0&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>   <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos">11</span>     <span class="n">sighting</span> <span class="o">=</span> <span class="k">await</span> <span class="n">redis</span><span class="o">.</span><span class="n">blpop</span><span class="p">(</span><span class="s1">&#39;bigfoot:sightings:received&#39;</span><span class="p">)</span>
+<span class="linenos">12</span>     <span class="n">pp</span><span class="p">(</span><span class="n">sighting</span><span class="p">)</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>第 11 行和第 12 行的无限循环将等待并且打印被推入至队列中的大脚兽踪迹。
 这里使用了 <code class="docutils literal notranslate"><span class="pre">redis.blpop</span></code> 而不是 <code class="docutils literal notranslate"><span class="pre">redis.lpop</span></code> ，
 因为前者可以阻塞客户端并等待列表中的元素返回。
@@ -252,8 +221,8 @@ Redis 的确是一个很棒的缓存，
 然后将被弹出的元素推入到另一个列表。
 你可以使用这个命令来将一个队列中的元素传递至另一个队列，
 这是非常棒的一个命令。</p>
-</div>
-<div class="section" id="id4">
+</section>
+<section id="id4">
 <h2>使用 Redis 订阅和发送事件<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>Redis 提供的东西中有些并不是数据结构，
 比如订阅与发布（Pub/Sub）特性就是其中之一。
@@ -263,39 +232,24 @@ Redis 的确是一个很棒的缓存，
 我们只需要<a class="reference external" href="https://redis.io/commands#pubsub">使用一些命令</a>就可以在自己的 Python 应用里面添加强大的订阅与发布机制。</p>
 <p>通过执行订阅操作可以让我们发现事件，
 以下是代码：</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">asyncio</span>
- <span class="kn">import</span> <span class="nn">aioredis</span>
-
- <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pp</span>
-
- <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-
-   <span class="n">redis</span> <span class="o">=</span> <span class="k">await</span> <span class="n">aioredis</span><span class="o">.</span><span class="n">create_redis</span><span class="p">(</span><span class="s1">&#39;redis://:foobared@localhost:6379/0&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-
-   <span class="p">[</span><span class="n">channel</span><span class="p">]</span> <span class="o">=</span> <span class="k">await</span> <span class="n">redis</span><span class="o">.</span><span class="n">psubscribe</span><span class="p">(</span><span class="s1">&#39;bigfoot:broadcast:channel:*&#39;</span><span class="p">)</span>
-
-   <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-     <span class="n">message</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-     <span class="n">pp</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-
- <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="linenos"> 2</span> <span class="kn">import</span> <span class="nn">aioredis</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span> <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pp</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span> <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>   <span class="n">redis</span> <span class="o">=</span> <span class="k">await</span> <span class="n">aioredis</span><span class="o">.</span><span class="n">create_redis</span><span class="p">(</span><span class="s1">&#39;redis://:foobared@localhost:6379/0&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>   <span class="p">[</span><span class="n">channel</span><span class="p">]</span> <span class="o">=</span> <span class="k">await</span> <span class="n">redis</span><span class="o">.</span><span class="n">psubscribe</span><span class="p">(</span><span class="s1">&#39;bigfoot:broadcast:channel:*&#39;</span><span class="p">)</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>   <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos">13</span>     <span class="n">message</span> <span class="o">=</span> <span class="k">await</span> <span class="n">channel</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="linenos">14</span>     <span class="n">pp</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>因为我想要接收所有跟大脚兽有关的消息，
 所以我在这段代码的第 10 行使用 <code class="docutils literal notranslate"><span class="pre">redis.psubscribe</span></code> 订阅了一个 Glob 风格的模式，
 通过使用 <code class="docutils literal notranslate"><span class="pre">bigfoot:broadcast:channel:*</span></code> 作为模式，
@@ -306,47 +260,28 @@ Redis 的确是一个很棒的缓存，
 并在之后使用 <code class="docutils literal notranslate"><span class="pre">.get</span></code> 进行阻塞调用以等待下一条消息。</p>
 <p>发布事件非常简单，
 下面是代码：</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">asyncio</span>
- <span class="kn">import</span> <span class="nn">aioredis</span>
-
- <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-
-   <span class="n">redis</span> <span class="o">=</span> <span class="k">await</span> <span class="n">aioredis</span><span class="o">.</span><span class="n">create_redis</span><span class="p">(</span><span class="s1">&#39;redis://:foobared@localhost:6379/0&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-
-   <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
-     <span class="n">publish</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Possible vocalizations east of Makanda&#39;</span><span class="p">),</span>
-     <span class="n">publish</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Sighting near the Columbia River&#39;</span><span class="p">),</span>
-     <span class="n">publish</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Chased by a tall hairy creature&#39;</span><span class="p">)</span>
-   <span class="p">)</span>
-
-   <span class="n">redis</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-   <span class="k">await</span> <span class="n">redis</span><span class="o">.</span><span class="n">wait_closed</span><span class="p">()</span>
-
- <span class="k">def</span> <span class="nf">publish</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
-   <span class="k">return</span> <span class="n">redis</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;bigfoot:broadcast:channel:</span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
-
- <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="linenos"> 2</span> <span class="kn">import</span> <span class="nn">aioredis</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span> <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span>   <span class="n">redis</span> <span class="o">=</span> <span class="k">await</span> <span class="n">aioredis</span><span class="o">.</span><span class="n">create_redis</span><span class="p">(</span><span class="s1">&#39;redis://:foobared@localhost:6379/0&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>   <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
+<span class="linenos"> 9</span>     <span class="n">publish</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Possible vocalizations east of Makanda&#39;</span><span class="p">),</span>
+<span class="linenos">10</span>     <span class="n">publish</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Sighting near the Columbia River&#39;</span><span class="p">),</span>
+<span class="linenos">11</span>     <span class="n">publish</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Chased by a tall hairy creature&#39;</span><span class="p">)</span>
+<span class="linenos">12</span>   <span class="p">)</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span>   <span class="n">redis</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="linenos">15</span>   <span class="k">await</span> <span class="n">redis</span><span class="o">.</span><span class="n">wait_closed</span><span class="p">()</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span> <span class="k">def</span> <span class="nf">publish</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="n">channel</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<span class="linenos">18</span>   <span class="k">return</span> <span class="n">redis</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;bigfoot:broadcast:channel:</span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>这段代码的重点是第 18 行，
 它使用了名字非常直接的 <code class="docutils literal notranslate"><span class="pre">redis.publish</span></code> 来讲消息发布至所需的通道。</p>
 <p>值得注意的是，
@@ -356,8 +291,8 @@ Redis 的确是一个很棒的缓存，
 如果你想让自己的事件持续存在，
 那么可以考虑使用前面提到的队列，
 又或者接下来将要介绍的 Redis 流。</p>
-</div>
-<div class="section" id="id6">
+</section>
+<section id="id6">
 <h2>使用 Redis 储存数据流<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <p>除了发布与订阅之外，
 Redis 还可以使用流来发布和订阅事件。
@@ -367,47 +302,28 @@ Redis 还可以使用流来发布和订阅事件。
 这些命令的用法都是非常简单的，
 我将一一向你说明。</p>
 <p>下面的代码将把三次大脚兽的目击事件添加到流里面。</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">asyncio</span>
- <span class="kn">import</span> <span class="nn">aioredis</span>
-
- <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-
-   <span class="n">redis</span> <span class="o">=</span> <span class="k">await</span> <span class="n">aioredis</span><span class="o">.</span><span class="n">create_redis</span><span class="p">(</span><span class="s1">&#39;redis://:foobared@localhost:6379/0&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-
-   <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
-     <span class="n">add_to_stream</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Possible vocalizations east of Makanda&#39;</span><span class="p">,</span> <span class="s1">&#39;Class B&#39;</span><span class="p">),</span>
-     <span class="n">add_to_stream</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Sighting near the Columbia River&#39;</span><span class="p">,</span> <span class="s1">&#39;Class A&#39;</span><span class="p">),</span>
-     <span class="n">add_to_stream</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Chased by a tall hairy creature&#39;</span><span class="p">,</span> <span class="s1">&#39;Class A&#39;</span><span class="p">))</span>
-
-   <span class="n">redis</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-   <span class="k">await</span> <span class="n">redis</span><span class="o">.</span><span class="n">wait_closed</span><span class="p">()</span>
-
- <span class="k">def</span> <span class="nf">add_to_stream</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">classification</span><span class="p">):</span>
-   <span class="k">return</span> <span class="n">redis</span><span class="o">.</span><span class="n">xadd</span><span class="p">(</span><span class="s1">&#39;bigfoot:sightings:stream&#39;</span><span class="p">,</span> <span class="p">{</span>
-     <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span> <span class="s1">&#39;classification&#39;</span><span class="p">:</span> <span class="n">classification</span> <span class="p">})</span>
-
- <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="linenos"> 2</span> <span class="kn">import</span> <span class="nn">aioredis</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span> <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span>   <span class="n">redis</span> <span class="o">=</span> <span class="k">await</span> <span class="n">aioredis</span><span class="o">.</span><span class="n">create_redis</span><span class="p">(</span><span class="s1">&#39;redis://:foobared@localhost:6379/0&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>   <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
+<span class="linenos"> 9</span>     <span class="n">add_to_stream</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Possible vocalizations east of Makanda&#39;</span><span class="p">,</span> <span class="s1">&#39;Class B&#39;</span><span class="p">),</span>
+<span class="linenos">10</span>     <span class="n">add_to_stream</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Sighting near the Columbia River&#39;</span><span class="p">,</span> <span class="s1">&#39;Class A&#39;</span><span class="p">),</span>
+<span class="linenos">11</span>     <span class="n">add_to_stream</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Chased by a tall hairy creature&#39;</span><span class="p">,</span> <span class="s1">&#39;Class A&#39;</span><span class="p">))</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>   <span class="n">redis</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="linenos">14</span>   <span class="k">await</span> <span class="n">redis</span><span class="o">.</span><span class="n">wait_closed</span><span class="p">()</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span> <span class="k">def</span> <span class="nf">add_to_stream</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">classification</span><span class="p">):</span>
+<span class="linenos">17</span>   <span class="k">return</span> <span class="n">redis</span><span class="o">.</span><span class="n">xadd</span><span class="p">(</span><span class="s1">&#39;bigfoot:sightings:stream&#39;</span><span class="p">,</span> <span class="p">{</span>
+<span class="linenos">18</span>     <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span> <span class="s1">&#39;classification&#39;</span><span class="p">:</span> <span class="n">classification</span> <span class="p">})</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>这段代码中最重要的就是第 17 行和第 18 行，
 它使用了 <code class="docutils literal notranslate"><span class="pre">redis.xadd</span></code> 函数将一次目击事件的字段添加到流里面。</p>
 <p>每个新添加的流事件都有一个唯一标识符，
@@ -428,49 +344,33 @@ Redis 还可以使用流来发布和订阅事件。
 在第 10 行，
 程序将变量 <code class="docutils literal notranslate"><span class="pre">last_id</span></code> 设置成了 <code class="docutils literal notranslate"><span class="pre">0-0</span></code> ，
 这个 ID 代表流的起始位置。</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">asyncio</span>
- <span class="kn">import</span> <span class="nn">aioredis</span>
-
- <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pp</span>
-
- <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-
-   <span class="n">redis</span> <span class="o">=</span> <span class="k">await</span> <span class="n">aioredis</span><span class="o">.</span><span class="n">create_redis</span><span class="p">(</span><span class="s1">&#39;redis://:foobared@localhost:6379/0&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span>
-
-   <span class="n">last_id</span> <span class="o">=</span> <span class="s1">&#39;0-0&#39;</span>
-   <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-     <span class="n">events</span> <span class="o">=</span> <span class="k">await</span> <span class="n">redis</span><span class="o">.</span><span class="n">xread</span><span class="p">([</span><span class="s1">&#39;bigfoot:sightings:stream&#39;</span><span class="p">],</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">latest_ids</span><span class="o">=</span><span class="p">[</span><span class="n">last_id</span><span class="p">])</span>
-     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">fields</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
-       <span class="n">pp</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span>
-       <span class="n">last_id</span> <span class="o">=</span> <span class="nb">id</span>
-
- <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="linenos"> 2</span> <span class="kn">import</span> <span class="nn">aioredis</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span> <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pp</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span> <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>   <span class="n">redis</span> <span class="o">=</span> <span class="k">await</span> <span class="n">aioredis</span><span class="o">.</span><span class="n">create_redis</span><span class="p">(</span><span class="s1">&#39;redis://:foobared@localhost:6379/0&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>   <span class="n">last_id</span> <span class="o">=</span> <span class="s1">&#39;0-0&#39;</span>
+<span class="linenos">11</span>   <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="linenos">12</span>     <span class="n">events</span> <span class="o">=</span> <span class="k">await</span> <span class="n">redis</span><span class="o">.</span><span class="n">xread</span><span class="p">([</span><span class="s1">&#39;bigfoot:sightings:stream&#39;</span><span class="p">],</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">latest_ids</span><span class="o">=</span><span class="p">[</span><span class="n">last_id</span><span class="p">])</span>
+<span class="linenos">13</span>     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">fields</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+<span class="linenos">14</span>       <span class="n">pp</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span>
+<span class="linenos">15</span>       <span class="n">last_id</span> <span class="o">=</span> <span class="nb">id</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>程序的第 12 行使用 <code class="docutils literal notranslate"><span class="pre">redis.xread</span></code> 函数从流中请求最多 5 个 <code class="docutils literal notranslate"><span class="pre">0-0</span></code> 之后的事件。
 该调用将返回一个列表，
 然后程序将对其进行循环和解构，
 以获得事件的字段和标识符。
 事件的标识符会被储存起来，
 以便将来调用 <code class="docutils literal notranslate"><span class="pre">redis.xread</span></code> 时可以获得新的事件并在有需要时重新读取之前读取过的旧事件。</p>
-</div>
-<div class="section" id="id9">
+</section>
+<section id="id9">
 <h2>将 Redis 用作搜索引擎<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
 <p>Redis 可以通过模块（Module）扩展来增加新的命令和功能。
 有<a class="reference external" href="https://redis.io/modules">大量的模块</a>可以用于 AI 模型服务、图形数据库、时间序列数据库以及本例中的搜索引擎。</p>
@@ -479,73 +379,41 @@ Redis 还可以使用流来发布和订阅事件。
 有些人喜欢用它来进行<a class="reference external" href="https://redislabs.com/blog/the-case-for-ephemeral-search/">瞬时搜索</a>，
 但除此之外它也可以用来进行其他搜索。
 下面是使用该模块的一个例子：</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">asyncio</span>
- <span class="kn">import</span> <span class="nn">aioredis</span>
-
- <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pp</span>
-
- <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-
-   <span class="n">redis</span> <span class="o">=</span> <span class="k">await</span> <span class="n">aioredis</span><span class="o">.</span><span class="n">create_redis</span><span class="p">(</span><span class="s1">&#39;redis://:foobared@localhost:6379/0&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-
-   <span class="k">await</span> <span class="n">redis</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;FT.DROP&#39;</span><span class="p">,</span> <span class="s1">&#39;bigfoot:sightings:search&#39;</span><span class="p">)</span>
-
-   <span class="k">await</span> <span class="n">redis</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;FT.CREATE&#39;</span><span class="p">,</span> <span class="s1">&#39;bigfoot:sightings:search&#39;</span><span class="p">,</span>
-     <span class="s1">&#39;SCHEMA&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;TEXT&#39;</span><span class="p">,</span> <span class="s1">&#39;classification&#39;</span><span class="p">,</span> <span class="s1">&#39;TEXT&#39;</span><span class="p">)</span>
-
-   <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
-     <span class="n">add_document</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Possible vocalizations east of Makanda&#39;</span><span class="p">,</span> <span class="s1">&#39;Class B&#39;</span><span class="p">),</span>
-     <span class="n">add_document</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Sighting near the Columbia River&#39;</span><span class="p">,</span> <span class="s1">&#39;Class A&#39;</span><span class="p">),</span>
-     <span class="n">add_document</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Chased by a tall hairy creature&#39;</span><span class="p">,</span> <span class="s1">&#39;Class A&#39;</span><span class="p">))</span>
-
-   <span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">search</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="s1">&#39;chase|east&#39;</span><span class="p">)</span>
-   <span class="n">pp</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
-
-   <span class="n">redis</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-   <span class="k">await</span> <span class="n">redis</span><span class="o">.</span><span class="n">wait_closed</span><span class="p">()</span>
-
- <span class="k">def</span> <span class="nf">add_document</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">classification</span><span class="p">):</span>
-   <span class="k">return</span> <span class="n">redis</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;FT.ADD&#39;</span><span class="p">,</span> <span class="s1">&#39;bigfoot:sightings:search&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-     <span class="s1">&#39;FIELDS&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="s1">&#39;classification&#39;</span><span class="p">,</span> <span class="n">classification</span><span class="p">)</span>
-
- <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
-   <span class="k">return</span> <span class="n">redis</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;FT.SEARCH&#39;</span><span class="p">,</span> <span class="s1">&#39;bigfoot:sightings:search&#39;</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
-
- <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="linenos"> 2</span> <span class="kn">import</span> <span class="nn">aioredis</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span> <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pp</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span> <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>   <span class="n">redis</span> <span class="o">=</span> <span class="k">await</span> <span class="n">aioredis</span><span class="o">.</span><span class="n">create_redis</span><span class="p">(</span><span class="s1">&#39;redis://:foobared@localhost:6379/0&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>   <span class="k">await</span> <span class="n">redis</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;FT.DROP&#39;</span><span class="p">,</span> <span class="s1">&#39;bigfoot:sightings:search&#39;</span><span class="p">)</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>   <span class="k">await</span> <span class="n">redis</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;FT.CREATE&#39;</span><span class="p">,</span> <span class="s1">&#39;bigfoot:sightings:search&#39;</span><span class="p">,</span>
+<span class="linenos">13</span>     <span class="s1">&#39;SCHEMA&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;TEXT&#39;</span><span class="p">,</span> <span class="s1">&#39;classification&#39;</span><span class="p">,</span> <span class="s1">&#39;TEXT&#39;</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>   <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
+<span class="linenos">16</span>     <span class="n">add_document</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Possible vocalizations east of Makanda&#39;</span><span class="p">,</span> <span class="s1">&#39;Class B&#39;</span><span class="p">),</span>
+<span class="linenos">17</span>     <span class="n">add_document</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Sighting near the Columbia River&#39;</span><span class="p">,</span> <span class="s1">&#39;Class A&#39;</span><span class="p">),</span>
+<span class="linenos">18</span>     <span class="n">add_document</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Chased by a tall hairy creature&#39;</span><span class="p">,</span> <span class="s1">&#39;Class A&#39;</span><span class="p">))</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span>   <span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">search</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="s1">&#39;chase|east&#39;</span><span class="p">)</span>
+<span class="linenos">21</span>   <span class="n">pp</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span>   <span class="n">redis</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="linenos">24</span>   <span class="k">await</span> <span class="n">redis</span><span class="o">.</span><span class="n">wait_closed</span><span class="p">()</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span> <span class="k">def</span> <span class="nf">add_document</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">classification</span><span class="p">):</span>
+<span class="linenos">27</span>   <span class="k">return</span> <span class="n">redis</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;FT.ADD&#39;</span><span class="p">,</span> <span class="s1">&#39;bigfoot:sightings:search&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
+<span class="linenos">28</span>     <span class="s1">&#39;FIELDS&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="s1">&#39;classification&#39;</span><span class="p">,</span> <span class="n">classification</span><span class="p">)</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span> <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+<span class="linenos">31</span>   <span class="k">return</span> <span class="n">redis</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;FT.SEARCH&#39;</span><span class="p">,</span> <span class="s1">&#39;bigfoot:sightings:search&#39;</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>在第 12 和第 13 行，
 程序使用 <code class="docutils literal notranslate"><span class="pre">FT.CREATE</span></code> 创建了一个索引。
 索引需要描述程序将要添加的每个文档中的字段的模式。
@@ -564,79 +432,48 @@ Redis 还可以使用流来发布和订阅事件。
 第 20 行的特定查询指示 RedisSearch 在索引中查找包含这些术语之一的文档。
 在这个例子中，
 该查询将返回两个文档。</p>
-</div>
-<div class="section" id="id12">
+</section>
+<section id="id12">
 <h2>使用 Redis 作为主数据库<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
 <p>Redis 可以作为一个速度奇快的内存存储数据库来使用。
 下面的代码使用了哈希来演示这种用法。
 哈希是一种非常棒的数据结构，
 它可以建模你想要储存的记录类型，
 并且能够将数据的主键用作键名的其中一部分。</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">asyncio</span>
- <span class="kn">import</span> <span class="nn">aioredis</span>
-
- <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pp</span>
-
- <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-
-   <span class="n">redis</span> <span class="o">=</span> <span class="k">await</span> <span class="n">aioredis</span><span class="o">.</span><span class="n">create_redis</span><span class="p">(</span><span class="s1">&#39;redis://:foobared@localhost:6379/0&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-
-   <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
-     <span class="n">add_sighting</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Possible vocalizations east of Makanda&#39;</span><span class="p">,</span> <span class="s1">&#39;Class B&#39;</span><span class="p">),</span>
-     <span class="n">add_sighting</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Sighting near the Columbia River&#39;</span><span class="p">,</span> <span class="s1">&#39;Class A&#39;</span><span class="p">),</span>
-     <span class="n">add_sighting</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Chased by a tall hairy creature&#39;</span><span class="p">,</span> <span class="s1">&#39;Class A&#39;</span><span class="p">))</span>
-
-   <span class="n">sightings</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
-     <span class="n">read_sighting</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-     <span class="n">read_sighting</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-     <span class="n">read_sighting</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-
-   <span class="n">pp</span><span class="p">(</span><span class="n">sightings</span><span class="p">)</span>
-
-   <span class="n">redis</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-   <span class="k">await</span> <span class="n">redis</span><span class="o">.</span><span class="n">wait_closed</span><span class="p">()</span>
-
- <span class="k">def</span> <span class="nf">add_sighting</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">classification</span><span class="p">):</span>
-   <span class="k">return</span> <span class="n">redis</span><span class="o">.</span><span class="n">hmset</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;bigfoot:sighting:</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
-     <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="s1">&#39;classification&#39;</span><span class="p">,</span> <span class="n">classification</span><span class="p">)</span>
-
- <span class="k">def</span> <span class="nf">read_sighting</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
-   <span class="k">return</span> <span class="n">redis</span><span class="o">.</span><span class="n">hgetall</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;bigfoot:sighting:</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-
- <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="linenos"> 2</span> <span class="kn">import</span> <span class="nn">aioredis</span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span> <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pp</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span> <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>   <span class="n">redis</span> <span class="o">=</span> <span class="k">await</span> <span class="n">aioredis</span><span class="o">.</span><span class="n">create_redis</span><span class="p">(</span><span class="s1">&#39;redis://:foobared@localhost:6379/0&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>   <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
+<span class="linenos">11</span>     <span class="n">add_sighting</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Possible vocalizations east of Makanda&#39;</span><span class="p">,</span> <span class="s1">&#39;Class B&#39;</span><span class="p">),</span>
+<span class="linenos">12</span>     <span class="n">add_sighting</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Sighting near the Columbia River&#39;</span><span class="p">,</span> <span class="s1">&#39;Class A&#39;</span><span class="p">),</span>
+<span class="linenos">13</span>     <span class="n">add_sighting</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Chased by a tall hairy creature&#39;</span><span class="p">,</span> <span class="s1">&#39;Class A&#39;</span><span class="p">))</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>   <span class="n">sightings</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
+<span class="linenos">16</span>     <span class="n">read_sighting</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="linenos">17</span>     <span class="n">read_sighting</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+<span class="linenos">18</span>     <span class="n">read_sighting</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span>   <span class="n">pp</span><span class="p">(</span><span class="n">sightings</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>   <span class="n">redis</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="linenos">23</span>   <span class="k">await</span> <span class="n">redis</span><span class="o">.</span><span class="n">wait_closed</span><span class="p">()</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span> <span class="k">def</span> <span class="nf">add_sighting</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">classification</span><span class="p">):</span>
+<span class="linenos">26</span>   <span class="k">return</span> <span class="n">redis</span><span class="o">.</span><span class="n">hmset</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;bigfoot:sighting:</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+<span class="linenos">27</span>     <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="s1">&#39;classification&#39;</span><span class="p">,</span> <span class="n">classification</span><span class="p">)</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span> <span class="k">def</span> <span class="nf">read_sighting</span><span class="p">(</span><span class="n">redis</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+<span class="linenos">30</span>   <span class="k">return</span> <span class="n">redis</span><span class="o">.</span><span class="n">hgetall</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;bigfoot:sighting:</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="linenos">31</span>
+<span class="linenos">32</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <img alt="../_images/redis-hash.png" src="../_images/redis-hash.png" />
 <p>你可能会这样想”如果我把服务器关掉了怎么办？如果它崩溃了怎么办？那我就什么数据都没有了！“
 No，不会的！
@@ -646,8 +483,8 @@ No，不会的！
 如果你使用的是 Redis Enterprise ，
 我们也有为你提供<a class="reference external" href="https://redislabs.com/redis-enterprise/technology/durable-redis-2/">相应的解决方案</a>，
 使得你可以直接使用 Redis 而不必担心持久化的问题。</p>
-</div>
-<div class="section" id="id15">
+</section>
+<section id="id15">
 <h2>亲手尝试一下<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h2>
 <p>为了方便你亲手尝试这些例子，
 我把文中涉及的<a class="reference external" href="https://github.com/guyroyse/python-redis-examples">所有代码都放到了 GitHub 上面</a>，
@@ -665,8 +502,8 @@ No，不会的！
 <div class="line">文/Guy Royse · 译/黄健宏</div>
 <div class="line">2020.7.11</div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
     </div>
@@ -681,7 +518,7 @@ No，不会的！
     </p>
     <p>
         &copy; Copyright 2021, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.0.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

@@ -3,12 +3,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>在 Manjaro Linux 系统使用 Docker &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -126,10 +127,10 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="manjaro-linux-docker">
+  <section id="manjaro-linux-docker">
 <h1>在 Manjaro Linux 系统使用 Docker<a class="headerlink" href="#manjaro-linux-docker" title="Permalink to this headline">¶</a></h1>
 <img alt="../_images/docker_logo.png" src="../_images/docker_logo.png" />
-<div class="section" id="id1">
+<section id="id1">
 <h2>安装并启动<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>安装 Docker ：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S docker
@@ -168,8 +169,8 @@ docker 的可选依赖
 Created symlink /etc/systemd/system/multi-user.target.wants/docker.service → /usr/lib/systemd/system/docker.service.
 </pre></div>
 </div>
-</div>
-<div class="section" id="docker">
+</section>
+<section id="docker">
 <h2>将用户添加到 Docker 组中<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h2>
 <p>Docker 默认只能通过 root 权限执行操作，
 但通过将用户添加到 <code class="docutils literal notranslate"><span class="pre">docker</span></code> 用户组可以规避这一点：</p>
@@ -177,8 +178,8 @@ Created symlink /etc/systemd/system/multi-user.target.wants/docker.service → /
 </pre></div>
 </div>
 <p>注销然后重新登录之后就可以直接执行 Docker 命令了。</p>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h2>使用国内镜像<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>Docker 默认使用的是外国源，
 访问速度很慢而且很容易断线，
@@ -228,8 +229,8 @@ Created symlink /etc/systemd/system/multi-user.target.wants/docker.service → /
 </pre></div>
 </div>
 <p>之后再次拉取应该就能够享受到镜像的加速效果了。</p>
-</div>
-<div class="section" id="image">
+</section>
+<section id="image">
 <h2>搜索和拉取映像（image）<a class="headerlink" href="#image" title="Permalink to this headline">¶</a></h2>
 <p>查找“redis”相关的映像：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker search redis
@@ -298,8 +299,8 @@ redis               rc                  9220658d0dd7        2 weeks ago         
 ubuntu              latest              ccc6e87d482b        5 weeks ago         64.2MB
 </pre></div>
 </div>
-</div>
-<div class="section" id="id3">
+</section>
+<section id="id3">
 <h2>运行映像创建容器<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>根据映像创建容器（实例）：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker run --name myredis -d redis
@@ -319,8 +320,8 @@ f6b2ed42676c        redis               &quot;docker-entrypoint.s…&quot;   9 s
 $ docker rm myredis
 </pre></div>
 </div>
-</div>
-<div class="section" id="id4">
+</section>
+<section id="id4">
 <h2>查看相关信息<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ docker info
 Client:
@@ -374,8 +375,8 @@ Server:
  Live Restore Enabled: false
 </pre></div>
 </div>
-</div>
-<div class="section" id="id5">
+</section>
+<section id="id5">
 <h2>参考资料<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://linuxhint.com/docker_arch_linux/">https://linuxhint.com/docker_arch_linux/</a></p></li>
@@ -386,8 +387,8 @@ Server:
 <div class="line">觉得 Docker 就是套娃的黄健宏</div>
 <div class="line">2020.2.20</div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
     </div>
@@ -402,7 +403,7 @@ Server:
     </p>
     <p>
         &copy; Copyright 2021, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.0.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

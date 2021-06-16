@@ -3,12 +3,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>如何阅读 Redis 源码？ &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -126,12 +127,12 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="redis">
+  <section id="redis">
 <h1>如何阅读 Redis 源码？<a class="headerlink" href="#redis" title="Permalink to this headline">¶</a></h1>
 <p>在这篇文章中，
 我将向大家介绍一种我认为比较合理的 Redis 源码阅读顺序，
 希望可以给对 Redis 有兴趣并打算阅读 Redis 源码的朋友带来一点帮助。</p>
-<div class="section" id="id1">
+<section id="id1">
 <h2>第 1 步：阅读数据结构实现<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>刚开始阅读 Redis 源码的时候，
 最好从数据结构的相关文件开始读起，
@@ -171,8 +172,8 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h2>第 2 步：阅读内存编码数据结构实现<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>在阅读完和数据结构有关的文件之后，
 接下来就应该阅读内存编码（encoding）数据结构了。</p>
@@ -220,8 +221,8 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="id3">
+</section>
+<section id="id3">
 <h2>第 3 步：阅读数据类型实现<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>在完成以上两个阅读步骤之后，
 我们就读完了 Redis 六种不同类型的键（字符串、散列、列表、集合、有序集合、HyperLogLog）的所有底层实现结构了。</p>
@@ -264,8 +265,8 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="id4">
+</section>
+<section id="id4">
 <h2>第 4 步：阅读数据库实现相关代码<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>在读完了 Redis 使用所有底层数据结构，
 以及 Redis 是如何使用这些数据结构来实现不同类型的键之后，
@@ -329,8 +330,8 @@
 </tbody>
 </table>
 </div>
-</div>
-<div class="section" id="id5">
+</section>
+<section id="id5">
 <h2>第 5 步：阅读客户端和服务器的相关代码<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>在阅读完数据库实现代码，
 以及 RDB 和 AOF 两种持久化的代码之后，
@@ -394,8 +395,8 @@
 </tbody>
 </table>
 </div>
-</div>
-<div class="section" id="id6">
+</section>
+<section id="id6">
 <h2>第 6 步：阅读多机功能的实现<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <p>在弄懂了 Redis 的单机服务器是怎样运作的之后，
 就可以开始阅读 Redis 多机功能的实现代码了，
@@ -454,8 +455,8 @@ digraph {
 
     datastruct -&gt; encoding_datastruct -&gt; object -&gt; db -&gt; client_and_server -&gt; multi_server
 
-}</div>
-<div class="section" id="id7">
+}</section>
+<section id="id7">
 <h2>结语<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <p>Redis 的设计非常简洁、优美、精巧和高效，
 任何人只要愿意去阅读它的代码的话，
@@ -469,8 +470,8 @@ digraph {
 <div class="line">黄健宏（huangz）</div>
 <div class="line">2014.7.28</div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
     </div>
@@ -485,7 +486,7 @@ digraph {
     </p>
     <p>
         &copy; Copyright 2021, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.0.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

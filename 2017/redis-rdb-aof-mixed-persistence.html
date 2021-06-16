@@ -3,12 +3,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Redis 4.0 新功能简介：RDB-AOF 混合持久化 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -122,7 +123,7 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="redis-4-0-rdb-aof">
+  <section id="redis-4-0-rdb-aof">
 <h1>Redis 4.0 新功能简介：RDB-AOF 混合持久化<a class="headerlink" href="#redis-4-0-rdb-aof" title="Permalink to this headline">¶</a></h1>
 <p>在过去，
 Redis 用户通常会因为 RDB 持久化和 AOF 持久化之间不同的优缺点而陷入两难的选择当中：</p>
@@ -141,23 +142,23 @@ RDB-AOF 混合持久化：
 至于那些在重写操作执行之后执行的 Redis 命令，
 则会继续以 AOF 格式追加到 AOF 文件的末尾，
 也即是 RDB 数据之后。</p>
-<div class="section" id="aof">
+<section id="aof">
 <h2>创建包含混合持久化内容的 AOF 文件<a class="headerlink" href="#aof" title="Permalink to this headline">¶</a></h2>
 <p>在启用了 RDB-AOF 混合持久化功能的情况下，
 如果我们执行以下命令：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">SET</span> <span class="n">K1</span> <span class="s2">&quot;V1&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">SET</span> <span class="n">K1</span> <span class="s2">&quot;V1&quot;</span>
 <span class="n">OK</span>
 
-<span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">SET</span> <span class="n">K2</span> <span class="s2">&quot;V2&quot;</span>
+<span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">SET</span> <span class="n">K2</span> <span class="s2">&quot;V2&quot;</span>
 <span class="n">OK</span>
 
-<span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">BGREWRITEAOF</span>
+<span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">BGREWRITEAOF</span>
 <span class="n">Background</span> <span class="n">append</span> <span class="n">only</span> <span class="n">file</span> <span class="n">rewriting</span> <span class="n">started</span>
 
-<span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">SET</span> <span class="n">K3</span> <span class="s2">&quot;V3&quot;</span>
+<span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">SET</span> <span class="n">K3</span> <span class="s2">&quot;V3&quot;</span>
 <span class="n">OK</span>
 
-<span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">SET</span> <span class="n">K4</span> <span class="s2">&quot;V4&quot;</span>
+<span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">SET</span> <span class="n">K4</span> <span class="s2">&quot;V4&quot;</span>
 <span class="n">OK</span>
 </pre></div>
 </div>
@@ -182,8 +183,8 @@ RDB-AOF 混合持久化：
 <p>从文件的内容可以看出，
 文件的前半部分储存的是 RDB 格式的数据，
 而后半部分储存的则是 AOF 格式的数据。</p>
-</div>
-<div class="section" id="rdb-aof">
+</section>
+<section id="rdb-aof">
 <h2>启用 RDB-AOF 混合持久化<a class="headerlink" href="#rdb-aof" title="Permalink to this headline">¶</a></h2>
 <p>在目前版本中，
 RDB-AOF 混合持久化功能默认是处于关闭状态的，
@@ -225,8 +226,8 @@ $ redis-server redis.conf
 9468:M 17 Nov 14:46:01.066 * Ready to accept connections
 </pre></div>
 </div>
-</div>
-<div class="section" id="id1">
+</section>
+<section id="id1">
 <h2>结语<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>好的，
 关于 RDB-AOF 混合持久化功能的介绍到此就结束了，
@@ -236,8 +237,8 @@ $ redis-server redis.conf
 <div class="line">黄健宏</div>
 <div class="line">2017.11.17</div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
     </div>
@@ -252,7 +253,7 @@ $ redis-server redis.conf
     </p>
     <p>
         &copy; Copyright 2021, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.0.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

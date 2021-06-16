@@ -3,12 +3,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Go 标准库文档翻译：path 包 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -120,23 +121,23 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="go-path">
+  <section id="go-path">
 <h1>Go 标准库文档翻译：path 包<a class="headerlink" href="#go-path" title="Permalink to this headline">¶</a></h1>
 <p>本文是 Go 标准库中 path 包文档的翻译，
 原文地址为：
 <a class="reference external" href="https://golang.org/pkg/path/">https://golang.org/pkg/path/</a></p>
-<div class="section" id="id1">
+<section id="id1">
 <h2>概述<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>path 包实现了一系列实用函数，
 这些函数可以对实用斜杠进行分隔的路径进行处理。</p>
 <p>如果你要对操作系统路径进行处理，
 请使用 path/filepath 包。</p>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h2>变量<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>ErrBadPattern 用于指示一个 glob 模式出现了格式错误。</p>
-</div>
-<div class="section" id="base">
+</section>
+<section id="base">
 <h2>Base 函数<a class="headerlink" href="#base" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="nx">Base</span><span class="p">(</span><span class="nx">path</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">string</span>
 </pre></div>
@@ -165,8 +166,8 @@
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">b</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="clean">
+</section>
+<section id="clean">
 <h2>Clean 函数<a class="headerlink" href="#clean" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="nx">Clean</span><span class="p">(</span><span class="nx">path</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">string</span>
 </pre></div>
@@ -220,8 +221,8 @@ Clean 函数会根据以下规则进行迭代，
 <span class="nx">Clean</span><span class="p">(</span><span class="s">&quot;/../a/b/../././/c&quot;</span><span class="p">)</span> <span class="p">=</span> <span class="s">&quot;/a/c&quot;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="dir">
+</section>
+<section id="dir">
 <h2>Dir 函数<a class="headerlink" href="#dir" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="nx">Dir</span><span class="p">(</span><span class="nx">path</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">string</span>
 </pre></div>
@@ -254,8 +255,8 @@ Clean 函数会根据以下规则进行迭代，
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="nx">a</span><span class="o">/</span><span class="nx">b</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="ext">
+</section>
+<section id="ext">
 <h2>Ext 函数<a class="headerlink" href="#ext" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="nx">Ext</span><span class="p">(</span><span class="nx">path</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">string</span>
 </pre></div>
@@ -281,8 +282,8 @@ Clean 函数会根据以下规则进行迭代，
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nx">css</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="isabs">
+</section>
+<section id="isabs">
 <h2>IsAbs 函数<a class="headerlink" href="#isabs" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="nx">IsAbs</span><span class="p">(</span><span class="nx">path</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">bool</span>
 </pre></div>
@@ -305,8 +306,8 @@ Clean 函数会根据以下规则进行迭代，
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kc">true</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="join">
+</section>
+<section id="join">
 <h2>Join 函数<a class="headerlink" href="#join" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="nx">Join</span><span class="p">(</span><span class="nx">elem</span> <span class="o">...</span><span class="kt">string</span><span class="p">)</span> <span class="kt">string</span>
 </pre></div>
@@ -339,8 +340,8 @@ Clean 函数会根据以下规则进行迭代，
 <span class="nx">a</span><span class="o">/</span><span class="nx">b</span><span class="o">/</span><span class="nx">c</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="match">
+</section>
+<section id="match">
 <h2>Match 函数<a class="headerlink" href="#match" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="nx">Match</span><span class="p">(</span><span class="nx">pattern</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">matched</span> <span class="kt">bool</span><span class="p">,</span> <span class="nx">err</span> <span class="kt">error</span><span class="p">)</span>
 </pre></div>
@@ -368,8 +369,8 @@ Clean 函数会根据以下规则进行迭代，
 而不是部分匹配。</p>
 <p>函数唯一可能返回的错误为 ErrBadPattern ，
 这个错误用于表示给定的模式有误。</p>
-</div>
-<div class="section" id="split">
+</section>
+<section id="split">
 <h2>Split 函数<a class="headerlink" href="#split" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="nx">Split</span><span class="p">(</span><span class="nx">path</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="nx">file</span> <span class="kt">string</span><span class="p">)</span>
 </pre></div>
@@ -399,12 +400,12 @@ path = dir + file 。</p>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">static</span><span class="o">/</span> <span class="nx">myfile</span><span class="p">.</span><span class="nx">css</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="license">
+</section>
+<section id="license">
 <h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
 <p>Portions of this page are modifications based on work created and <a class="reference external" href="https://developers.google.com/terms/site-policies">shared by Google</a> and used according to terms described in the <a class="reference external" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons 3.0 Attribution License</a> .</p>
-</div>
-</div>
+</section>
+</section>
 
 
     </div>
@@ -419,7 +420,7 @@ path = dir + file 。</p>
     </p>
     <p>
         &copy; Copyright 2021, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.0.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

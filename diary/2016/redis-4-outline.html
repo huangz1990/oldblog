@@ -3,12 +3,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Redis 4.0 新功能简介 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -128,7 +129,7 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="redis-4-0">
+  <section id="redis-4-0">
 <h1>Redis 4.0 新功能简介<a class="headerlink" href="#redis-4-0" title="Permalink to this headline">¶</a></h1>
 <p>Redis 的作者 antirez 在三天之前通过博客文章《<a class="reference external" href="http://antirez.com/news/110">The first release candidate of Redis 4.0 is out</a>》发布了 Redis 4.0 的第一个 RC 版本，
 在博文中他说，
@@ -137,7 +138,7 @@
 以此来强调这次更新的变化之大。</p>
 <p>本文将对 Redis 4.0 的各项主要新功能做一个简单的介绍，
 方便大家第一时间了解到这次更新的主要内容。</p>
-<div class="section" id="id1">
+<section id="id1">
 <h2>模块系统<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>Redis 4.0 发生的最大变化就是加入了模块系统，
 这个系统可以让用户通过自己编写的代码来扩展和实现 Redis 本身并不具备的功能，
@@ -163,8 +164,8 @@
 <p>模块功能使得用户可以将 Redis 用作基础设施，
 并在上面构建更多功能，
 这给 Redis 带来了无数新的可能性。</p>
-</div>
-<div class="section" id="psync-2-0">
+</section>
+<section id="psync-2-0">
 <h2>PSYNC 2.0<a class="headerlink" href="#psync-2-0" title="Permalink to this headline">¶</a></h2>
 <p>新版本的 <code class="docutils literal notranslate"><span class="pre">PSYNC</span></code> 命令解决了旧版本的 Redis 在复制时的一些不够优化的地方：</p>
 <ul class="simple">
@@ -181,15 +182,15 @@
 只要条件允许，
 主从在处理这种情况时将使用部分复制。</p></li>
 </ul>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h2>缓存驱逐策略优化<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>新添加了 Last Frequently Used 缓存驱逐策略，
 具体信息见 antirez 的博文《Random notes on improving the Redis LRU algorithm》： <a class="reference external" href="http://antirez.com/news/109">http://antirez.com/news/109</a></p>
 <p>另外 Redis 4.0 还对已有的缓存驱逐策略进行了优化，
 使得它们能够更健壮、高效、快速和精确。</p>
-</div>
-<div class="section" id="del-flushdb-flushall">
+</section>
+<section id="del-flushdb-flushall">
 <h2>非阻塞 DEL 、 FLUSHDB 和 FLUSHALL<a class="headerlink" href="#del-flushdb-flushall" title="Permalink to this headline">¶</a></h2>
 <p>在 Redis 4.0 之前，
 用户在使用 <code class="docutils literal notranslate"><span class="pre">DEL</span></code> 命令删除体积较大的键，
@@ -216,8 +217,8 @@ Redis 4.0 中的 <code class="docutils literal notranslate"><span class="pre">FL
 <span class="n">OK</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="id3">
+</section>
+<section id="id3">
 <h2>交换数据库<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>Redis 4.0 对数据库命令的另外一个修改是新增了 <code class="docutils literal notranslate"><span class="pre">SWAPDB</span></code> 命令，
 这个命令可以对指定的两个数据库进行互换：
@@ -245,8 +246,8 @@ Redis 4.0 中的 <code class="docutils literal notranslate"><span class="pre">FL
 <span class="s2">&quot;huangz&quot;</span>                 <span class="o">--</span> <span class="n">证明两个数据库已经互换</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="rdb-aof">
+</section>
+<section id="rdb-aof">
 <h2>混合 RDB-AOF 持久化格式<a class="headerlink" href="#rdb-aof" title="Permalink to this headline">¶</a></h2>
 <p>Redis 4.0 新增了 RDB-AOF 混合持久化格式，
 这是一个可选的功能，
@@ -275,8 +276,8 @@ AOF 重写产生的文件将同时包含 RDB 格式的内容和 AOF 格式的内
 <span class="n">aof</span><span class="o">-</span><span class="n">use</span><span class="o">-</span><span class="n">rdb</span><span class="o">-</span><span class="n">preamble</span> <span class="n">no</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="id4">
+</section>
+<section id="id4">
 <h2>内存命令<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>新添加了一个 <code class="docutils literal notranslate"><span class="pre">MEMORY</span></code> 命令，
 这个命令可以用于视察内存使用情况，
@@ -350,8 +351,8 @@ AOF 重写产生的文件将同时包含 RDB 格式的内容和 AOF 格式的内
 <span class="n">Stats</span> <span class="ow">not</span> <span class="n">supported</span> <span class="k">for</span> <span class="n">the</span> <span class="n">current</span> <span class="n">allocator</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="nat-docker">
+</section>
+<section id="nat-docker">
 <h2>兼容 NAT 和 Docker<a class="headerlink" href="#nat-docker" title="Permalink to this headline">¶</a></h2>
 <p>Redis 4.0 将兼容 NAT 和 Docker ，
 具体的使用方法在 <code class="docutils literal notranslate"><span class="pre">redis.conf</span></code> 中有记载：</p>
@@ -389,8 +390,8 @@ AOF 重写产生的文件将同时包含 RDB 格式的内容和 AOF 格式的内
 <span class="c1"># cluster-announce-bus-port 6380</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="id5">
+</section>
+<section id="id5">
 <h2>结语<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>关于 Redis 4.0 的主要更新就介绍到这里，
 想要详细了解 Redis 4.0 各项修改的读者可以参考 Release Note ：
@@ -401,8 +402,8 @@ AOF 重写产生的文件将同时包含 RDB 格式的内容和 AOF 格式的内
 <div class="line">黄健宏</div>
 <div class="line">2016.12.6</div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
     </div>
@@ -417,7 +418,7 @@ AOF 重写产生的文件将同时包含 RDB 格式的内容和 AOF 格式的内
     </p>
     <p>
         &copy; Copyright 2021, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.0.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

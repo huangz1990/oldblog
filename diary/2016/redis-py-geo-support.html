@@ -3,12 +3,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>使用 redis-py 储存地理位置数据 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -126,7 +127,7 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="redis-py">
+  <section id="redis-py">
 <h1>使用 redis-py 储存地理位置数据<a class="headerlink" href="#redis-py" title="Permalink to this headline">¶</a></h1>
 <p>Redis 3.2 版本的其中一个重要更新就是提供了对<a class="reference external" href="http://redisdoc.com/geo/index.html">地理位置（GEO）数据</a>的支持，
 这一特性允许用户将地理位置信息储存到 Redis 数据库中，
@@ -139,7 +140,7 @@
 发现 redis-py 的最新版本已经添加了对 GEO 特性的支持，
 所以今天就让我们一起来看看如何在 redis-py 中处理地理位置数据。</p>
 <img alt="../../_images/google-map.png" src="../../_images/google-map.png" />
-<div class="section" id="id1">
+<section id="id1">
 <h2>下载并安装新版 redis-py<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>因为支持 GEO 命令的最新版 redis-py 仍处于开发阶段，
 所以它无法通过 pypi 取得。
@@ -180,8 +181,8 @@ $sudo setup.py install
 </div>
 <p>接下来，
 就让我们逐个试试这些方法。</p>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h2>添加地理位置<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>首先要测试的是 <code class="docutils literal notranslate"><span class="pre">geoadd()</span></code> 方法，
 这个方法调用的是 Redis 的 <a class="reference external" href="http://redisdoc.com/geo/geoadd.html">GEOADD</a> 命令，
@@ -200,8 +201,8 @@ $sudo setup.py install
 <span class="go">3</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="id3">
+</section>
+<section id="id3">
 <h2>获取地理位置<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>在将地理位置储存到键里面之后，
 我们就可以使用 <a class="reference external" href="http://redisdoc.com/geo/geopos.html">GEOPOS</a> 命令去获取已储存的地理位置信息。
@@ -220,8 +221,8 @@ $sudo setup.py install
 <span class="go">[(113.20996731519699, 23.593675019671288), (113.22784155607224, 23.125598202060807)]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="id4">
+</section>
+<section id="id4">
 <h2>计算两地间的距离<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>对于被储存的两个地理位置，
 我们可以使用 <a class="reference external" href="http://redisdoc.com/geo/geodist.html">GEODIST</a> 命令去计算它们之间的距离，
@@ -251,8 +252,8 @@ $sudo setup.py install
 </div>
 <p>现在，
 我们可以更直观地看到清远和广州之间相距 52.0944 公里了。</p>
-</div>
-<div class="section" id="id5">
+</section>
+<section id="id5">
 <h2>范围查找<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>Redis 的 <a class="reference external" href="http://redisdoc.com/geo/georadius.html">GEORADIUS 命令</a> 和 <a class="reference external" href="http://redisdoc.com/geo/georadiusbymember.html">GEORADIUSBYMEMBER 命令</a> 可以让用户基于指定的地理位置或者已有的地理位置进行范围查找，
 redis-py 也通过同名的 <code class="docutils literal notranslate"><span class="pre">georadius()</span></code> 方法和 <code class="docutils literal notranslate"><span class="pre">georadiusbymember()</span></code> 方法来执行这两个命令。</p>
@@ -317,8 +318,8 @@ redis-py 也通过同名的 <code class="docutils literal notranslate"><span cla
 <span class="go">[[&#39;Foshan&#39;, 17.9819], [&#39;Guangzhou&#39;, 0.0], [&#39;Qingyuan&#39;, 52.0944]]  # 佛山和清远都在广州的半径 100 公里范围之内</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="geohash">
+</section>
+<section id="geohash">
 <h2>获取 geohash<a class="headerlink" href="#geohash" title="Permalink to this headline">¶</a></h2>
 <p>最后，
 用户可以通过 <code class="docutils literal notranslate"><span class="pre">geohash()</span></code> 方法调用 <a class="reference external" href="http://redisdoc.com/geo/geohash.html">GEOHASH</a> 命令，
@@ -335,8 +336,8 @@ redis-py 也通过同名的 <code class="docutils literal notranslate"><span cla
 <span class="go">[&#39;ws0w0phgp70&#39;, &#39;ws0e89curg0&#39;, &#39;ws06vu9s0j0&#39;]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="id7">
+</section>
+<section id="id7">
 <h2>结语<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <p>好的，
 这次关于使用 redis-py 处理 GEO 数据的介绍就到此结束，
@@ -347,8 +348,8 @@ redis-py 也通过同名的 <code class="docutils literal notranslate"><span cla
 <div class="line">黄健宏</div>
 <div class="line">2016.8.12</div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
     </div>
@@ -363,7 +364,7 @@ redis-py 也通过同名的 <code class="docutils literal notranslate"><span cla
     </p>
     <p>
         &copy; Copyright 2021, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.0.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

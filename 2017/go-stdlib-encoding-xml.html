@@ -3,12 +3,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Go 标准库文档翻译：encoding/xml 包 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -188,17 +189,17 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="go-encoding-xml">
+  <section id="go-encoding-xml">
 <h1>Go 标准库文档翻译：encoding/xml 包<a class="headerlink" href="#go-encoding-xml" title="Permalink to this headline">¶</a></h1>
 <p>本文是 Go 标准库中 encoding/xml 包文档的翻译，
 原文地址为：
 <a class="reference external" href="https://golang.org/pkg/encoding/xml/">https://golang.org/pkg/encoding/xml/</a></p>
-<div class="section" id="id1">
+<section id="id1">
 <h2>概述<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>xml 包实现了一个简单的 XML 1.0 语法分析器，
 这个分析器能够理解 XML 命名空间。</p>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h2>常量<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span> <span class="p">(</span>
     <span class="c1">// 一个普通的 XML 首部，可以用于封装的输出结果。</span>
@@ -208,8 +209,8 @@
 <span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="id3">
+</section>
+<section id="id3">
 <h2>变量<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>HTMLAutoClose 用于说明 HTML 元素是否会自动关闭标签：</p>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">HTMLAutoClose</span> <span class="p">=</span> <span class="nx">htmlAutoClose</span>
@@ -220,8 +221,8 @@
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">HTMLEntity</span> <span class="p">=</span> <span class="nx">htmlEntity</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="escape">
+</section>
+<section id="escape">
 <h2>Escape 函数<a class="headerlink" href="#escape" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="nx">Escape</span><span class="p">(</span><span class="nx">w</span> <span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">,</span> <span class="nx">s</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span>
 </pre></div>
@@ -230,15 +231,15 @@
 但前者不会返回错误。
 这个函数是为了兼容 Go 1.0 而提供的，
 高于此版本的平台应该使用 EscapeText 来代替。</p>
-</div>
-<div class="section" id="escapetext">
+</section>
+<section id="escapetext">
 <h2>EscapeText 函数<a class="headerlink" href="#escapetext" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="nx">EscapeText</span><span class="p">(</span><span class="nx">w</span> <span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">,</span> <span class="nx">s</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="kt">error</span>
 </pre></div>
 </div>
 <p>把与纯文本数据 s 等价的转义后 XML 写入到 w 。</p>
-</div>
-<div class="section" id="marshal">
+</section>
+<section id="marshal">
 <h2>Marshal 函数<a class="headerlink" href="#marshal" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="nx">Marshal</span><span class="p">(</span><span class="nx">v</span> <span class="kd">interface</span><span class="p">{})</span> <span class="p">([]</span><span class="kt">byte</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span>
 </pre></div>
@@ -295,8 +296,8 @@ XML 元素的名字由一系列规则决定，
 <p>Marshal 的执行示例请参考 MarshalIndent 的文档。</p>
 <p>如果用户尝试让 Marshal 去封装一个频道、函数或者map，
 那么 Marshal 将返回一个错误。</p>
-</div>
-<div class="section" id="marshalindent">
+</section>
+<section id="marshalindent">
 <h2>MarshalIndent 函数<a class="headerlink" href="#marshalindent" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="nx">MarshalIndent</span><span class="p">(</span><span class="nx">v</span> <span class="kd">interface</span><span class="p">{},</span> <span class="nx">prefix</span><span class="p">,</span> <span class="nx">indent</span> <span class="kt">string</span><span class="p">)</span> <span class="p">([]</span><span class="kt">byte</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span>
 </pre></div>
@@ -358,8 +359,8 @@ indent 出现的数量由行的嵌套深度决定。</p>
   <span class="nt">&lt;/person&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="unmarshal">
+</section>
+<section id="unmarshal">
 <h2>Unmarshal 函数<a class="headerlink" href="#unmarshal" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="nx">Unmarshal</span><span class="p">(</span><span class="nx">data</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">,</span> <span class="nx">v</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kt">error</span>
 </pre></div>
@@ -442,7 +443,7 @@ Unmarshal 使用大小写敏感的比较操作来对比 XML 元素的名字和�
 <p>Unmarshal 通过记录元素的名字来将一个 XML 元素映射为 Name 。</p>
 <p>Unmarshal 通过为指针设置为一个新分配的值，
 并把元素映射至该值来将一个 XML 元素映射至指针。</p>
-<div class="section" id="id4">
+<section id="id4">
 <h3>示例<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>这个示例展示了如何将一个 XML 片段解封至一个具有多个预设字段的值里面。
 需要注意的是，
@@ -516,9 +517,9 @@ Groups: [Friends Squash]
 Address: {Hanga Roa Easter Island}
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="attr">
+</section>
+</section>
+<section id="attr">
 <h2>Attr 类型<a class="headerlink" href="#attr" title="Permalink to this headline">¶</a></h2>
 <p>Attr 用于表示 XML 元素中以 Name=Value 格式存在的属性：</p>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">Attr</span> <span class="kd">struct</span> <span class="p">{</span>
@@ -527,38 +528,38 @@ Address: {Hanga Roa Easter Island}
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="chardata">
+</section>
+<section id="chardata">
 <h2>CharData 类型<a class="headerlink" href="#chardata" title="Permalink to this headline">¶</a></h2>
 <p>CharData 用于表示 XML 字符数据（原始文本），
 而 XML 转义序列（sequence）将被 CharData 表示的字符代替。</p>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">CharData</span> <span class="p">[]</span><span class="kt">byte</span>
 </pre></div>
 </div>
-<div class="section" id="chardata-copy">
+<section id="chardata-copy">
 <h3>(CharData) Copy 方法<a class="headerlink" href="#chardata-copy" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="nx">CharData</span><span class="p">)</span> <span class="nx">Copy</span><span class="p">()</span> <span class="nx">CharData</span>
 </pre></div>
 </div>
 <p>返回 CharData 的一个副本。</p>
-</div>
-</div>
-<div class="section" id="comment">
+</section>
+</section>
+<section id="comment">
 <h2>Comment 类型<a class="headerlink" href="#comment" title="Permalink to this headline">¶</a></h2>
 <p>Comment 用于表示格式为 <code class="docutils literal notranslate"><span class="pre">&lt;!--comment--&gt;</span></code> 的 XML 注释，
 但注释的 <code class="docutils literal notranslate"><span class="pre">&lt;!--</span></code> 标记以及 <code class="docutils literal notranslate"><span class="pre">--&gt;</span></code> 标记不会被包含在字节里面。</p>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">Comment</span> <span class="p">[]</span><span class="kt">byte</span>
 </pre></div>
 </div>
-<div class="section" id="comment-copy">
+<section id="comment-copy">
 <h3>(Comment) Copy 方法<a class="headerlink" href="#comment-copy" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="nx">Comment</span><span class="p">)</span> <span class="nx">Copy</span><span class="p">()</span> <span class="nx">Comment</span>
 </pre></div>
 </div>
 <p>返回 Comment 的一个副本。</p>
-</div>
-</div>
-<div class="section" id="decoder">
+</section>
+</section>
+<section id="decoder">
 <h2>Decoder 类型<a class="headerlink" href="#decoder" title="Permalink to this headline">¶</a></h2>
 <p>Decoder 用于表示一个读取特定输入流的 XML 语法分析器，
 分析器会假定该输入以 UTF-8 进行编码。</p>
@@ -611,7 +612,7 @@ Address: {Hanga Roa Easter Island}
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="section" id="newdecoder">
+<section id="newdecoder">
 <h3>NewDecoder 函数<a class="headerlink" href="#newdecoder" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="nx">NewDecoder</span><span class="p">(</span><span class="nx">r</span> <span class="nx">io</span><span class="p">.</span><span class="nx">Reader</span><span class="p">)</span> <span class="o">*</span><span class="nx">Decoder</span>
 </pre></div>
@@ -619,16 +620,16 @@ Address: {Hanga Roa Easter Island}
 <p>创建一个新的读取 r 的 XML 语法分析器。
 如果 r 没有实现 io.ByteReader ，
 那么函数将使用它自有的缓冲机制。</p>
-</div>
-<div class="section" id="decoder-decode">
+</section>
+<section id="decoder-decode">
 <h3>(*Decoder) Decode 方法<a class="headerlink" href="#decoder-decode" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="o">*</span><span class="nx">Decoder</span><span class="p">)</span> <span class="nx">Decode</span><span class="p">(</span><span class="nx">v</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kt">error</span>
 </pre></div>
 </div>
 <p>执行与 Unmarshal 一样的解码工作，
 唯一的不同在于这个方法会通过读取解码器流来查找起始元素。</p>
-</div>
-<div class="section" id="decoder-decodeelement">
+</section>
+<section id="decoder-decodeelement">
 <h3>(*Decoder) DecodeElement 方法<a class="headerlink" href="#decoder-decodeelement" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="o">*</span><span class="nx">Decoder</span><span class="p">)</span> <span class="nx">DecodeElement</span><span class="p">(</span><span class="nx">v</span> <span class="kd">interface</span><span class="p">{},</span> <span class="nx">start</span> <span class="o">*</span><span class="nx">StartElement</span><span class="p">)</span> <span class="kt">error</span>
 </pre></div>
@@ -639,8 +640,8 @@ Address: {Hanga Roa Easter Island}
 当一个客户端想要自行读取某些原始 XML token ，
 但是却想要使用 Unmarshal 去处理某些元素时，
 这个方法就可以派上用场。</p>
-</div>
-<div class="section" id="decoder-inputoffset">
+</section>
+<section id="decoder-inputoffset">
 <h3>(*Decoder) InputOffset 方法<a class="headerlink" href="#decoder-inputoffset" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="o">*</span><span class="nx">Decoder</span><span class="p">)</span> <span class="nx">InputOffset</span><span class="p">()</span> <span class="kt">int64</span>
 </pre></div>
@@ -648,8 +649,8 @@ Address: {Hanga Roa Easter Island}
 <p>返回当前解码器位置在输入流中所处的字节偏移量。
 这个偏移量会给出最近被返回的 token 的结尾，
 以及下一个 token 的开头。</p>
-</div>
-<div class="section" id="decoder-skip">
+</section>
+<section id="decoder-skip">
 <h3>(*Decoder) Skip 方法<a class="headerlink" href="#decoder-skip" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="o">*</span><span class="nx">Decoder</span><span class="p">)</span> <span class="nx">Skip</span><span class="p">()</span> <span class="kt">error</span>
 </pre></div>
@@ -662,8 +663,8 @@ Address: {Hanga Roa Easter Island}
 它返回 nil ；
 否则，
 它将返回一个用于描述问题的错误。</p>
-</div>
-<div class="section" id="decoder-token">
+</section>
+<section id="decoder-token">
 <h3>(*Decoder) Token 方法<a class="headerlink" href="#decoder-token" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="o">*</span><span class="nx">Decoder</span><span class="p">)</span> <span class="nx">Token</span><span class="p">()</span> <span class="p">(</span><span class="nx">Token</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span>
 </pre></div>
@@ -686,8 +687,8 @@ Token 包含的每个 Name 结构的 Space 都会被设置为标志着它的命�
 如果 Token 遇到了一个未被识别的命名空间前缀，
 那么它会使用这个前缀来作为 Space 的值，
 而不是报告一个错误。</p>
-</div>
-<div class="section" id="decoder-rawtoken">
+</section>
+<section id="decoder-rawtoken">
 <h3>(*Decoder) RawToken 方法<a class="headerlink" href="#decoder-rawtoken" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="o">*</span><span class="nx">Decoder</span><span class="p">)</span> <span class="nx">RawToken</span><span class="p">()</span> <span class="p">(</span><span class="nx">Token</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span>
 </pre></div>
@@ -695,24 +696,24 @@ Token 包含的每个 Name 结构的 Space 都会被设置为标志着它的命�
 <p>RawToken 的作用跟 Token 的作用类似，
 但 RawToken 不会验证起始元素和结束元素是否匹配，
 也不会将命名空间前缀转换为它们对应的 URL 。</p>
-</div>
-</div>
-<div class="section" id="directive">
+</section>
+</section>
+<section id="directive">
 <h2>Directive 类型<a class="headerlink" href="#directive" title="Permalink to this headline">¶</a></h2>
 <p>一个 Directive 表示一个 &lt;!text&gt; 格式的 XML 命令，
 用于包围命令的 &lt;! 标识和 &gt; 标识不会包含在 Directive 之内：</p>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">Directive</span> <span class="p">[]</span><span class="kt">byte</span>
 </pre></div>
 </div>
-<div class="section" id="directive-copy">
+<section id="directive-copy">
 <h3>(Directive) Copy 方法<a class="headerlink" href="#directive-copy" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="nx">Directive</span><span class="p">)</span> <span class="nx">Copy</span><span class="p">()</span> <span class="nx">Directive</span>
 </pre></div>
 </div>
 <p>创建 Directive 的一个副本。</p>
-</div>
-</div>
-<div class="section" id="encoder">
+</section>
+</section>
+<section id="encoder">
 <h2>Encoder 类型<a class="headerlink" href="#encoder" title="Permalink to this headline">¶</a></h2>
 <p>Encoder 负责把 XML 数据写入至输出流里面：</p>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">Encoder</span> <span class="kd">struct</span> <span class="p">{</span>
@@ -772,14 +773,14 @@ Token 包含的每个 Name 结构的 Space 都会被设置为标志着它的命�
   <span class="nt">&lt;/person&gt;</span>
 </pre></div>
 </div>
-<div class="section" id="newencoder">
+<section id="newencoder">
 <h3>NewEncoder 函数<a class="headerlink" href="#newencoder" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="nx">NewEncoder</span><span class="p">(</span><span class="nx">w</span> <span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">)</span> <span class="o">*</span><span class="nx">Encoder</span>
 </pre></div>
 </div>
 <p>返回一个能够对 w 进行写入的编码器。</p>
-</div>
-<div class="section" id="encoder-encode">
+</section>
+<section id="encoder-encode">
 <h3>(*Encoder) Encode 方法<a class="headerlink" href="#encoder-encode" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">enc</span> <span class="o">*</span><span class="nx">Encoder</span><span class="p">)</span> <span class="nx">Encode</span><span class="p">(</span><span class="nx">v</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kt">error</span>
 </pre></div>
@@ -787,8 +788,8 @@ Token 包含的每个 Name 结构的 Space 都会被设置为标志着它的命�
 <p>将 XML 编码的 v 写入到流里面。</p>
 <p>请查阅 Marshal 的文档来了解 Go 是如何将 Go 值转换为 XML 的。</p>
 <p>Encode 在返回之前会先调用 Flush 。</p>
-</div>
-<div class="section" id="encoder-encodeelement">
+</section>
+<section id="encoder-encodeelement">
 <h3>(*Encoder) EncodeElement 方法<a class="headerlink" href="#encoder-encodeelement" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">enc</span> <span class="o">*</span><span class="nx">Encoder</span><span class="p">)</span> <span class="nx">EncodeElement</span><span class="p">(</span><span class="nx">v</span> <span class="kd">interface</span><span class="p">{},</span> <span class="nx">start</span> <span class="nx">StartElement</span><span class="p">)</span> <span class="kt">error</span>
 </pre></div>
@@ -797,8 +798,8 @@ Token 包含的每个 Name 结构的 Space 都会被设置为标志着它的命�
 并使用 start 作为被编码数据的最外围标签。</p>
 <p>请查阅 Marshal 的文档来了解 Go 是如何将 Go 值转换为 XML 的。</p>
 <p>EncodeElement 在返回之前会先调用 Flush 。</p>
-</div>
-<div class="section" id="encoder-encodetoken">
+</section>
+<section id="encoder-encodetoken">
 <h3>(*Encoder) EncodeToken 方法<a class="headerlink" href="#encoder-encodetoken" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">enc</span> <span class="o">*</span><span class="nx">Encoder</span><span class="p">)</span> <span class="nx">EncodeToken</span><span class="p">(</span><span class="nx">t</span> <span class="nx">Token</span><span class="p">)</span> <span class="kt">error</span>
 </pre></div>
@@ -816,16 +817,16 @@ Token 包含的每个 Name 结构的 Space 都会被设置为标志着它的命�
 以便确保 XML 被写入到底层的写入器里面。</p>
 <p>只有在第一个 token 存在于流里面时，
 EncodeToken 才会允许对一个 Target 设置为 “xml” 的 Proclnst 进行写入。</p>
-</div>
-<div class="section" id="encoder-flush">
+</section>
+<section id="encoder-flush">
 <h3>(*Encoder) Flush 方法<a class="headerlink" href="#encoder-flush" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">enc</span> <span class="o">*</span><span class="nx">Encoder</span><span class="p">)</span> <span class="nx">Flush</span><span class="p">()</span> <span class="kt">error</span>
 </pre></div>
 </div>
 <p>将所有被缓冲的 XML 冲刷到底层的写入器里面。
 请查看 EncodeToken 的文档以便了解更多细节。</p>
-</div>
-<div class="section" id="encoder-indent">
+</section>
+<section id="encoder-indent">
 <h3>(*Encoder) Indent 方法<a class="headerlink" href="#encoder-indent" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">enc</span> <span class="o">*</span><span class="nx">Encoder</span><span class="p">)</span> <span class="nx">Indent</span><span class="p">(</span><span class="nx">prefix</span><span class="p">,</span> <span class="nx">indent</span> <span class="kt">string</span><span class="p">)</span>
 </pre></div>
@@ -834,9 +835,9 @@ EncodeToken 才会允许对一个 Target 设置为 “xml” 的 Proclnst 进行
 使得编码器产生的每个元素都会以一个 prefix 开头的新缩进行为开始，
 而跟在 prefix 后面的则是一个或多个 indent 的副本，
 indent 的具体数量由元素的嵌套深度决定。</p>
-</div>
-</div>
-<div class="section" id="endelement">
+</section>
+</section>
+<section id="endelement">
 <h2>EndElement 类型<a class="headerlink" href="#endelement" title="Permalink to this headline">¶</a></h2>
 <p>一个 EndElement 表示一个 XML 结束元素。</p>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">EndElement</span> <span class="kd">struct</span> <span class="p">{</span>
@@ -844,8 +845,8 @@ indent 的具体数量由元素的嵌套深度决定。</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="marshaler">
+</section>
+<section id="marshaler">
 <h2>Marshaler 类型<a class="headerlink" href="#marshaler" title="Permalink to this headline">¶</a></h2>
 <p>Marshaler 接口由那些需要将自己封装成合法的 XML 元素的对象实现。</p>
 <p>MarshalXML 会将它的接收者编码成一个或多个 XML 元素。
@@ -864,8 +865,8 @@ indent 的具体数量由元素的嵌套深度决定。</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="marshalerattr">
+</section>
+<section id="marshalerattr">
 <h2>MarshalerAttr 类型<a class="headerlink" href="#marshalerattr" title="Permalink to this headline">¶</a></h2>
 <p>MarshalerAttr 接口由那些需要将自己封装成合法的 XML 属性的对象实现。</p>
 <p>MarshalXMLAttr 会返回一个 XML 属性，
@@ -878,8 +879,8 @@ MarshalXMLAttr 只能用于字段标签中带有 “attr” 选项的结构字�
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="name">
+</section>
+<section id="name">
 <h2>Name 类型<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h2>
 <p>一个 Name 可以表示一个使用命名空间标识符（Space）进行注解的 XML 名字（Local）。
 在 Decoder.Token 返回的 token 但中，
@@ -890,8 +891,8 @@ Space 标识符将不会使用被分析文档中的简短前缀，
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="procinst">
+</section>
+<section id="procinst">
 <h2>ProcInst 类型<a class="headerlink" href="#procinst" title="Permalink to this headline">¶</a></h2>
 <p>一个 ProcInst 可以表示一个格式为 &lt;?目标指令?&gt; 的 XML 处理指令。</p>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">ProcInst</span> <span class="kd">struct</span> <span class="p">{</span>
@@ -900,14 +901,14 @@ Space 标识符将不会使用被分析文档中的简短前缀，
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="section" id="procinst-copy">
+<section id="procinst-copy">
 <h3>(ProcInst) Copy 方法<a class="headerlink" href="#procinst-copy" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="nx">ProcInst</span><span class="p">)</span> <span class="nx">Copy</span><span class="p">()</span> <span class="nx">ProcInst</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="startelement">
+</section>
+</section>
+<section id="startelement">
 <h2>StartElement 类型<a class="headerlink" href="#startelement" title="Permalink to this headline">¶</a></h2>
 <p>一个 StartElement 可以表示一个 XML 起始元素。</p>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">StartElement</span> <span class="kd">struct</span> <span class="p">{</span>
@@ -916,21 +917,21 @@ Space 标识符将不会使用被分析文档中的简短前缀，
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="section" id="startelement-copy">
+<section id="startelement-copy">
 <h3>(StartElement) Copy 方法<a class="headerlink" href="#startelement-copy" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">e</span> <span class="nx">StartElement</span><span class="p">)</span> <span class="nx">Copy</span><span class="p">()</span> <span class="nx">StartElement</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="startelement-end">
+</section>
+<section id="startelement-end">
 <h3>(StartElement) End 方法<a class="headerlink" href="#startelement-end" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">e</span> <span class="nx">StartElement</span><span class="p">)</span> <span class="nx">End</span><span class="p">()</span> <span class="nx">EndElement</span>
 </pre></div>
 </div>
 <p>返回相应的 XML 结束元素。</p>
-</div>
-</div>
-<div class="section" id="syntaxerror">
+</section>
+</section>
+<section id="syntaxerror">
 <h2>SyntaxError 类型<a class="headerlink" href="#syntaxerror" title="Permalink to this headline">¶</a></h2>
 <p>一个 SyntaxError 表示一个在 XML 输入流中发现的语法错误。</p>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">SyntaxError</span> <span class="kd">struct</span> <span class="p">{</span>
@@ -939,14 +940,14 @@ Space 标识符将不会使用被分析文档中的简短前缀，
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="section" id="syntaxerror-error">
+<section id="syntaxerror-error">
 <h3>(*SyntaxError) Error 方法<a class="headerlink" href="#syntaxerror-error" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">e</span> <span class="o">*</span><span class="nx">SyntaxError</span><span class="p">)</span> <span class="nx">Error</span><span class="p">()</span> <span class="kt">string</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="tagpatherror">
+</section>
+</section>
+<section id="tagpatherror">
 <h2>TagPathError 类型<a class="headerlink" href="#tagpatherror" title="Permalink to this headline">¶</a></h2>
 <p>一个 TagPathError 用于表示一个在解封过程中因为字段标签使用了冲突的路径而引起的错误。</p>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">TagPathError</span> <span class="kd">struct</span> <span class="p">{</span>
@@ -956,14 +957,14 @@ Space 标识符将不会使用被分析文档中的简短前缀，
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="section" id="tagpatherror-error">
+<section id="tagpatherror-error">
 <h3>(*TagPathError) Error 方法<a class="headerlink" href="#tagpatherror-error" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">e</span> <span class="o">*</span><span class="nx">TagPathError</span><span class="p">)</span> <span class="nx">Error</span><span class="p">()</span> <span class="kt">string</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="token">
+</section>
+</section>
+<section id="token">
 <h2>Token 类型<a class="headerlink" href="#token" title="Permalink to this headline">¶</a></h2>
 <p>一个 Token 是一个持有以下任一 token 类型的接口：
 StartElement ，
@@ -975,28 +976,28 @@ Directive 。</p>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">Token</span> <span class="kd">interface</span><span class="p">{}</span>
 </pre></div>
 </div>
-<div class="section" id="copytoken">
+<section id="copytoken">
 <h3>CopyToken 函数<a class="headerlink" href="#copytoken" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="nx">CopyToken</span><span class="p">(</span><span class="nx">t</span> <span class="nx">Token</span><span class="p">)</span> <span class="nx">Token</span>
 </pre></div>
 </div>
 <p>返回 Token 的一个副本。</p>
-</div>
-</div>
-<div class="section" id="unmarshalerror">
+</section>
+</section>
+<section id="unmarshalerror">
 <h2>UnmarshalError 类型<a class="headerlink" href="#unmarshalerror" title="Permalink to this headline">¶</a></h2>
 <p>一个 UnmarshalError 表示一个在解封过程中出现的错误。</p>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">UnmarshalError</span> <span class="kt">string</span>
 </pre></div>
 </div>
-<div class="section" id="unmarshalerror-error">
+<section id="unmarshalerror-error">
 <h3>(UnmarshalError) Error 方法<a class="headerlink" href="#unmarshalerror-error" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">e</span> <span class="nx">UnmarshalError</span><span class="p">)</span> <span class="nx">Error</span><span class="p">()</span> <span class="kt">string</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="unmarshaler">
+</section>
+</section>
+<section id="unmarshaler">
 <h2>Unmarshaler 类型<a class="headerlink" href="#unmarshaler" title="Permalink to this headline">¶</a></h2>
 <p>实现了 Unmarshaler 接口的对象可以对记录了自身描述的 XML 元素进行解封。</p>
 <p>UnmarshalXML 可以对一个带有给定起始元素的 XML 元素进行解码。
@@ -1014,8 +1015,8 @@ UnmarshalXML 有可能无法使用 d.RawToken 。</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="unmarshalerattr">
+</section>
+<section id="unmarshalerattr">
 <h2>UnmarshalerAttr 类型<a class="headerlink" href="#unmarshalerattr" title="Permalink to this headline">¶</a></h2>
 <p>实现了 UnmarshalerAttr 接口的对象可以对记录了自身描述的 XML 属性进行解封。</p>
 <p>UnmarshalXMLAttr 可以对一个 XML 属性进行解码。
@@ -1027,8 +1028,8 @@ UnmarshalXMLAttr 只能用于字段标签中带有 “attr” 选项的结构字
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="unsupportedtypeerror">
+</section>
+<section id="unsupportedtypeerror">
 <h2>UnsupportedTypeError 类型<a class="headerlink" href="#unsupportedtypeerror" title="Permalink to this headline">¶</a></h2>
 <p>当 Marshal 遇到一种它无法转换为 XML 的类型时，
 就会返回一个 MarshalXMLError 。</p>
@@ -1037,18 +1038,18 @@ UnmarshalXMLAttr 只能用于字段标签中带有 “attr” 选项的结构字
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="section" id="unsupportedtypeerror-error">
+<section id="unsupportedtypeerror-error">
 <h3>(*UnsupportedTypeError) Error 方法<a class="headerlink" href="#unsupportedtypeerror-error" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">e</span> <span class="o">*</span><span class="nx">UnsupportedTypeError</span><span class="p">)</span> <span class="nx">Error</span><span class="p">()</span> <span class="kt">string</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="license">
+</section>
+</section>
+<section id="license">
 <h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
 <p>Portions of this page are reproduced from work created and <a class="reference external" href="https://developers.google.com/terms/site-policies">shared by Google</a> and used according to terms described in the <a class="reference external" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons 3.0 Attribution License</a> .</p>
-</div>
-</div>
+</section>
+</section>
 
 
     </div>
@@ -1063,7 +1064,7 @@ UnmarshalXMLAttr 只能用于字段标签中带有 “attr” 选项的结构字
     </p>
     <p>
         &copy; Copyright 2021, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.0.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

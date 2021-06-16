@@ -3,12 +3,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Redis Streams（流）数据结构简介 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -123,7 +124,7 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="redis-streams">
+  <section id="redis-streams">
 <h1>Redis Streams（流）数据结构简介<a class="headerlink" href="#redis-streams" title="Permalink to this headline">¶</a></h1>
 <p>Redis 的 Streams （流）是即将要添加到 Redis 4.x 版本的一种新的数据结构，
 该结构是为了抹平 List 、SortedSet 和 Pub/Sub 之间的空隙，
@@ -135,7 +136,7 @@
 所有流命令都是以 <code class="docutils literal notranslate"><span class="pre">X</span></code> 为开头的，
 比如 <code class="docutils literal notranslate"><span class="pre">XADD</span></code> 、 <code class="docutils literal notranslate"><span class="pre">XRANGE</span></code> 和 <code class="docutils literal notranslate"><span class="pre">XREAD</span></code> ，
 本文接下来将对这三个元素进行介绍。</p>
-<div class="section" id="id1">
+<section id="id1">
 <h2>向流中添加新元素<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>向流中添加信息可以通过使用 <code class="docutils literal notranslate"><span class="pre">XADD</span></code> 命令来完成。</p>
 <p>比如以下命令就向流 <code class="docutils literal notranslate"><span class="pre">user-timeline</span></code> 添加了一个拥有两个字段的元素，
@@ -154,8 +155,8 @@
 点号 <code class="docutils literal notranslate"><span class="pre">.</span></code> 之前的数字为添加元素时的毫秒精度的时间戳，
 而点号之后的数字则是一个从 0 开始自增的数字，
 用于却别同一毫秒内出现的多个不同元素。</p>
-</div>
-<div class="section" id="id">
+</section>
+<section id="id">
 <h2>从流中获取指定 ID 范围内的元素<a class="headerlink" href="#id" title="Permalink to this headline">¶</a></h2>
 <p>通过使用 <code class="docutils literal notranslate"><span class="pre">XRANGE</span></code> 命令，
 用户可以获取指定 ID 范围内的元素。
@@ -172,8 +173,8 @@ ID 范围可以使用 <code class="docutils literal notranslate"><span class="pr
    <span class="mi">4</span><span class="p">)</span> <span class="s2">&quot;hello world!&quot;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h2>以阻塞方式获取流中元素<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>跟列表一样，
 流也支持阻塞式的获取操作。</p>
@@ -188,8 +189,8 @@ ID 范围可以使用 <code class="docutils literal notranslate"><span class="pr
 那么 <code class="docutils literal notranslate"><span class="pre">XREAD</span></code> 命令将返回一个空值；
 否则，
 <code class="docutils literal notranslate"><span class="pre">XREAD</span></code> 命令将返回流新添加的元素。</p>
-</div>
-<div class="section" id="id3">
+</section>
+<section id="id3">
 <h2>结语<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>除了上述提到的功能之外，
 流还支持定长功能（限制流最多只能包含指定数量的元素），
@@ -200,8 +201,8 @@ ID 范围可以使用 <code class="docutils literal notranslate"><span class="pr
 <div class="line">黄健宏</div>
 <div class="line">2017.10.24</div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
     </div>
@@ -216,7 +217,7 @@ ID 范围可以使用 <code class="docutils literal notranslate"><span class="pr
     </p>
     <p>
         &copy; Copyright 2021, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.0.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

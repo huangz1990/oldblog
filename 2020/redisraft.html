@@ -3,12 +3,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>使用 RedisRaft 构建强一致的 Redis 集群 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -124,7 +125,7 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="redisraft-redis">
+  <section id="redisraft-redis">
 <h1>使用 RedisRaft 构建强一致的 Redis 集群<a class="headerlink" href="#redisraft-redis" title="Permalink to this headline">¶</a></h1>
 <img alt="../_images/redisraft.jpg" src="../_images/redisraft.jpg" />
 <p><strong>本文由黄健宏翻译自</strong>
@@ -137,7 +138,7 @@
 这个模块基于 <a class="reference external" href="https://raft.github.io/">Raft 的共识算法</a>并且使用了一个<a class="reference external" href="https://github.com/willemt/raft">实现该算法的开源 C 库</a>。</p>
 <p>RedisRaft 为 Redis 和 Redis 生态系统带来了新的<a class="reference external" href="https://jepsen.io/consistency/models/strict-serializable#:~:text=Informally%2C%20strict%20serializability%20(a.k.a.%20PL,B%20in%20the%20serialization%20order">强一致性与严格的序列化</a>部署方案。
 新模块使 Redis 与 Redis 现有的客户端、库和数据类型一起在需要高可靠性和一致性的超越缓存（beyond-cache）的场景中使用成为可能。</p>
-<div class="section" id="id2">
+<section id="id2">
 <h2>RedisRaft 的由来<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>RedisRaft 始于 Redis 5 发布之前的一个实验性的“副项目”。
 至于 Redis 模块这一特性则从 Redis 4 开始引入，
@@ -160,8 +161,8 @@
 <li><p>写入必须在完成之前刷新到磁盘上，它们会受到磁盘 I/O 延迟的约束。</p></li>
 <li><p>只有在大多数节点都正常运行、健康并且能够相互通信的情况下，集群才是可用的。</p></li>
 </ul>
-</div>
-<div class="section" id="id3">
+</section>
+<section id="id3">
 <h2>RedisRaft 的工作原理<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>一旦 RedisRaft 模块被加载到 Redis 中，
 它就会接管集群节点之间的通信、Raft 日志或快照的复制、持久化等工作。
@@ -175,26 +176,26 @@ Redis 核心不会察觉到这一点，
 </div>
 <p>接着，
 执行以下命令能够连接到第一个服务器并且创建 Raft 集群：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">10.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">RAFT</span><span class="o">.</span><span class="n">CLUSTER</span> <span class="n">INIT</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">10.0.0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">RAFT</span><span class="o">.</span><span class="n">CLUSTER</span> <span class="n">INIT</span>
 <span class="n">OK</span> <span class="mi">989645460313</span><span class="n">dd2ddb051f033c791222</span>
 </pre></div>
 </div>
 <p>之后，
 我们可以执行以下两条命令，
 将另外两台服务器加入到集群里面：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">10.0</span><span class="o">.</span><span class="mf">0.2</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">RAFT</span><span class="o">.</span><span class="n">CLUSTER</span> <span class="n">JOIN</span> <span class="mf">10.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">10.0.0.2</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">RAFT</span><span class="o">.</span><span class="n">CLUSTER</span> <span class="n">JOIN</span> <span class="mf">10.0.0.1</span><span class="p">:</span><span class="mi">6379</span>
 <span class="n">OK</span>
 
-<span class="mf">10.0</span><span class="o">.</span><span class="mf">0.3</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">RAFT</span><span class="o">.</span><span class="n">CLUSTER</span> <span class="n">JOIN</span> <span class="mf">10.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span>
+<span class="mf">10.0.0.3</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">RAFT</span><span class="o">.</span><span class="n">CLUSTER</span> <span class="n">JOIN</span> <span class="mf">10.0.0.1</span><span class="p">:</span><span class="mi">6379</span>
 <span class="n">OK</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="id4">
+</section>
+<section id="id4">
 <h2>访问集群<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>在设置好 RedisRaft 集群之后，
 我们就可以向它写入数据：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">10.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">INCR</span> <span class="n">counter</span><span class="p">:</span><span class="mi">1</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">10.0.0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">INCR</span> <span class="n">counter</span><span class="p">:</span><span class="mi">1</span>
 <span class="p">(</span><span class="n">integer</span><span class="p">)</span> <span class="mi">1</span>
 </pre></div>
 </div>
@@ -208,8 +209,8 @@ Redis 核心不会察觉到这一点，
 客户端不一定知道谁是领导者。</p>
 <p>在一个跟随者（非领导者）节点上尝试同样的操作，
 会产生这样的响应：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">10.0</span><span class="o">.</span><span class="mf">0.3</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">INCR</span> <span class="n">counter</span><span class="p">:</span><span class="mf">1.</span>
-<span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="n">MOVED</span> <span class="mf">10.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">10.0.0.3</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">INCR</span> <span class="n">counter</span><span class="p">:</span><span class="mf">1.</span>
+<span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="n">MOVED</span> <span class="mf">10.0.0.1</span><span class="p">:</span><span class="mi">6379</span>
 </pre></div>
 </div>
 <p>客户端可以捕捉这个错误，
@@ -222,18 +223,18 @@ RedisRaft 也可以被配置为自动为我们处理这个问题。
 通过启用 follower 代理模式，
 我们可以让集群节点自动将请求转发给领导者，
 并在其可用时提供回复。</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">10.0</span><span class="o">.</span><span class="mf">0.3</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">RAFT</span><span class="o">.</span><span class="n">CONFIG</span> <span class="n">SET</span> <span class="n">follower</span><span class="o">-</span><span class="n">proxy</span> <span class="n">yes</span><span class="o">.</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">10.0.0.3</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">RAFT</span><span class="o">.</span><span class="n">CONFIG</span> <span class="n">SET</span> <span class="n">follower</span><span class="o">-</span><span class="n">proxy</span> <span class="n">yes</span><span class="o">.</span>
 <span class="n">OK</span>
 
-<span class="mf">10.0</span><span class="o">.</span><span class="mf">0.3</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">INCR</span> <span class="n">counter</span><span class="p">:</span><span class="mi">1</span>
+<span class="mf">10.0.0.3</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">INCR</span> <span class="n">counter</span><span class="p">:</span><span class="mi">1</span>
 <span class="p">(</span><span class="n">integer</span><span class="p">)</span> <span class="mi">2</span>
 </pre></div>
 </div>
 <p>这种做法要简单得多，
 但是由于访问非领导者节点会产生额外的网络跳数，
 所以对延迟和网络负载都会有影响。</p>
-</div>
-<div class="section" id="id5">
+</section>
+<section id="id5">
 <h2>改变集群<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>在设置集群时，
 我们实际上进行了三种不同的操作。</p>
@@ -251,7 +252,7 @@ RedisRaft 也可以被配置为自动为我们处理这个问题。
 为了避免集群和宝贵的数据在数据迁移期间处于退化的冗余状态，
 我们需要”先添加新节点，再移除旧节点“，
 而不是”先移除旧节点再添加新节点“：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">10.0</span><span class="o">.</span><span class="mf">0.4</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">RAFT</span><span class="o">.</span><span class="n">CLUSTER</span> <span class="n">JOIN</span> <span class="mf">10.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">10.0.0.4</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">RAFT</span><span class="o">.</span><span class="n">CLUSTER</span> <span class="n">JOIN</span> <span class="mf">10.0.0.1</span><span class="p">:</span><span class="mi">6379</span>
 <span class="n">OK</span>
 </pre></div>
 </div>
@@ -263,12 +264,12 @@ last_conn_secs=3537，conn_errors=0，conn_oks=1。
 </pre></div>
 </div>
 <p>然后将第三个节点删除：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">10.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">RAFT</span><span class="o">.</span><span class="n">NODE</span> <span class="n">REMOVE</span> <span class="mi">1739451728</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">10.0.0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">RAFT</span><span class="o">.</span><span class="n">NODE</span> <span class="n">REMOVE</span> <span class="mi">1739451728</span>
 <span class="n">OK</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="id6">
+</section>
+<section id="id6">
 <h2>RedisRaft 的发布状态<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <p>作为 RedisRaft 开发工作的一部分，
 我们一直在与 Kyle Kingsbury（又名<a class="reference external" href="https://aphyr.com/about">Aphyr</a>） 合作，
@@ -290,8 +291,8 @@ last_conn_secs=3537，conn_errors=0，conn_oks=1。
 <p>如果你对 Redis 感兴趣，
 那么请不要错过我即将推出的 <a class="reference external" href="http://learnredis.com/">《Redis入门与实战》</a>以及<a class="reference external" href="http://huangz.me/">其他 Redis 书</a>。</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
     </div>
@@ -306,7 +307,7 @@ last_conn_secs=3537，conn_errors=0，conn_oks=1。
     </p>
     <p>
         &copy; Copyright 2021, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.0.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

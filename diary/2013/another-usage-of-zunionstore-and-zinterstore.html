@@ -3,12 +3,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Redis 的 ZUNIONSTORE 命令和 ZINTERSTORE 命令的另一种用法 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
@@ -127,7 +128,7 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="redis-zunionstore-zinterstore">
+  <section id="redis-zunionstore-zinterstore">
 <h1>Redis 的 ZUNIONSTORE 命令和 ZINTERSTORE 命令的另一种用法<a class="headerlink" href="#redis-zunionstore-zinterstore" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="http://redis.readthedocs.org/en/latest/sorted_set/zunionstore.html">ZUNIONSTORE</a> 和 <a class="reference external" href="http://redis.readthedocs.org/en/latest/sorted_set/zinterstore.html">ZINTERSTORE</a> 是用于有序集（sorted set）的聚合命令。</p>
 <p>根据文档的说明：</p>
@@ -139,7 +140,7 @@
 这两个命令还有一种没有记载于文档的用法，
 那就是 ——
 这两个命令除了可以用于有序集之外，还可以用于集合（set）。</p>
-<div class="section" id="zunionstore-zinterstore">
+<section id="zunionstore-zinterstore">
 <h2>例子：使用 ZUNIONSTORE 和 ZINTERSTORE 计算爱好水果的并集和交集<a class="headerlink" href="#zunionstore-zinterstore" title="Permalink to this headline">¶</a></h2>
 <p>作为例子，
 下文展示了怎样用 <code class="docutils literal notranslate"><span class="pre">ZUNIONSTORE</span></code> 和 <code class="docutils literal notranslate"><span class="pre">ZINTERSTORE</span></code> 命令计算爱好水果的并集和交集。</p>
@@ -208,15 +209,15 @@
 <span class="mi">1</span><span class="p">)</span> <span class="s2">&quot;orange&quot;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="id1">
+</section>
+<section id="id1">
 <h2>实例：使用集合和 ZUNIONSTORE 实现签到功能<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>上面展示的计算爱好水果的例子非常有趣，
 而且也非常实用 —— 将水果换成物品、商品、书籍、等等，
 就可以衍生出更多玩法，
 应用到各种不同的应用中。</p>
 <p>作为一个更详细的例子，让我们用集合和 <code class="docutils literal notranslate"><span class="pre">ZUNIONSTORE</span></code> 命令来实现一个签到功能。</p>
-<div class="section" id="id2">
+<section id="id2">
 <h3>什么是签到？<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>签到在很多网站都有不同的叫法，比如出勤、打卡，等等，
 有些是由用户自己操作的，
@@ -230,8 +231,8 @@
 </ul>
 <p>以下是 <a class="reference external" href="http://www.shanbay.com/checkin/top/">扇贝网</a> 上的一个签到排名示例：</p>
 <img alt="../../_images/top-checkin.png" src="../../_images/top-checkin.png" />
-</div>
-<div class="section" id="id4">
+</section>
+<section id="id4">
 <h3>签到功能的实现<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>以下 Python 代码实现了一些基本的签到功能，
 其中用到了前面提到的，
@@ -390,9 +391,9 @@
 <li><p>因为如果单纯使用集合命令，那么签到排名的实现就会非常复杂、而且低效。</p></li>
 <li><p>而如果直接使用有序集而不是集合来记录签到信息，又会浪费不少额外的空间：因为每个有序集元素都必须保存一个值为 <code class="docutils literal notranslate"><span class="pre">1.0</span></code> 的 <code class="docutils literal notranslate"><span class="pre">double</span></code> 分值，更不必说 <a class="reference external" href="http://www.redisbook.com/en/latest/datatype/sorted_set.html">有序集消耗的空间本来就比集合消耗的空间要多</a> 了。</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="id6">
+</section>
+</section>
+<section id="id6">
 <h2>关于这个技巧的说明<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <p>好的，
 看过前面的两个例子
@@ -408,8 +409,8 @@
 它并不是一个废弃特性，
 所以可以放心使用。</p>
 <p>至少在目前的 2.6 、 2.8 和 3.0 （unstable）三个版本中，这个特性都是可以正常使用的。</p>
-</div>
-<div class="section" id="id10">
+</section>
+<section id="id10">
 <h2>底层实现<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
 <p>最后，
 是时候揭晓谜题了 ——
@@ -437,8 +438,8 @@
 <div class="line">huangz</div>
 <div class="line">2013.4.13</div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
     </div>
@@ -453,7 +454,7 @@
     </p>
     <p>
         &copy; Copyright 2021, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.0.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>

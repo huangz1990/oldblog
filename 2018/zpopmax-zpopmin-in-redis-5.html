@@ -3,12 +3,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Redis 5 新功能介绍：ZPOPMAX、ZPOPMIN 以及它们的阻塞变种 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -117,7 +118,7 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="redis-5-zpopmaxzpopmin">
+  <section id="redis-5-zpopmaxzpopmin">
 <h1>Redis 5 新功能介绍：ZPOPMAX、ZPOPMIN 以及它们的阻塞变种<a class="headerlink" href="#redis-5-zpopmaxzpopmin" title="Permalink to this headline">¶</a></h1>
 <p>有序集合（SortedSet又称zset）是 Redis 的老牌数据结构之一，
 它的 API 一直以来都是很稳定的，
@@ -135,28 +136,28 @@
 <code class="docutils literal notranslate"><span class="pre">ZPOPMAX</span></code> 命令用于移除并弹出有序集合中分值最大的 <code class="docutils literal notranslate"><span class="pre">count</span></code> 个元素：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ZPOPMAX</span> <span class="n">key</span> <span class="p">[</span><span class="n">count</span><span class="p">]</span>
 <span class="n">summary</span><span class="p">:</span> <span class="n">Remove</span> <span class="ow">and</span> <span class="k">return</span> <span class="n">members</span> <span class="k">with</span> <span class="n">the</span> <span class="n">highest</span> <span class="n">scores</span> <span class="ow">in</span> <span class="n">a</span> <span class="nb">sorted</span> <span class="nb">set</span>
-<span class="n">since</span><span class="p">:</span> <span class="mf">5.0</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">since</span><span class="p">:</span> <span class="mf">5.0.0</span>
 <span class="n">group</span><span class="p">:</span> <span class="n">sorted_set</span>
 </pre></div>
 </div>
 <p>而 <code class="docutils literal notranslate"><span class="pre">ZPOPMIN</span></code> 命令则用于移除并弹出有序集合中分值最小的 <code class="docutils literal notranslate"><span class="pre">count</span></code> 个元素：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ZPOPMIN</span> <span class="n">key</span> <span class="p">[</span><span class="n">count</span><span class="p">]</span>
 <span class="n">summary</span><span class="p">:</span> <span class="n">Remove</span> <span class="ow">and</span> <span class="k">return</span> <span class="n">members</span> <span class="k">with</span> <span class="n">the</span> <span class="n">lowest</span> <span class="n">scores</span> <span class="ow">in</span> <span class="n">a</span> <span class="nb">sorted</span> <span class="nb">set</span>
-<span class="n">since</span><span class="p">:</span> <span class="mf">5.0</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">since</span><span class="p">:</span> <span class="mf">5.0.0</span>
 <span class="n">group</span><span class="p">:</span> <span class="n">sorted_set</span>
 </pre></div>
 </div>
 <p>如果用户没有显式地为 <code class="docutils literal notranslate"><span class="pre">count</span></code> 参数指定值，
 那么命令默认将移除并弹出一个元素。</p>
 <p>以下是这两个命令的使用示例：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">ZADD</span> <span class="n">zset</span> <span class="mf">1.0</span> <span class="s2">&quot;one&quot;</span> <span class="mf">2.0</span> <span class="s2">&quot;two&quot;</span> <span class="mf">3.0</span> <span class="s2">&quot;three&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">ZADD</span> <span class="n">zset</span> <span class="mf">1.0</span> <span class="s2">&quot;one&quot;</span> <span class="mf">2.0</span> <span class="s2">&quot;two&quot;</span> <span class="mf">3.0</span> <span class="s2">&quot;three&quot;</span>
 <span class="p">(</span><span class="n">integer</span><span class="p">)</span> <span class="mi">3</span>
 
-<span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">ZPOPMAX</span> <span class="n">zset</span>
+<span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">ZPOPMAX</span> <span class="n">zset</span>
 <span class="mi">1</span><span class="p">)</span> <span class="s2">&quot;three&quot;</span>
 <span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;3&quot;</span>
 
-<span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">ZPOPMIN</span> <span class="n">zset</span>
+<span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">6379</span><span class="o">&gt;</span> <span class="n">ZPOPMIN</span> <span class="n">zset</span>
 <span class="mi">1</span><span class="p">)</span> <span class="s2">&quot;one&quot;</span>
 <span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;1&quot;</span>
 </pre></div>
@@ -167,12 +168,12 @@
 并且需要使用 <code class="docutils literal notranslate"><span class="pre">timeout</span></code> 参数去指定命令的最长阻塞时间：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BZPOPMAX</span> <span class="n">key</span> <span class="p">[</span><span class="n">key</span> <span class="o">...</span><span class="p">]</span> <span class="n">timeout</span>
 <span class="n">summary</span><span class="p">:</span> <span class="n">Remove</span> <span class="ow">and</span> <span class="k">return</span> <span class="n">the</span> <span class="n">member</span> <span class="k">with</span> <span class="n">the</span> <span class="n">highest</span> <span class="n">score</span> <span class="kn">from</span> <span class="nn">one</span> <span class="ow">or</span> <span class="n">more</span> <span class="nb">sorted</span> <span class="n">sets</span><span class="p">,</span> <span class="ow">or</span> <span class="n">block</span> <span class="n">until</span> <span class="n">one</span> <span class="ow">is</span> <span class="n">available</span>
-<span class="n">since</span><span class="p">:</span> <span class="mf">5.0</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">since</span><span class="p">:</span> <span class="mf">5.0.0</span>
 <span class="n">group</span><span class="p">:</span> <span class="n">sorted_set</span>
 
 <span class="n">BZPOPMIN</span> <span class="n">key</span> <span class="p">[</span><span class="n">key</span> <span class="o">...</span><span class="p">]</span> <span class="n">timeout</span>
 <span class="n">summary</span><span class="p">:</span> <span class="n">Remove</span> <span class="ow">and</span> <span class="k">return</span> <span class="n">the</span> <span class="n">member</span> <span class="k">with</span> <span class="n">the</span> <span class="n">lowest</span> <span class="n">score</span> <span class="kn">from</span> <span class="nn">one</span> <span class="ow">or</span> <span class="n">more</span> <span class="nb">sorted</span> <span class="n">sets</span><span class="p">,</span> <span class="ow">or</span> <span class="n">block</span> <span class="n">until</span> <span class="n">one</span> <span class="ow">is</span> <span class="n">available</span>
-<span class="n">since</span><span class="p">:</span> <span class="mf">5.0</span><span class="o">.</span><span class="mi">0</span>
+<span class="n">since</span><span class="p">:</span> <span class="mf">5.0.0</span>
 <span class="n">group</span><span class="p">:</span> <span class="n">sorted_set</span>
 </pre></div>
 </div>
@@ -182,7 +183,7 @@
 <div class="line">黄健宏</div>
 <div class="line">2018.6.15</div>
 </div>
-</div>
+</section>
 
 
     </div>
@@ -197,7 +198,7 @@
     </p>
     <p>
         &copy; Copyright 2021, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.0.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
     </p>
   </div>
 </footer>
