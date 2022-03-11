@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Redis GEO 特性简介 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="翻译笔记之九：如何避免被机器翻译取代？" href="notes-about-translation-9.html" />
@@ -130,7 +130,7 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <section id="redis-geo">
+  <div class="section" id="redis-geo">
 <h1>Redis GEO 特性简介<a class="headerlink" href="#redis-geo" title="Permalink to this headline">¶</a></h1>
 <p>Redis 的 GEO 特性将在 Redis 3.2 版本释出，
 这个功能可以将用户给定的地理位置信息储存起来，
@@ -138,7 +138,7 @@
 <p>本文将对 Redis 的 GEO 特性进行介绍，
 说明这个特性相关命令的用户，
 并在最后说明如何使用这些命令去实现“查找附近的人”以及“摇一摇”这两个功能。</p>
-<section id="id1">
+<div class="section" id="id1">
 <h2>版本要求<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>因为 Redis 目前的稳定版本为 Redis 3.0 ，
 而 GEO 特性是 Redis 3.2 版本的特性，
@@ -146,8 +146,8 @@
 那么就需要到 <a class="reference external" href="https://github.com/antirez/redis">Redis 的 GitHub 页面</a>去克隆 unstable 分支
 然后编译 unstable 版本的 Redis 源码，
 这样才能用到 Redis GEO 特性。</p>
-</section>
-<section id="id2">
+</div>
+<div class="section" id="id2">
 <h2>添加位置和获取位置<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>为了进行地理位置相关操作，
 我们首先需要将具体的地理位置记录起来，
@@ -187,8 +187,8 @@
    <span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;23.008831202413539&quot;</span>    <span class="o">--</span> <span class="n">佛山的纬度</span>
 </pre></div>
 </div>
-</section>
-<section id="id3">
+</div>
+<div class="section" id="id3">
 <h2>计算两个位置之间的距离<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>在拥有了地理数据之后，
 我们就可以基于这些数据进行各种各样的操作。
@@ -205,10 +205,10 @@
 <p>可选参数 <code class="docutils literal notranslate"><span class="pre">unit</span></code> 用于指定计算距离时的单位，
 它的值可以是以下单位的其中一个：</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">m</span></code> 表示单位为米。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">km</span></code> 表示单位为千米。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mi</span></code> 表示单位为英里。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ft</span></code> 表示单位为英尺。</p></li>
+<li><code class="docutils literal notranslate"><span class="pre">m</span></code> 表示单位为米。</li>
+<li><code class="docutils literal notranslate"><span class="pre">km</span></code> 表示单位为千米。</li>
+<li><code class="docutils literal notranslate"><span class="pre">mi</span></code> 表示单位为英里。</li>
+<li><code class="docutils literal notranslate"><span class="pre">ft</span></code> 表示单位为英尺。</li>
 </ul>
 <p>如果用户没有指定 <code class="docutils literal notranslate"><span class="pre">unit</span></code> 参数，
 那么 <code class="docutils literal notranslate"><span class="pre">GEODIST</span></code> 默认使用米为单位。</p>
@@ -227,8 +227,8 @@
 <span class="s2">&quot;52.094433840356309&quot;</span>    <span class="o">--</span> <span class="n">两地相距</span> <span class="mi">52</span> <span class="n">公里</span>
 </pre></div>
 </div>
-</section>
-<section id="id4">
+</div>
+<div class="section" id="id4">
 <h2>获取指定范围内的元素<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>除了计算两地的距离之外，
 另一个常见的地理位置操作就是找出特定范围之内的其他存在的地点。
@@ -247,16 +247,16 @@
 </div>
 <p>这两个命令的各个参数的意义如下：</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">m|km|ft|mi</span></code> 指定的是计算范围时的单位；</p></li>
-<li><p>如果给定了可选的 <code class="docutils literal notranslate"><span class="pre">WITHCOORD</span></code> ，
-那么命令在返回匹配的位置时会将位置的经纬度一并返回；</p></li>
-<li><p>如果给定了可选的 <code class="docutils literal notranslate"><span class="pre">WITHDIST</span></code> ，
-那么命令在返回匹配的位置时会将位置与中心点之间的距离一并返回；</p></li>
-<li><p>在默认情况下，
+<li><code class="docutils literal notranslate"><span class="pre">m|km|ft|mi</span></code> 指定的是计算范围时的单位；</li>
+<li>如果给定了可选的 <code class="docutils literal notranslate"><span class="pre">WITHCOORD</span></code> ，
+那么命令在返回匹配的位置时会将位置的经纬度一并返回；</li>
+<li>如果给定了可选的 <code class="docutils literal notranslate"><span class="pre">WITHDIST</span></code> ，
+那么命令在返回匹配的位置时会将位置与中心点之间的距离一并返回；</li>
+<li>在默认情况下，
 <code class="docutils literal notranslate"><span class="pre">GEORADIUS</span></code> 和 <code class="docutils literal notranslate"><span class="pre">GEORADIUSBYMEMBER</span></code> 的结果是未排序的，
 <code class="docutils literal notranslate"><span class="pre">ASC</span></code> 可以让查找结果根据距离从近到远排序，
-而 <code class="docutils literal notranslate"><span class="pre">DESC</span></code> 则可以让查找结果根据从远到近排序；</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">COUNT</span></code> 参数指定要返回的结果数量。</p></li>
+而 <code class="docutils literal notranslate"><span class="pre">DESC</span></code> 则可以让查找结果根据从远到近排序；</li>
+<li><code class="docutils literal notranslate"><span class="pre">COUNT</span></code> 参数指定要返回的结果数量。</li>
 </ul>
 <p>作为示例，
 我们可以使用 <code class="docutils literal notranslate"><span class="pre">GEORADIUSBYMEMBER</span></code> 去找出位于广州 50 公里、 100 公里以及 150 公里以内的城市：</p>
@@ -278,8 +278,8 @@
 <span class="mi">5</span><span class="p">)</span> <span class="s2">&quot;Shenzhen&quot;</span>
 </pre></div>
 </div>
-</section>
-<section id="id5">
+</div>
+<div class="section" id="id5">
 <h2>示例：查找附近的人<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>好的，
 在了解了 Redis GEO 特性的基本信息之后，
@@ -302,8 +302,8 @@
     <span class="k">return</span> <span class="n">GEORADIUSBYMEMBER</span><span class="p">(</span><span class="s1">&#39;user-location-set&#39;</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;km&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
-<section id="id6">
+</div>
+<div class="section" id="id6">
 <h2>示例：摇一摇<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <p>为了增加乐趣性，
 我们可以对“查找附近的人”这一功能进行修改 ——
@@ -322,8 +322,8 @@
     <span class="k">return</span> <span class="n">user_set</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 </pre></div>
 </div>
-</section>
-<section id="id7">
+</div>
+<div class="section" id="id7">
 <h2>效率优化<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <p>现在的 <code class="docutils literal notranslate"><span class="pre">find_random()</span></code> 函数可以实现“摇一摇”功能，
 但它的效率并不高：
@@ -346,13 +346,13 @@
 <p>因为篇幅关系，
 优化版的 <code class="docutils literal notranslate"><span class="pre">find_random()</span></code> 的具体实现这里就不给出了，
 有兴趣的读者可以自己尝试完成这个函数。</p>
-</section>
-<section id="id8">
+</div>
+<div class="section" id="id8">
 <h2>Redis GEO 命令<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
 <p>想要了解更多关于 <code class="docutils literal notranslate"><span class="pre">GEOADD</span></code> 、 <code class="docutils literal notranslate"><span class="pre">GEORADIUS</span></code> 等 Redis GEO 特性命令的相关信息，
 请访问《Redis命令参考》： <a class="reference external" href="http://redisdoc.com">RedisDoc.com</a></p>
-</section>
-<section id="id9">
+</div>
+<div class="section" id="id9">
 <h2>结语<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
 <p>好的，
 关于 Redis GEO 特性的简单介绍就到此结束，
@@ -362,8 +362,8 @@
 <div class="line">黄健宏（huangz）</div>
 <div class="line">2015.8.8</div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
     </div>
@@ -377,8 +377,8 @@
       
     </p>
     <p>
-        &copy; Copyright 2021, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
+        &copy; Copyright 2022, 黄健宏.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>
 </footer>

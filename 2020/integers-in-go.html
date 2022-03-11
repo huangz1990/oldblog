@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Go 语言中的整数 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
 <meta charset='utf-8'>
@@ -112,13 +112,13 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <section id="go">
+  <div class="section" id="go">
 <h1>Go 语言中的整数<a class="headerlink" href="#go" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
+<p class="first admonition-title">Note</p>
 <p>本文摘录自《Go语言趣学指南》第 7 章，
 请访问 <a class="reference external" href="http://gpwgcn.com">gpwgcn.com</a>  以获取更多相关信息。</p>
-<a class="reference internal image-reference" href="../_images/gpwgcn1.jpg"><img alt="../_images/gpwgcn1.jpg" src="../_images/gpwgcn1.jpg" style="width: 149.6px; height: 188.0px;" /></a>
+<a class="last reference internal image-reference" href="../_images/gpwgcn1.jpg"><img alt="../_images/gpwgcn1.jpg" src="../_images/gpwgcn1.jpg" style="width: 149.6px; height: 188.0px;" /></a>
 </div>
 <p>Go 提供了 10 种类型用于表示整数，
 它们被统称为<em>整数类型</em>(integer)。
@@ -133,23 +133,23 @@
 在这些整数类型中，
 最常用的莫过于代表有符号整数的 <code class="docutils literal notranslate"><span class="pre">int</span></code> 类型了:</p>
 <a class="reference internal image-reference" href="../_images/figure_7_1_1.png"><img alt="../_images/figure_7_1_1.png" class="align-right" src="../_images/figure_7_1_1.png" style="width: 266.0px; height: 320.0px;" /></a>
-<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">year</span> <span class="kt">int</span> <span class="p">=</span> <span class="mi">2018</span>
+<div class="code go highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">year</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2018</span>
 </pre></div>
 </div>
 <p>除有符号整数之外，
 Go 还提供了 5 种只能表示正整数的<em>无符号</em>(unsigned)整数类型，
 其中的典型为 <code class="docutils literal notranslate"><span class="pre">uint</span></code> 类型:</p>
-<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">month</span> <span class="kt">uint</span> <span class="p">=</span> <span class="mi">2</span>
+<div class="code go highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">month</span> <span class="n">uint</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
 </div>
 <p>因为 Go 在进行类型推断的时候总是会选择 <code class="docutils literal notranslate"><span class="pre">int</span></code> 类型作为整数值的类型，
 所以下面这 3 行代码的意义是完全相同的:</p>
-<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">year</span> <span class="o">:=</span> <span class="mi">2018</span>
-<span class="kd">var</span> <span class="nx">year</span> <span class="p">=</span> <span class="mi">2018</span>
-<span class="kd">var</span> <span class="nx">year</span> <span class="kt">int</span> <span class="p">=</span> <span class="mi">2018</span>
+<div class="code go highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">year</span> <span class="p">:</span><span class="o">=</span> <span class="mi">2018</span>
+<span class="n">var</span> <span class="n">year</span> <span class="o">=</span> <span class="mi">2018</span>
+<span class="n">var</span> <span class="n">year</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2018</span>
 </pre></div>
 </div>
-<section id="id1">
+<div class="section" id="id1">
 <h2>为不同场合而设的整数类型<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>无论是有符号整数还是无符号整数，
 它们都有各种不同大小(size)的类型可供选择，
@@ -171,8 +171,8 @@ Go 提供了非常多的整数类型可供选择。
 <code class="docutils literal notranslate"><span class="pre">int</span></code> 和 <code class="docutils literal notranslate"><span class="pre">uint</span></code> 都是 32 位值，
 而较新的计算机都基于 64 位架构，
 所以这些架构上的 <code class="docutils literal notranslate"><span class="pre">int</span></code> 和 <code class="docutils literal notranslate"><span class="pre">uint</span></code> 都是 64 位值。</p>
-</section>
-</section>
+</div>
+</div>
 
 
     </div>
@@ -186,8 +186,8 @@ Go 提供了非常多的整数类型可供选择。
       
     </p>
     <p>
-        &copy; Copyright 2021, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
+        &copy; Copyright 2022, 黄健宏.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>
 </footer>

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Redis 的 ZUNIONSTORE 命令和 ZINTERSTORE 命令的另一种用法 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="怎么样写出更好、也更简短的源码分析书" href="how-to-write-a-better-and-shorter-code-analysis-book.html" />
@@ -129,19 +129,19 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <section id="redis-zunionstore-zinterstore">
+  <div class="section" id="redis-zunionstore-zinterstore">
 <h1>Redis 的 ZUNIONSTORE 命令和 ZINTERSTORE 命令的另一种用法<a class="headerlink" href="#redis-zunionstore-zinterstore" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="http://redis.readthedocs.org/en/latest/sorted_set/zunionstore.html">ZUNIONSTORE</a> 和 <a class="reference external" href="http://redis.readthedocs.org/en/latest/sorted_set/zinterstore.html">ZINTERSTORE</a> 是用于有序集（sorted set）的聚合命令。</p>
 <p>根据文档的说明：</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ZUNIONSTORE</span></code> 用于计算给定的一个或多个有序集的并集。</p></li>
-<li><p>而 <code class="docutils literal notranslate"><span class="pre">ZINTERSTORE</span></code> 则用于计算给定的一个或多个有序集的交集。</p></li>
+<li><code class="docutils literal notranslate"><span class="pre">ZUNIONSTORE</span></code> 用于计算给定的一个或多个有序集的并集。</li>
+<li>而 <code class="docutils literal notranslate"><span class="pre">ZINTERSTORE</span></code> 则用于计算给定的一个或多个有序集的交集。</li>
 </ul>
 <p>除此之外，
 这两个命令还有一种没有记载于文档的用法，
 那就是 ——
 这两个命令除了可以用于有序集之外，还可以用于集合（set）。</p>
-<section id="zunionstore-zinterstore">
+<div class="section" id="zunionstore-zinterstore">
 <h2>例子：使用 ZUNIONSTORE 和 ZINTERSTORE 计算爱好水果的并集和交集<a class="headerlink" href="#zunionstore-zinterstore" title="Permalink to this headline">¶</a></h2>
 <p>作为例子，
 下文展示了怎样用 <code class="docutils literal notranslate"><span class="pre">ZUNIONSTORE</span></code> 和 <code class="docutils literal notranslate"><span class="pre">ZINTERSTORE</span></code> 命令计算爱好水果的并集和交集。</p>
@@ -189,8 +189,8 @@
 <p><code class="docutils literal notranslate"><span class="pre">SUNION</span></code> 的结果只显示计算并集所得的元素，但并不显示元素在输入集合中出现了多少次。</p>
 <p>从 <code class="docutils literal notranslate"><span class="pre">ZUNIONSTORE</span></code> 和 <code class="docutils literal notranslate"><span class="pre">SUNION</span></code> 两个命令的对比中可以看出：</p>
 <ul class="simple">
-<li><p>如果只是处理集合之间的关系，那么 <code class="docutils literal notranslate"><span class="pre">SUNION</span></code> 已经足够。</p></li>
-<li><p>另一方面，如果不仅要处理集合之间的关系，还需要对集合元素进行聚合计算，那么就必须使用 <code class="docutils literal notranslate"><span class="pre">ZUNIONSTORE</span></code> 。</p></li>
+<li>如果只是处理集合之间的关系，那么 <code class="docutils literal notranslate"><span class="pre">SUNION</span></code> 已经足够。</li>
+<li>另一方面，如果不仅要处理集合之间的关系，还需要对集合元素进行聚合计算，那么就必须使用 <code class="docutils literal notranslate"><span class="pre">ZUNIONSTORE</span></code> 。</li>
 </ul>
 <p>三人爱好水果的并集可以通过 <code class="docutils literal notranslate"><span class="pre">ZINTERSTORE</span></code> 命令来计算：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">redis</span><span class="o">&gt;</span> <span class="n">ZINTERSTORE</span> <span class="n">favorite</span><span class="o">-</span><span class="n">fruits</span><span class="o">-</span><span class="n">inter</span> <span class="mi">3</span> <span class="n">huangz</span> <span class="n">peter</span> <span class="n">john</span>
@@ -210,15 +210,15 @@
 <span class="mi">1</span><span class="p">)</span> <span class="s2">&quot;orange&quot;</span>
 </pre></div>
 </div>
-</section>
-<section id="id1">
+</div>
+<div class="section" id="id1">
 <h2>实例：使用集合和 ZUNIONSTORE 实现签到功能<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>上面展示的计算爱好水果的例子非常有趣，
 而且也非常实用 —— 将水果换成物品、商品、书籍、等等，
 就可以衍生出更多玩法，
 应用到各种不同的应用中。</p>
 <p>作为一个更详细的例子，让我们用集合和 <code class="docutils literal notranslate"><span class="pre">ZUNIONSTORE</span></code> 命令来实现一个签到功能。</p>
-<section id="id2">
+<div class="section" id="id2">
 <h3>什么是签到？<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>签到在很多网站都有不同的叫法，比如出勤、打卡，等等，
 有些是由用户自己操作的，
@@ -226,14 +226,14 @@
 不管如何，
 签到功能都有以下共同特性：</p>
 <ul class="simple">
-<li><p>记录用户的某一行为（通常是登录，或者完成某项任务），并进行计数。</p></li>
-<li><p>为用户提供签到次数统计，比如说，用户界面会显示“你已经签到了 xx 次”，诸如此类。</p></li>
-<li><p>对所有用户的签到进行统计，并进行签到次数排名。</p></li>
+<li>记录用户的某一行为（通常是登录，或者完成某项任务），并进行计数。</li>
+<li>为用户提供签到次数统计，比如说，用户界面会显示“你已经签到了 xx 次”，诸如此类。</li>
+<li>对所有用户的签到进行统计，并进行签到次数排名。</li>
 </ul>
 <p>以下是 <a class="reference external" href="http://www.shanbay.com/checkin/top/">扇贝网</a> 上的一个签到排名示例：</p>
 <img alt="../../_images/top-checkin.png" src="../../_images/top-checkin.png" />
-</section>
-<section id="id4">
+</div>
+<div class="section" id="id4">
 <h3>签到功能的实现<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>以下 Python 代码实现了一些基本的签到功能，
 其中用到了前面提到的，
@@ -255,13 +255,13 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    生成签到日期的键，例如 2013-4-13::signed</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">::signed&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;{0}::signed&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">_sign_count_key</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    生成用户签到计数器的键，例如 tom::sign_count</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">::sign_count&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;{0}::sign_count&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
 
 
 <span class="sd">&quot;&quot;&quot;</span>
@@ -290,7 +290,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">count</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_sign_count_key</span><span class="p">(</span><span class="n">user</span><span class="p">))</span>
 
-    <span class="k">if</span> <span class="n">count</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">count</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
@@ -302,7 +302,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">date_keys</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">_sign_key</span><span class="p">,</span> <span class="n">dates</span><span class="p">)</span>
     <span class="n">r</span><span class="o">.</span><span class="n">zunionstore</span><span class="p">(</span><span class="n">top_sign_name</span><span class="p">,</span> <span class="n">date_keys</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">zrevrange</span><span class="p">(</span><span class="n">top_sign_name</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">withscores</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">zrevrange</span><span class="p">(</span><span class="n">top_sign_name</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">withscores</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">full_sign</span><span class="p">(</span><span class="n">full_sign_name</span><span class="p">,</span> <span class="o">*</span><span class="n">dates</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -389,12 +389,12 @@
 <p>多得 <code class="docutils literal notranslate"><span class="pre">ZUNIONSTORE</span></code> 可以直接用于集合，
 不然实现这个签到功能就没有那么简单了：</p>
 <ul class="simple">
-<li><p>因为如果单纯使用集合命令，那么签到排名的实现就会非常复杂、而且低效。</p></li>
-<li><p>而如果直接使用有序集而不是集合来记录签到信息，又会浪费不少额外的空间：因为每个有序集元素都必须保存一个值为 <code class="docutils literal notranslate"><span class="pre">1.0</span></code> 的 <code class="docutils literal notranslate"><span class="pre">double</span></code> 分值，更不必说 <a class="reference external" href="http://www.redisbook.com/en/latest/datatype/sorted_set.html">有序集消耗的空间本来就比集合消耗的空间要多</a> 了。</p></li>
+<li>因为如果单纯使用集合命令，那么签到排名的实现就会非常复杂、而且低效。</li>
+<li>而如果直接使用有序集而不是集合来记录签到信息，又会浪费不少额外的空间：因为每个有序集元素都必须保存一个值为 <code class="docutils literal notranslate"><span class="pre">1.0</span></code> 的 <code class="docutils literal notranslate"><span class="pre">double</span></code> 分值，更不必说 <a class="reference external" href="http://www.redisbook.com/en/latest/datatype/sorted_set.html">有序集消耗的空间本来就比集合消耗的空间要多</a> 了。</li>
 </ul>
-</section>
-</section>
-<section id="id6">
+</div>
+</div>
+<div class="section" id="id6">
 <h2>关于这个技巧的说明<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <p>好的，
 看过前面的两个例子
@@ -410,8 +410,8 @@
 它并不是一个废弃特性，
 所以可以放心使用。</p>
 <p>至少在目前的 2.6 、 2.8 和 3.0 （unstable）三个版本中，这个特性都是可以正常使用的。</p>
-</section>
-<section id="id10">
+</div>
+<div class="section" id="id10">
 <h2>底层实现<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
 <p>最后，
 是时候揭晓谜题了 ——
@@ -422,8 +422,8 @@
 都会对一个迭代器（iterator）进行处理，
 而这个迭代器是一个多态迭代器：</p>
 <ul class="simple">
-<li><p>当输入的键是集合时，它就迭代集合。</p></li>
-<li><p>当如何的键是有序集时，它就迭代有序集。</p></li>
+<li>当输入的键是集合时，它就迭代集合。</li>
+<li>当如何的键是有序集时，它就迭代有序集。</li>
 </ul>
 <img alt="../../_images/iterator.png" src="../../_images/iterator.png" />
 <p>如果在迭代集合的时候，
@@ -439,8 +439,8 @@
 <div class="line">huangz</div>
 <div class="line">2013.4.13</div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
     </div>
@@ -454,8 +454,8 @@
       
     </p>
     <p>
-        &copy; Copyright 2021, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
+        &copy; Copyright 2022, 黄健宏.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>
 </footer>

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>HuangzTalk 002： 《Redis设计与实现》创作回忆录（文字大纲） &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="HuangzTalk 001：ThinkPad X1 Nano 使用体验分享（文字大纲）" href="huangztalk-001-outline.html" />
@@ -125,130 +125,118 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <section id="huangztalk-002-redis">
+  <div class="section" id="huangztalk-002-redis">
 <h1>HuangzTalk 002： 《Redis设计与实现》创作回忆录（文字大纲）<a class="headerlink" href="#huangztalk-002-redis" title="Permalink to this headline">¶</a></h1>
 <img alt="../_images/intro_redisbook.jpeg" src="../_images/intro_redisbook.jpeg" />
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>这是 HuangzTalk 节目第 002 期的文字大纲，
+<p class="first admonition-title">Note</p>
+<p class="last">这是 HuangzTalk 节目第 002 期的文字大纲，
 你可以通过访问以下地址查看完整的节目视频：
 <a class="reference external" href="https://www.bilibili.com/video/BV1G64y1d7Co">https://www.bilibili.com/video/BV1G64y1d7Co</a></p>
 </div>
-<section id="id1">
+<div class="section" id="id1">
 <h2>导言<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>介绍《Redis设计与实现》的基本信息</p></li>
-<li><p>介绍它的畅销情况</p></li>
-<li><p>介绍它在豆瓣上的评分、好评信息等</p></li>
-<li><p>让大家快速知道这本书的受欢迎程度</p></li>
+<li>介绍《Redis设计与实现》的基本信息</li>
+<li>介绍它的畅销情况</li>
+<li>介绍它在豆瓣上的评分、好评信息等</li>
+<li>让大家快速知道这本书的受欢迎程度</li>
 </ul>
-</section>
-<section id="id2">
+</div>
+<div class="section" id="id2">
 <h2>时间线<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>2011 年 4 月</p>
-<ul>
-<li><p>SNS 风行，模仿微博练手</p></li>
-<li><p>在构建“共同关注”功能的时候觉得 MySQL 的 join 语句太不符合直觉了，开始寻找更简单的方法</p></li>
-<li><p>找到 Redis ，很欣赏它的简单小巧，开始学习使用它</p></li>
-<li><p>Redis 当时还是一个新兴数据库，用的人很少，中文资料很少</p></li>
-<li><p>开始将它的文档翻译成中文，刚开始发布在自己的<a class="reference external" href="https://blog.csdn.net/iteye_10039">博客上</a> （当时的 iteye ，现在合并在了 CSDN 博客）</p></li>
-<li><p>后来翻译的文档多了，就集中整理并发布在 RedisDoc.com 上，成为了《Redis命令参考》项目（2011年7月发布）</p></li>
-<li><p>在学习 Redis 的过程中发现它有不少 pattern 可以重用，于是想着把它记录下来，形成“Cookbook”，但没有公开</p></li>
+<li>2011 年 4 月<ul>
+<li>SNS 风行，模仿微博练手</li>
+<li>在构建“共同关注”功能的时候觉得 MySQL 的 join 语句太不符合直觉了，开始寻找更简单的方法</li>
+<li>找到 Redis ，很欣赏它的简单小巧，开始学习使用它</li>
+<li>Redis 当时还是一个新兴数据库，用的人很少，中文资料很少</li>
+<li>开始将它的文档翻译成中文，刚开始发布在自己的<a class="reference external" href="https://blog.csdn.net/iteye_10039">博客上</a> （当时的 iteye ，现在合并在了 CSDN 博客）</li>
+<li>后来翻译的文档多了，就集中整理并发布在 RedisDoc.com 上，成为了《Redis命令参考》项目（2011年7月发布）</li>
+<li>在学习 Redis 的过程中发现它有不少 pattern 可以重用，于是想着把它记录下来，形成“Cookbook”，但没有公开</li>
 </ul>
 </li>
-<li><p>2011 年 7 月</p>
-<ul>
-<li><p>为了宣传《Redis命令参考》，将连接发到了豆瓣的<a class="reference external" href="https://www.douban.com/group/topic/21061964/">NoSQL小组</a>和<a class="reference external" href="https://www.douban.com/group/topic/21061982/">Redis小组</a>里面，并因此认识了当时 <a class="reference external" href="https://www.douban.com/group/topic/10641981/">NoSQLFan.com</a>（已失效）的站长 iammutex ，还有当时在阿里云工作的 hoterran</p></li>
-<li><p>当时 NoSQL 还是一个新出现的热点词汇，而 NoSQLFan 就是专门收集和编译国内外 NoSQL 信息的网站</p></li>
-<li><p>hoterran 因为当时在阿里云工作的原因，也在深入研究 Redis ，它在自己的博客 hoterran.info （已失效）发布了很多 Redis 方面的文章，以及一些 Redis 源码的分析</p></li>
+<li>2011 年 7 月<ul>
+<li>为了宣传《Redis命令参考》，将连接发到了豆瓣的<a class="reference external" href="https://www.douban.com/group/topic/21061964/">NoSQL小组</a>和<a class="reference external" href="https://www.douban.com/group/topic/21061982/">Redis小组</a>里面，并因此认识了当时 <a class="reference external" href="https://www.douban.com/group/topic/10641981/">NoSQLFan.com</a>（已失效）的站长 iammutex ，还有当时在阿里云工作的 hoterran</li>
+<li>当时 NoSQL 还是一个新出现的热点词汇，而 NoSQLFan 就是专门收集和编译国内外 NoSQL 信息的网站</li>
+<li>hoterran 因为当时在阿里云工作的原因，也在深入研究 Redis ，它在自己的博客 hoterran.info （已失效）发布了很多 Redis 方面的文章，以及一些 Redis 源码的分析</li>
 </ul>
 </li>
-<li><p>2011 年 8 月</p>
-<ul>
-<li><p>hoterran 给我发邮件，询问我对实习是否有兴趣，并且讨论技术的过程中聊到 Redis ，双方惊奇地发现彼此都在写 Redis 书</p></li>
-<li><p>hoterran 写的书叫《Redis源码分析》，主要是通过分析 Redis 的源代码来讲解 Redis 的运作方式，行文方式跟他的博客很像，主要是把多篇文章串连起来了，很有趣，让我大开眼界</p></li>
-<li><p>彼此都很欣赏对方的书，都给对方debug和提意见，hoterran 建议我把书本放到 github 上，它能够给我提供一些他的菜谱，于是就有了 <a class="reference external" href="https://github.com/huangz1990/redis_cookbook">redis_cookbook</a> 项目</p></li>
+<li>2011 年 8 月<ul>
+<li>hoterran 给我发邮件，询问我对实习是否有兴趣，并且讨论技术的过程中聊到 Redis ，双方惊奇地发现彼此都在写 Redis 书</li>
+<li>hoterran 写的书叫《Redis源码分析》，主要是通过分析 Redis 的源代码来讲解 Redis 的运作方式，行文方式跟他的博客很像，主要是把多篇文章串连起来了，很有趣，让我大开眼界</li>
+<li>彼此都很欣赏对方的书，都给对方debug和提意见，hoterran 建议我把书本放到 github 上，它能够给我提供一些他的菜谱，于是就有了 <a class="reference external" href="https://github.com/huangz1990/redis_cookbook">redis_cookbook</a> 项目</li>
 </ul>
 </li>
-<li><p>2011 年 9 月</p>
-<ul>
-<li><p>机械工业出版社的吴怡编辑联系 hoterran ，想让他出一本书</p></li>
-<li><p>hoterran 找我一起合著，我欣然答应</p></li>
+<li>2011 年 9 月<ul>
+<li>机械工业出版社的吴怡编辑联系 hoterran ，想让他出一本书</li>
+<li>hoterran 找我一起合著，我欣然答应</li>
 </ul>
 </li>
-<li><p>2011 年 10 月</p>
-<ul>
-<li><p>hoterran 和我一起构思了一本 Redis 书的大纲，基本由三个部分组成：1）Redis 基本介绍；2）案例介绍；3）源码分析</p></li>
-<li><p>hoterran 把大纲发给了吴编辑，并把我介绍给了她</p></li>
+<li>2011 年 10 月<ul>
+<li>hoterran 和我一起构思了一本 Redis 书的大纲，基本由三个部分组成：1）Redis 基本介绍；2）案例介绍；3）源码分析</li>
+<li>hoterran 把大纲发给了吴编辑，并把我介绍给了她</li>
 </ul>
 </li>
-<li><p>2011 年 12 月</p>
-<ul>
-<li><p>因为家庭原因（孩子出生了要照顾他）放弃写书计划</p></li>
+<li>2011 年 12 月<ul>
+<li>因为家庭原因（孩子出生了要照顾他）放弃写书计划</li>
 </ul>
 </li>
-<li><p>2012 年 3~8月</p>
-<ul>
-<li><p>随着对 Redis 使用的加多，需要了解 Redis 的内核，于是我也开始了阅读并分析 Redis 源码的过程</p></li>
-<li><p>一边阅读 Redis 源码，一边对它们进行注释，并将文章发布到自己的<a class="reference external" href="http://note.huangz.me/storage/redis_code_analysis/index.html">博客里面</a></p></li>
+<li>2012 年 3~8月<ul>
+<li>随着对 Redis 使用的加多，需要了解 Redis 的内核，于是我也开始了阅读并分析 Redis 源码的过程</li>
+<li>一边阅读 Redis 源码，一边对它们进行注释，并将文章发布到自己的<a class="reference external" href="http://note.huangz.me/storage/redis_code_analysis/index.html">博客里面</a></li>
 </ul>
 </li>
-<li><p>2012 年 8 月</p>
-<ul>
-<li><p>因为源码分析文章越来越多，我产生了撰写一本 Redis 书的想法，并邀请 hoterran 一起来撰写，他答应了，可惜的是，因为 hoterran 的工作原因，这次的项目也在一段时间之后在 10 月份停滞了</p></li>
-<li><p>反思：do or not do，no try ；鼓起勇气；承担风险！</p></li>
+<li>2012 年 8 月<ul>
+<li>因为源码分析文章越来越多，我产生了撰写一本 Redis 书的想法，并邀请 hoterran 一起来撰写，他答应了，可惜的是，因为 hoterran 的工作原因，这次的项目也在一段时间之后在 10 月份停滞了</li>
+<li>反思：do or not do，no try ；鼓起勇气；承担风险！</li>
 </ul>
 </li>
-<li><p>2012 年 12 月</p>
-<ul>
-<li><p>我决心自己单独完成 Redis 源码书</p></li>
-<li><p>刚开始我的源码分析文章基本上就是对 hoterran 的拙劣模仿，但后来逐渐产生了我自己的风格，形成了“设计与实现”的想法（受到 Love 的 《Linux设计与实现》的影响）</p></li>
-<li><p>新书贯彻了我的这一想法，并命名为《Redis设计与实现》</p></li>
+<li>2012 年 12 月<ul>
+<li>我决心自己单独完成 Redis 源码书</li>
+<li>刚开始我的源码分析文章基本上就是对 hoterran 的拙劣模仿，但后来逐渐产生了我自己的风格，形成了“设计与实现”的想法（受到 Love 的 《Linux设计与实现》的影响）</li>
+<li>新书贯彻了我的这一想法，并命名为《Redis设计与实现》</li>
 </ul>
 </li>
-<li><p>2013 年 3 月</p>
-<ul>
-<li><p>发布了《Redis设计与实现》网络版 <a class="reference external" href="http://origin.redisbook.com/">http://origin.redisbook.com/</a></p></li>
-<li><p>在豆瓣、微博、NoSQLFan 都获得了很好的反响</p></li>
-<li><p>hoterran 再次向吴编辑推荐了我，其他几间出版社也向我约稿，但考虑到最先和吴编辑接触，最后还是选择了机械工业出版社</p></li>
+<li>2013 年 3 月<ul>
+<li>发布了《Redis设计与实现》网络版 <a class="reference external" href="http://origin.redisbook.com/">http://origin.redisbook.com/</a></li>
+<li>在豆瓣、微博、NoSQLFan 都获得了很好的反响</li>
+<li>hoterran 再次向吴编辑推荐了我，其他几间出版社也向我约稿，但考虑到最先和吴编辑接触，最后还是选择了机械工业出版社</li>
 </ul>
 </li>
-<li><p>2013 年 4 月 - 2014 年 3 月</p>
-<ul>
-<li><p>重新分析了 Redis 3.0 测试版的代码，撰写了《Redis设计与实现》正式的第一版</p></li>
+<li>2013 年 4 月 - 2014 年 3 月<ul>
+<li>重新分析了 Redis 3.0 测试版的代码，撰写了《Redis设计与实现》正式的第一版</li>
 </ul>
 </li>
-<li><p>2014 年 6 月</p>
-<ul>
-<li><p>《Redis设计与实现》正式发售</p></li>
+<li>2014 年 6 月<ul>
+<li>《Redis设计与实现》正式发售</li>
 </ul>
 </li>
 </ul>
-</section>
-<section id="id5">
+</div>
+<div class="section" id="id5">
 <h2>后日谈<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Redis 越来越受欢迎，成为了现在事实上的内存数据库标准</p></li>
-<li><p>我接下了《Redis实战》的翻译工作，开始了译者生涯，并在之后也继续写作 Redis 相关的文章和图书</p></li>
-<li><p>hoterran 在蚂蚁金服工作，之前还看了我翻译的《Go Web 编程》</p></li>
-<li><p>iammutex 加入了创业公司</p></li>
+<li>Redis 越来越受欢迎，成为了现在事实上的内存数据库标准</li>
+<li>我接下了《Redis实战》的翻译工作，开始了译者生涯，并在之后也继续写作 Redis 相关的文章和图书</li>
+<li>hoterran 在蚂蚁金服工作，之前还看了我翻译的《Go Web 编程》</li>
+<li>iammutex 加入了创业公司</li>
 </ul>
-</section>
-<section id="id6">
+</div>
+<div class="section" id="id6">
 <h2>总结<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>结交良师益友</p></li>
-<li><p>抓住机会</p></li>
-<li><p>鼓起勇气</p></li>
-<li><p>用心，专注</p></li>
+<li>结交良师益友</li>
+<li>抓住机会</li>
+<li>鼓起勇气</li>
+<li>用心，专注</li>
 </ul>
 <div class="line-block">
 <div class="line">黄健宏</div>
 <div class="line">2021.6.16</div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
     </div>
@@ -262,8 +250,8 @@
       
     </p>
     <p>
-        &copy; Copyright 2021, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
+        &copy; Copyright 2022, 黄健宏.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>
 </footer>

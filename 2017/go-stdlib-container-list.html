@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Go 标准库文档翻译：container/list 包 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
 <meta charset='utf-8'>
@@ -137,12 +137,12 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <section id="go-container-list">
+  <div class="section" id="go-container-list">
 <h1>Go 标准库文档翻译：container/list 包<a class="headerlink" href="#go-container-list" title="Permalink to this headline">¶</a></h1>
 <p>本文是 Go 标准库中 container/list 包文档的翻译，
 原文地址为：
 <a class="reference external" href="https://golang.org/pkg/container/list/">https://golang.org/pkg/container/list/</a></p>
-<section id="id1">
+<div class="section" id="id1">
 <h2>概述<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>list 包实现了一个双链表（doubly linked list）。</p>
 <p>用户可以通过以下方法来遍历链表，
@@ -183,8 +183,8 @@
 <span class="mi">4</span>
 </pre></div>
 </div>
-</section>
-<section id="element">
+</div>
+<div class="section" id="element">
 <h2>Element 类型<a class="headerlink" href="#element" title="Permalink to this headline">¶</a></h2>
 <p>Element 用于代表双链表的元素：</p>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">Element</span> <span class="kd">struct</span> <span class="p">{</span>
@@ -196,22 +196,22 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<section id="element-next">
+<div class="section" id="element-next">
 <h3>(*Element) Next 方法<a class="headerlink" href="#element-next" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">e</span> <span class="o">*</span><span class="nx">Element</span><span class="p">)</span> <span class="nx">Next</span><span class="p">()</span> <span class="o">*</span><span class="nx">Element</span>
 </pre></div>
 </div>
 <p>返回链表中的下一个元素或者 nil 。</p>
-</section>
-<section id="element-prev">
+</div>
+<div class="section" id="element-prev">
 <h3>(*Element) Prev 方法<a class="headerlink" href="#element-prev" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">e</span> <span class="o">*</span><span class="nx">Element</span><span class="p">)</span> <span class="nx">Prev</span><span class="p">()</span> <span class="o">*</span><span class="nx">Element</span>
 </pre></div>
 </div>
 <p>返回链表中的前一个元素或者 nil 。</p>
-</section>
-</section>
-<section id="list">
+</div>
+</div>
+<div class="section" id="list">
 <h2>List 类型<a class="headerlink" href="#list" title="Permalink to this headline">¶</a></h2>
 <p>List 用于表示双链表。</p>
 <p>空列表可以用作 List 的零值。</p>
@@ -220,35 +220,35 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<section id="new">
+<div class="section" id="new">
 <h3>New 函数<a class="headerlink" href="#new" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="nx">New</span><span class="p">()</span> <span class="o">*</span><span class="nx">List</span>
 </pre></div>
 </div>
 <p>返回一个初始化后的链表。</p>
-</section>
-<section id="list-back">
+</div>
+<div class="section" id="list-back">
 <h3>(*List) Back 方法<a class="headerlink" href="#list-back" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">List</span><span class="p">)</span> <span class="nx">Back</span><span class="p">()</span> <span class="o">*</span><span class="nx">Element</span>
 </pre></div>
 </div>
 <p>返回链表的最后一个元素或者 nil 。</p>
-</section>
-<section id="list-front">
+</div>
+<div class="section" id="list-front">
 <h3>(*List) Front 方法<a class="headerlink" href="#list-front" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">List</span><span class="p">)</span> <span class="nx">Front</span><span class="p">()</span> <span class="o">*</span><span class="nx">Element</span>
 </pre></div>
 </div>
 <p>返回链表的第一个元素或者 nil 。</p>
-</section>
-<section id="list-init">
+</div>
+<div class="section" id="list-init">
 <h3>(*List) Init 方法<a class="headerlink" href="#list-init" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">List</span><span class="p">)</span> <span class="nx">Init</span><span class="p">()</span> <span class="o">*</span><span class="nx">List</span>
 </pre></div>
 </div>
 <p>初始化或者清空链表。</p>
-</section>
-<section id="list-insertafter">
+</div>
+<div class="section" id="list-insertafter">
 <h3>(*List) InsertAfter 方法<a class="headerlink" href="#list-insertafter" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">List</span><span class="p">)</span> <span class="nx">InsertAfter</span><span class="p">(</span><span class="nx">v</span> <span class="kd">interface</span><span class="p">{},</span> <span class="nx">mark</span> <span class="o">*</span><span class="nx">Element</span><span class="p">)</span> <span class="o">*</span><span class="nx">Element</span>
 </pre></div>
@@ -257,8 +257,8 @@
 并返回 e 作为结果。</p>
 <p>如果 mark 不是链表的元素，
 那么不对链表做任何动作。</p>
-</section>
-<section id="list-insertbefore">
+</div>
+<div class="section" id="list-insertbefore">
 <h3>(*List) InsertBefore 方法<a class="headerlink" href="#list-insertbefore" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">List</span><span class="p">)</span> <span class="nx">InsertBefore</span><span class="p">(</span><span class="nx">v</span> <span class="kd">interface</span><span class="p">{},</span> <span class="nx">mark</span> <span class="o">*</span><span class="nx">Element</span><span class="p">)</span> <span class="o">*</span><span class="nx">Element</span>
 </pre></div>
@@ -267,16 +267,16 @@
 并返回 e 作为结果。</p>
 <p>如果 mark 不是链表的元素，
 那么不对链表做任何动作。</p>
-</section>
-<section id="list-len">
+</div>
+<div class="section" id="list-len">
 <h3>(*List) Len 方法<a class="headerlink" href="#list-len" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">List</span><span class="p">)</span> <span class="nx">Len</span><span class="p">()</span> <span class="kt">int</span>
 </pre></div>
 </div>
 <p>返回链表包含的元素数量。
 该方法的复杂度为 O(1) 。</p>
-</section>
-<section id="list-moveafter">
+</div>
+<div class="section" id="list-moveafter">
 <h3>(*List) MoveAfter 方法<a class="headerlink" href="#list-moveafter" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">List</span><span class="p">)</span> <span class="nx">MoveAfter</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">mark</span> <span class="o">*</span><span class="nx">Element</span><span class="p">)</span>
 </pre></div>
@@ -285,8 +285,8 @@
 <p>如果 e 或者 mark 不是链表的元素，
 又或者 e == mark ，
 那么不对链表做任何动作。</p>
-</section>
-<section id="list-movebefore">
+</div>
+<div class="section" id="list-movebefore">
 <h3>(*List) MoveBefore 方法<a class="headerlink" href="#list-movebefore" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">List</span><span class="p">)</span> <span class="nx">MoveBefore</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">mark</span> <span class="o">*</span><span class="nx">Element</span><span class="p">)</span>
 </pre></div>
@@ -295,8 +295,8 @@
 <p>如果 e 或者 mark 不是链表的元素，
 又或者 e == mark ，
 那么不对链表做任何动作。</p>
-</section>
-<section id="list-movetoback">
+</div>
+<div class="section" id="list-movetoback">
 <h3>(*List) MoveToBack 方法<a class="headerlink" href="#list-movetoback" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">List</span><span class="p">)</span> <span class="nx">MoveToBack</span><span class="p">(</span><span class="nx">e</span> <span class="o">*</span><span class="nx">Element</span><span class="p">)</span>
 </pre></div>
@@ -304,8 +304,8 @@
 <p>将元素 e 移动到链表的末尾。</p>
 <p>如果 e 不是链表的元素，
 那么不对链表做任何动作。</p>
-</section>
-<section id="list-movetofront">
+</div>
+<div class="section" id="list-movetofront">
 <h3>(*List) MoveToFront 方法<a class="headerlink" href="#list-movetofront" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">List</span><span class="p">)</span> <span class="nx">MoveToFront</span><span class="p">(</span><span class="nx">e</span> <span class="o">*</span><span class="nx">Element</span><span class="p">)</span>
 </pre></div>
@@ -313,38 +313,38 @@
 <p>将元素 e 移动到链表的开头。</p>
 <p>如果 e 不是链表的元素，
 那么不对链表做任何动作。</p>
-</section>
-<section id="list-pushback">
+</div>
+<div class="section" id="list-pushback">
 <h3>(*List) PushBack 方法<a class="headerlink" href="#list-pushback" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">List</span><span class="p">)</span> <span class="nx">PushBack</span><span class="p">(</span><span class="nx">v</span> <span class="kd">interface</span><span class="p">{})</span> <span class="o">*</span><span class="nx">Element</span>
 </pre></div>
 </div>
 <p>将包含了值 v 的元素 e 插入到链表的末尾并返回 e 。</p>
-</section>
-<section id="list-pushbacklist">
+</div>
+<div class="section" id="list-pushbacklist">
 <h3>(*List) PushBackList 方法<a class="headerlink" href="#list-pushbacklist" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">List</span><span class="p">)</span> <span class="nx">PushBackList</span><span class="p">(</span><span class="nx">other</span> <span class="o">*</span><span class="nx">List</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>将链表 other 的副本插入到链表 l 的末尾。
 other 和 l 可以是同一个链表。</p>
-</section>
-<section id="list-pushfront">
+</div>
+<div class="section" id="list-pushfront">
 <h3>(*List) PushFront 方法<a class="headerlink" href="#list-pushfront" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">List</span><span class="p">)</span> <span class="nx">PushFront</span><span class="p">(</span><span class="nx">v</span> <span class="kd">interface</span><span class="p">{})</span> <span class="o">*</span><span class="nx">Element</span>
 </pre></div>
 </div>
 <p>将包含了值 v 的元素 e 插入到链表的开头并返回 e 。</p>
-</section>
-<section id="list-pushfrontlist">
+</div>
+<div class="section" id="list-pushfrontlist">
 <h3>(*List) PushFrontList 方法<a class="headerlink" href="#list-pushfrontlist" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">List</span><span class="p">)</span> <span class="nx">PushFrontList</span><span class="p">(</span><span class="nx">other</span> <span class="o">*</span><span class="nx">List</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>将链表 other 的副本插入到链表 l 的开头。
 other 和 l 可以是同一个链表。</p>
-</section>
-<section id="list-remove">
+</div>
+<div class="section" id="list-remove">
 <h3>(*List) Remove 方法<a class="headerlink" href="#list-remove" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="o">*</span><span class="nx">List</span><span class="p">)</span> <span class="nx">Remove</span><span class="p">(</span><span class="nx">e</span> <span class="o">*</span><span class="nx">Element</span><span class="p">)</span> <span class="kd">interface</span><span class="p">{}</span>
 </pre></div>
@@ -352,13 +352,13 @@ other 和 l 可以是同一个链表。</p>
 <p>如果 e 是链表 l 中的元素，
 那么移除元素 e 。</p>
 <p>这个方法会返回元素 e 的值 e.Value 作为返回值。</p>
-</section>
-</section>
-<section id="license">
+</div>
+</div>
+<div class="section" id="license">
 <h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
 <p>Portions of this page are modifications based on work created and <a class="reference external" href="https://developers.google.com/terms/site-policies">shared by Google</a> and used according to terms described in the <a class="reference external" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons 3.0 Attribution License</a> .</p>
-</section>
-</section>
+</div>
+</div>
 
 
     </div>
@@ -372,8 +372,8 @@ other 和 l 可以是同一个链表。</p>
       
     </p>
     <p>
-        &copy; Copyright 2021, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
+        &copy; Copyright 2022, 黄健宏.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>
 </footer>

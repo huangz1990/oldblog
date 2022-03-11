@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Redis 学习路线 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="《算法导论》2.1 节《插入排序》：笔记、代码实现与练习解答" href="introduction-to-algorithms/section-2-1.html" />
@@ -126,17 +126,17 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <section id="redis">
+  <div class="section" id="redis">
 <h1>Redis 学习路线<a class="headerlink" href="#redis" title="Permalink to this headline">¶</a></h1>
 <p>学习和使用 Redis 一般可以分为以下四个阶段：</p>
 <ol class="arabic simple">
-<li><p>初学者入门</p></li>
-<li><p>进阶实战</p></li>
-<li><p>理解原理</p></li>
-<li><p>贡献和开发</p></li>
+<li>初学者入门</li>
+<li>进阶实战</li>
+<li>理解原理</li>
+<li>贡献和开发</li>
 </ol>
 <p>本文接下来将在四个小节里面分别对这四个阶段进行介绍。</p>
-<section id="id1">
+<div class="section" id="id1">
 <h2>初学者入门<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>如果你只是对 Redis 感兴趣，
 又或者听别人说过一些关于 Redis 的介绍，
@@ -161,19 +161,19 @@
 初学者就可以向下一阶段进发，
 考虑如何将 Redis 应用到实际的工作当中。</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
+<p class="first admonition-title">Note</p>
 <p>扩展阅读</p>
 <p>除了《Redis入门指南》和《Redis命令参考》之外，
 以下列出的一些资料也值得 Redis 初学者去观看和阅读：</p>
-<ul class="simple">
-<li><p>《Redis从入门到精通》课程： <a class="reference external" href="http://www.chinahadoop.cn/course/115">http://www.chinahadoop.cn/course/115</a></p></li>
-<li><p>《Redis课程》系列视频： <a class="reference external" href="http://my.tv.sohu.com/pl/9102138/index.shtml">http://my.tv.sohu.com/pl/9102138/index.shtml</a></p></li>
-<li><p>Redis 官方网站上的入门介绍文章（英文，可能需要翻墙访问）： <a class="reference external" href="http://redis.io/topics/data-types-intro">http://redis.io/topics/data-types-intro</a></p></li>
-<li><p>《What is Redis?》系列文章（英文，可能需要翻墙访问）： <a class="reference external" href="https://matt.sh/what-is-redis">https://matt.sh/what-is-redis</a></p></li>
+<ul class="last simple">
+<li>《Redis从入门到精通》课程： <a class="reference external" href="http://www.chinahadoop.cn/course/115">http://www.chinahadoop.cn/course/115</a></li>
+<li>《Redis课程》系列视频： <a class="reference external" href="http://my.tv.sohu.com/pl/9102138/index.shtml">http://my.tv.sohu.com/pl/9102138/index.shtml</a></li>
+<li>Redis 官方网站上的入门介绍文章（英文，可能需要翻墙访问）： <a class="reference external" href="http://redis.io/topics/data-types-intro">http://redis.io/topics/data-types-intro</a></li>
+<li>《What is Redis?》系列文章（英文，可能需要翻墙访问）： <a class="reference external" href="https://matt.sh/what-is-redis">https://matt.sh/what-is-redis</a></li>
 </ul>
 </div>
-</section>
-<section id="id3">
+</div>
+<div class="section" id="id3">
 <h2>进阶实战<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>学习 Redis 的第二个阶段是进阶实战阶段，
 处于这一阶段的 Redis 学习者应该对 Redis 有了基本的理解，
@@ -197,8 +197,8 @@ Redis 学习者可以通过这些分享中了解到更多使用 Redis 的例子�
 目前扩展 Redis 常见的技术包括 Redis 自带的<a class="reference external" href="http://redis.io/topics/replication">复制（replication）</a> 、<a class="reference external" href="http://redis.io/topics/sentinel">Sentinel</a>  和 <a class="reference external" href="http://redis.io/topics/cluster-tutorial">Cluster</a> 功能，
 以及 <a class="reference external" href="https://github.com/twitter/twemproxy">twemproxy</a> 和 <a class="reference external" href="https://github.com/CodisLabs/codis">codis</a> 等项目，
 Redis 用户可以通过这些技术的相关文档来学习如何使用这些技术。</p>
-</section>
-<section id="id5">
+</div>
+<div class="section" id="id5">
 <h2>理解原理<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>在弄懂了如何在实际中使用 Redis 之后，
 我们要考虑的就是如何解决 Redis 在使用过程中引发的问题；
@@ -216,8 +216,8 @@ Redis 用户可以通过这些技术的相关文档来学习如何使用这些�
 通过同时阅读书本和带注释的源代码，
 读者能够快速地了解到 Redis 的内部构造，
 以及各项主要功能的实现原理。</p>
-</section>
-<section id="id8">
+</div>
+<div class="section" id="id8">
 <h2>贡献和开发<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
 <p>在了解了 Redis 的原理之后，
 我们可以考虑向 Redis 项目贡献代码，
@@ -225,8 +225,8 @@ Redis 用户可以通过这些技术的相关文档来学习如何使用这些�
 <p>除了以上两点之外，
 我们还可以考虑通过 Redis 最新的可载入模块系统（loadable module system），
 以编写模块的方式来为 Redis 添加新功能： <a class="reference external" href="http://antirez.com/news/106">http://antirez.com/news/106</a> 。</p>
-</section>
-<section id="id9">
+</div>
+<div class="section" id="id9">
 <h2>结语<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
 <p>好的，
 关于 Redis 学习资料的介绍就到此结束，
@@ -236,8 +236,8 @@ Redis 用户可以通过这些技术的相关文档来学习如何使用这些�
 <div class="line">黄健宏（huangz）</div>
 <div class="line">2016.5.24</div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
     </div>
@@ -251,8 +251,8 @@ Redis 用户可以通过这些技术的相关文档来学习如何使用这些�
       
     </p>
     <p>
-        &copy; Copyright 2021, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
+        &copy; Copyright 2022, 黄健宏.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>
 </footer>

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>编写《Redis 设计与实现》时用到的工具 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Redis 的 ZUNIONSTORE 命令和 ZINTERSTORE 命令的另一种用法" href="another-usage-of-zunionstore-and-zinterstore.html" />
@@ -127,14 +127,14 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <section id="redis">
+  <div class="section" id="redis">
 <h1>编写《Redis 设计与实现》时用到的工具<a class="headerlink" href="#redis" title="Permalink to this headline">¶</a></h1>
 <p>在《<a class="reference external" href="http://www.redisbook.com">Redis 设计与实现</a>》（后面简称 《设计与实现》）发布以后，
 除了和 Redis 相关的问题之外，
 读者们问得最多的就是制作这本书使用了什么工具。</p>
 <p>这篇文章将对编写《设计与实现》时用到的所有工具进行介绍，
 并附上一些我个人的使用心得和经验。</p>
-<section id="sphinx">
+<div class="section" id="sphinx">
 <h2>文档生成：Sphinx<a class="headerlink" href="#sphinx" title="Permalink to this headline">¶</a></h2>
 <p>《设计与实现》的网页本身是由 <a class="reference external" href="http://sphinx-doc.org/ext/graphviz.html">Sphinx</a> 生成的。</p>
 <img alt="../../_images/sphinx-log.png" src="../../_images/sphinx-log.png" />
@@ -146,17 +146,20 @@ rst 格式和 markdown 格式一样，
 它具备了一系列强大的特性，
 使得这个工具非常利于编写文档：</p>
 <ul>
-<li><p>通过 <a class="reference external" href="http://pygments.org/">Pygments</a> ，支持多种语言、多种风格的代码高亮。</p></li>
-<li><p>代码和文件可以内嵌在 rst 文件中，也可以 <a class="reference external" href="http://sphinx-doc.org/markup/code.html?highlight=include#includes">从其他文件载入</a> ，这保证了多个文件之间的模块化：比如你可以将一系列文档放在一个文件夹，而将文档中用到的代码放在另一个文件夹，这样不同文件之间的就不会互相干扰。</p></li>
-<li><p>文档本身可以非常简单地 <a class="reference external" href="http://sphinx-doc.org/markup/inline.html#role-ref">引用同一文档的其他章节、其他小节，或者文档的任何地方</a> 。</p>
+<li><p class="first">通过 <a class="reference external" href="http://pygments.org/">Pygments</a> ，支持多种语言、多种风格的代码高亮。</p>
+</li>
+<li><p class="first">代码和文件可以内嵌在 rst 文件中，也可以 <a class="reference external" href="http://sphinx-doc.org/markup/code.html?highlight=include#includes">从其他文件载入</a> ，这保证了多个文件之间的模块化：比如你可以将一系列文档放在一个文件夹，而将文档中用到的代码放在另一个文件夹，这样不同文件之间的就不会互相干扰。</p>
+</li>
+<li><p class="first">文档本身可以非常简单地 <a class="reference external" href="http://sphinx-doc.org/markup/inline.html#role-ref">引用同一文档的其他章节、其他小节，或者文档的任何地方</a> 。</p>
 <p>更为强大的是， <a class="reference external" href="http://sphinx-doc.org/ext/intersphinx.html">一个 Sphinx 文档还可以引用另一个 Sphinx 文档的内容</a> ：举个例子，在《设计与实现》中，我需要添加大量链向《<a class="reference external" href="http://redis.readthedocs.org">Redis 命令参考</a>》的链接，比如 <a class="reference external" href="http://redis.readthedocs.org/en/latest/script/eval.html">EVAL</a> 。</p>
 <p>如果每次都要为这些命令手动添加链接，那可就真是既无聊又痛苦 —— 而使用 Sphinx 的跨文档链接就可以轻松地解决这个问题：我只要按照 Sphinx 的格式在 rst 文件中写下一个（简短的）命令，Sphinx 就会自动帮我添加到链向《Redis 命令参考》的链接，非常简单。</p>
 </li>
-<li><p>Sphinx 还支持 <a class="reference external" href="http://sphinx-doc.org/extensions.html">一系列插件</a> ，通过这些插件，可以增强 Sphinx 本身的功能。</p>
+<li><p class="first">Sphinx 还支持 <a class="reference external" href="http://sphinx-doc.org/extensions.html">一系列插件</a> ，通过这些插件，可以增强 Sphinx 本身的功能。</p>
 <p>这些插件很多都是和 Python 有关的，但有一些在非 Python 的文档项目中都能用得上。</p>
 <p>比如《设计与实现》就使用了其中的 <a class="reference external" href="http://sphinx-doc.org/ext/math.html#module-sphinx.ext.mathjax">mathjax 插件</a> 来显示 LaTeX 格式的算法复杂度；文章接下来会介绍的 Graphviz 图片生成工具，也有 <a class="reference external" href="http://sphinx-doc.org/ext/graphviz.html">相应的 Sphinx 插件</a> ；另外，前面提到的，对跨文档链接的支持，也是通过插件来完成的。</p>
 </li>
-<li><p>Sphinx <a class="reference external" href="http://sphinx-doc.org/theming.html">内置了多个蛮不错的外观样式</a> ，更换不同的样式、或者自己 <a class="reference external" href="http://sphinx-doc.org/templating.html">修改样式</a> 都非常简单。《设计与实现》所使用的样式就是通过修改内置的 pyramid 样式而来的，可以在 GitHub 找到这个样式： <a class="reference external" href="https://github.com/huangz1990/der">github.com/huangz1990/der</a> 。</p></li>
+<li><p class="first">Sphinx <a class="reference external" href="http://sphinx-doc.org/theming.html">内置了多个蛮不错的外观样式</a> ，更换不同的样式、或者自己 <a class="reference external" href="http://sphinx-doc.org/templating.html">修改样式</a> 都非常简单。《设计与实现》所使用的样式就是通过修改内置的 pyramid 样式而来的，可以在 GitHub 找到这个样式： <a class="reference external" href="https://github.com/huangz1990/der">github.com/huangz1990/der</a> 。</p>
+</li>
 </ul>
 <p>在编写《设计与实现》之前，
 我就已经用 Sphinx 做了多个文档，
@@ -170,8 +173,8 @@ rst 格式和 markdown 格式一样，
 说不定你也会因此喜欢上 Sphinx ，
 甚至会和我一样，
 变成一个文档编写爱好者。</p>
-</section>
-<section id="git-github-bitbucket">
+</div>
+<div class="section" id="git-github-bitbucket">
 <h2>源码的管理和托管：Git 、 GitHub 以及 Bitbucket<a class="headerlink" href="#git-github-bitbucket" title="Permalink to this headline">¶</a></h2>
 <p>有了书本原稿之后，
 如何妥善地保管这些原稿就成了一个非常重要的问题的 ——
@@ -193,8 +196,8 @@ rst 格式和 markdown 格式一样，
 安全性方面是可以保障的。
 这两个网站在项目托管方面的主要区别是：</p>
 <ul class="simple">
-<li><p>GitHub 的私有项目需要按月收费，而 Bitbucket 则为至多 5 人的团队提供免费的私有项目。</p></li>
-<li><p>但是 GitHub 的人气比 Bitbucket 要高，项目放在 GitHub 会受到更多关注。</p></li>
+<li>GitHub 的私有项目需要按月收费，而 Bitbucket 则为至多 5 人的团队提供免费的私有项目。</li>
+<li>但是 GitHub 的人气比 Bitbucket 要高，项目放在 GitHub 会受到更多关注。</li>
 </ul>
 <p>如果想节约一些私有项目的托管费用，
 但又想项目获得更多关注，
@@ -208,8 +211,8 @@ rst 格式和 markdown 格式一样，
 所以不妨邀请一些朋友作为文档的技术复检员，
 让他们加入到项目中，
 请他们为你未发布的文档提供意见。</p>
-</section>
-<section id="graphviz">
+</div>
+<div class="section" id="graphviz">
 <h2>图片生成：Graphviz<a class="headerlink" href="#graphviz" title="Permalink to this headline">¶</a></h2>
 <p>《设计与实现》的图片都是由 <a class="reference external" href="http://graphviz.org/">Graphviz</a> 生成的。</p>
 <img alt="../../_images/graphviz-logo.png" src="../../_images/graphviz-logo.png" />
@@ -244,8 +247,8 @@ Graphviz 的图片是用文本来表示的 ——
 而是像编程一样写出来的，
 这种做法有两个明显的好处：</p>
 <ol class="arabic simple">
-<li><p>因为“画图”是由 Graphviz 负责的，所以你只需要负责定义“这个图片应该是什么样子”，至于“怎么画这个图”，就交给 Graphviz 来思考就可以了。</p></li>
-<li><p>因为图片的源码是文本，所以源码中的内容可以重用，并且这些源码文件可以用 git 来管理。</p></li>
+<li>因为“画图”是由 Graphviz 负责的，所以你只需要负责定义“这个图片应该是什么样子”，至于“怎么画这个图”，就交给 Graphviz 来思考就可以了。</li>
+<li>因为图片的源码是文本，所以源码中的内容可以重用，并且这些源码文件可以用 git 来管理。</li>
 </ol>
 <p>多得这两个好处，
 在编写《设计与实现》时，
@@ -259,8 +262,8 @@ Graphviz 提供了大量的功能和参数，
 很多复杂的图片也只能用 ASCII 文字来表示，
 希望在将来的新版本中，
 能用 Graphviz 创建出更多更好看的图片。</p>
-</section>
-<section id="id12">
+</div>
+<div class="section" id="id12">
 <h2>其他工具<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
 <p>《设计与实现》是通过阅读并提取 Redis 源码中的设计思想来创作的，
 我使用 VIM 阅读和注释源码。
@@ -282,8 +285,8 @@ Graphviz 提供了大量的功能和参数，
 不过后来就把这事给忘记了，
 写这篇文章的时候忽然回忆到了，
 得赶紧去买才行。</p>
-</section>
-<section id="sphinx-readthedocs">
+</div>
+<div class="section" id="sphinx-readthedocs">
 <h2>Sphinx 项目托管： ReadTheDocs<a class="headerlink" href="#sphinx-readthedocs" title="Permalink to this headline">¶</a></h2>
 <p>当书本完成之后，
 我们需要将 Sphinx 生成的文档发布出去，
@@ -316,8 +319,8 @@ ReadTheDocs 也直接支持 <a class="reference external" href="https://www.goog
 就可以对你的文档的访问情况进行记录了。</p>
 <p>要将 Sphinx 文档发布到网上，
 ReadTheDocs 应该是你的不二之选。</p>
-</section>
-<section id="id13">
+</div>
+<div class="section" id="id13">
 <h2>结尾<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
 <p>好的，以上介绍的就是编写《Redis 实现与设计》时用到的所有工具了。</p>
 <p>关于工具的选择和使用上几乎每个人都有不同的想法，
@@ -336,8 +339,8 @@ ReadTheDocs 应该是你的不二之选。</p>
 <div class="line">huangz</div>
 <div class="line">2013.4.15</div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
     </div>
@@ -351,8 +354,8 @@ ReadTheDocs 应该是你的不二之选。</p>
       
     </p>
     <p>
-        &copy; Copyright 2021, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.1.<br/>
+        &copy; Copyright 2022, 黄健宏.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
     </p>
   </div>
 </footer>
