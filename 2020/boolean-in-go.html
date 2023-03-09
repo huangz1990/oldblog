@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Go 语言的布尔值 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
 <meta charset='utf-8'>
@@ -52,6 +52,7 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../2023/index.html">2023</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2022/index.html">2022</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2021/index.html">2021</a></li>
 <li class="toctree-l1"><a class="reference internal" href="index.html">2020</a></li>
@@ -109,27 +110,28 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="go">
+  <section id="go">
 <h1>Go 语言的布尔值<a class="headerlink" href="#go" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>本文摘录自《Go语言趣学指南》第 3 章，
 请访问 <a class="reference external" href="http://gpwgcn.com">gpwgcn.com</a>  以获取更多相关信息。</p>
-<a class="last reference internal image-reference" href="../_images/gpwgcn1.jpg"><img alt="../_images/gpwgcn1.jpg" src="../_images/gpwgcn1.jpg" style="width: 149.6px; height: 188.0px;" /></a>
+<a class="reference internal image-reference" href="../_images/gpwgcn1.jpg"><img alt="../_images/gpwgcn1.jpg" src="../_images/gpwgcn1.jpg" style="width: 149.6px; height: 188.0px;" /></a>
 </div>
 <p>在阅读能够自选结局的故事书时，你会碰到类似以下这样的选择：</p>
 <blockquote>
-<div>如果你选择走出洞穴， 那么请翻到第 21 页。 —— Edward
-Packard，《时间的洞穴》</div></blockquote>
+<div><p>如果你选择走出洞穴， 那么请翻到第 21 页。 —— Edward
+Packard，《时间的洞穴》</p>
+</div></blockquote>
 <p>在 Go 中，诸如“是否走出洞穴”这样的问题可以用 <code class="docutils literal notranslate"><span class="pre">true</span></code> 和 <code class="docutils literal notranslate"><span class="pre">false</span></code>
 这两个预定义常量来回答。 你可以像这样使用这两个常量：</p>
-<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">walkOutside</span> <span class="p">=</span> <span class="kc">true</span>
-<span class="kd">var</span> <span class="nx">takeTheBluePill</span> <span class="p">=</span> <span class="kc">false</span>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">walkOutside</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">takeTheBluePill</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">某些编程语言对于“真”的定义比较宽松。 比如 Python 和 JavaScript
+<p class="admonition-title">Note</p>
+<p>某些编程语言对于“真”的定义比较宽松。 比如 Python 和 JavaScript
 就把空文本 <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> 和数字零看作是“假”， 但是 Ruby 和 Elixir
 却把这两个值看作是“真”。 对于 Go 来说， <code class="docutils literal notranslate"><span class="pre">true</span></code> 是唯一的真值， 而
 <code class="docutils literal notranslate"><span class="pre">false</span></code> 则是唯一的假值。</p>
@@ -142,24 +144,24 @@ Go 的标准库里面有好些函数都会返回布尔值。 比如在接下来�
 <code class="docutils literal notranslate"><span class="pre">true</span></code> 作为结果。</p>
 <hr class="docutils" />
 <p>代码清单 3-1 返回布尔值的函数： <code class="docutils literal notranslate"><span class="pre">contains.go</span></code></p>
-<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nx">main</span><span class="w"></span>
 
-<span class="kn">import</span> <span class="p">(</span>
-    <span class="s">&quot;fmt&quot;</span>
-    <span class="s">&quot;strings&quot;</span>
-<span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="s">&quot;strings&quot;</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
 
-<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;You find yourself in a dimly lit cavern.&quot;</span><span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;You find yourself in a dimly lit cavern.&quot;</span><span class="p">)</span><span class="w"></span>
 
-    <span class="kd">var</span> <span class="nx">command</span> <span class="p">=</span> <span class="s">&quot;walk outside&quot;</span>
-    <span class="kd">var</span> <span class="nx">exit</span> <span class="p">=</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">Contains</span><span class="p">(</span><span class="nx">command</span><span class="p">,</span> <span class="s">&quot;outside&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">command</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;walk outside&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">exit</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">Contains</span><span class="p">(</span><span class="nx">command</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;outside&quot;</span><span class="p">)</span><span class="w"></span>
 
-    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;You leave the cave:&quot;</span><span class="p">,</span> <span class="nx">exit</span><span class="p">)</span>    <span class="c1">// 打印文本“You leave the cave: true”</span>
- <span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;You leave the cave:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">exit</span><span class="p">)</span><span class="w">    </span><span class="c1">// 打印文本“You leave the cave: true”</span><span class="w"></span>
+<span class="w"> </span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
     </div>
@@ -174,7 +176,7 @@ Go 的标准库里面有好些函数都会返回布尔值。 比如在接下来�
     </p>
     <p>
         &copy; Copyright 2022, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br/>
     </p>
   </div>
 </footer>

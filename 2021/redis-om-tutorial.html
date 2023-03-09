@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Redis OM 基本教程 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="《SICP》献词个人翻译版本" href="sicp-dedication.html" />
@@ -54,6 +54,7 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../2023/index.html">2023</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2022/index.html">2022</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">2021</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2020/index.html">2020</a></li>
@@ -130,29 +131,29 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="redis-om">
+  <section id="redis-om">
 <h1>Redis OM 基本教程<a class="headerlink" href="#redis-om" title="Permalink to this headline">¶</a></h1>
 <a class="reference internal image-reference" href="../_images/redisom.jpeg"><img alt="../_images/redisom.jpeg" src="../_images/redisom.jpeg" style="width: 1020.0px; height: 534.0px;" /></a>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">本文翻译自 <a class="reference external" href="https://github.com/redis/redis-om-python">Redis OM Python 的项目文档</a> ，
+<p class="admonition-title">Note</p>
+<p>本文翻译自 <a class="reference external" href="https://github.com/redis/redis-om-python">Redis OM Python 的项目文档</a> ，
 有删改。</p>
 </div>
 <p>Redis OM 提供了高层次的抽象，
 它可以让当今的 Python 应用更容易地查询 Redis 中储存的数据并为之建模。</p>
 <p>本次释出的<strong>预览版本</strong>提供了以下特性：</p>
 <ul class="simple">
-<li>为 Redis 对象提供声明式对象映射</li>
-<li>声明式二级索引生成</li>
-<li>非常丰富多样的 Redis 查询 API</li>
+<li><p>为 Redis 对象提供声明式对象映射</p></li>
+<li><p>声明式二级索引生成</p></li>
+<li><p>非常丰富多样的 Redis 查询 API</p></li>
 </ul>
-<div class="section" id="id1">
+<section id="id1">
 <h2>安装 Redis OM<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>你可以通过执行以下命令来安装 Redis OM ：</p>
-<div class="code sh highlight-default notranslate"><div class="highlight"><pre><span></span># 通过 PIP 安装
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># 通过 PIP 安装</span>
 $ pip install redis-om
 
-# 通过 Poetry 安装
+<span class="c1"># 通过 Poetry 安装</span>
 $ poetry add redis-om
 </pre></div>
 </div>
@@ -164,19 +165,19 @@ Redis OM 的某些高级功能需要用到
 你可以在有需要时酌情安装它们。</p>
 <p>除了 Python 版本之外，
 Redis OM 还提供 <a class="reference external" href="https://github.com/redis/redis-om-dotnet">.Net</a> 、 <a class="reference external" href="https://github.com/redis/redis-om-node">Node.js</a> 和 <a class="reference external" href="https://github.com/redis/redis-om-spring">Java（Spring）</a> 版本。</p>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h2>为数据建模<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>Redis OM 包含强大的声明式模型，
 以便验证、序列化你的数据并将其持久化至 Redis 。</p>
 <p>下文将演示如何通过 Redis OM 建模客户数据。
 首先，
 我们需要创建一个 <code class="docutils literal notranslate"><span class="pre">Customer</span></code> 模型：</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Optional</span>
-<span class="kn">from</span> <span class="nn">pydantic</span> <span class="k">import</span> <span class="n">EmailStr</span>
-<span class="kn">from</span> <span class="nn">redis_om</span> <span class="k">import</span> <span class="n">HashModel</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">EmailStr</span>
+<span class="kn">from</span> <span class="nn">redis_om</span> <span class="kn">import</span> <span class="n">HashModel</span>
 
 <span class="k">class</span> <span class="nc">Customer</span><span class="p">(</span><span class="n">HashModel</span><span class="p">):</span>
     <span class="n">first_name</span><span class="p">:</span> <span class="nb">str</span>
@@ -189,11 +190,11 @@ Redis OM 还提供 <a class="reference external" href="https://github.com/redis/
 </div>
 <p>之后我们将通过 <code class="docutils literal notranslate"><span class="pre">Customer</span></code> 模型，
 将客户数据储存至 Redis ：</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Optional</span>
-<span class="kn">from</span> <span class="nn">pydantic</span> <span class="k">import</span> <span class="n">EmailStr</span>
-<span class="kn">from</span> <span class="nn">redis_om</span> <span class="k">import</span> <span class="n">HashModel</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">EmailStr</span>
+<span class="kn">from</span> <span class="nn">redis_om</span> <span class="kn">import</span> <span class="n">HashModel</span>
 
 <span class="k">class</span> <span class="nc">Customer</span><span class="p">(</span><span class="n">HashModel</span><span class="p">):</span>
     <span class="n">first_name</span><span class="p">:</span> <span class="nb">str</span>
@@ -229,8 +230,8 @@ Redis OM 还提供 <a class="reference external" href="https://github.com/redis/
 那么可以阅读我们的 <a class="reference external" href="https://github.com/redis/redis-om-python/blob/main/docs/getting_started.md">Getting Started Guide</a> 文档。</p>
 <p>或者你也可以接着读下去，
 学习如何通过 Redis OM 进行数据验证。</p>
-</div>
-<div class="section" id="id3">
+</section>
+<section id="id3">
 <h2>通过模型验证数据<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>Redis OM 使用了 <a class="reference external" href="https://github.com/samuelcolvin/pydantic">Pydantic</a> ，
 它可以基于你在模型类中为字段添加的类型注解进行数据验证。</p>
@@ -242,11 +243,11 @@ Redis OM 还提供 <a class="reference external" href="https://github.com/redis/
 <p>比如说，
 由于我们将 <code class="docutils literal notranslate"><span class="pre">email</span></code> 字段标记成了 <code class="docutils literal notranslate"><span class="pre">EmailStr</span></code> 类型，
 所以程序在尝试使用不正确的邮箱地址创建 <code class="docutils literal notranslate"><span class="pre">Customer</span></code> 实例时将引发一个验证错误：</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Optional</span>
-<span class="kn">from</span> <span class="nn">pydantic</span> <span class="k">import</span> <span class="n">EmailStr</span><span class="p">,</span> <span class="n">ValidationError</span>
-<span class="kn">from</span> <span class="nn">redis_om</span> <span class="k">import</span> <span class="n">HashModel</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">EmailStr</span><span class="p">,</span> <span class="n">ValidationError</span>
+<span class="kn">from</span> <span class="nn">redis_om</span> <span class="kn">import</span> <span class="n">HashModel</span>
 
 <span class="k">class</span> <span class="nc">Customer</span><span class="p">(</span><span class="n">HashModel</span><span class="p">):</span>
     <span class="n">first_name</span><span class="p">:</span> <span class="nb">str</span>
@@ -277,8 +278,8 @@ Redis OM 还提供 <a class="reference external" href="https://github.com/redis/
 当然你也可以自行编写任意复杂的定制校验器。</p>
 <p>要了解更多校验器的用法，
 请阅读 <a class="reference external" href="https://github.com/redis/redis-om-python/blob/main/docs/validation.md">Data Validation</a> 文档.</p>
-</div>
-<div class="section" id="id4">
+</section>
+<section id="id4">
 <h2>多样查询和嵌入式模型<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>无论你以何种方式运行 Redis ，
 上述展示的数据建模、验证和保存操作应该都能够正常作用于 Redis 。</p>
@@ -292,7 +293,7 @@ Redis OM 还提供 <a class="reference external" href="https://github.com/redis/
 又或者你运行的是
 <a class="reference external" href="https://redis.com/try-free/">Redis Enterprise</a>
 版本。</p>
-<div class="section" id="id5">
+<section id="id5">
 <h3>查询<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <p>Redis OM 提供了一套多样查询语言（rich query language），
 以便你通过 Pyhton 表达式来查询 Redis 数据。</p>
@@ -300,11 +301,11 @@ Redis OM 还提供 <a class="reference external" href="https://github.com/redis/
 我们需要对前面定义的 <code class="docutils literal notranslate"><span class="pre">Customer</span></code> 模型做一些修改。
 通过为 <code class="docutils literal notranslate"><span class="pre">last_name</span></code> 字段和 <code class="docutils literal notranslate"><span class="pre">age</span></code> 字段添加语句 <code class="docutils literal notranslate"><span class="pre">Field(index=True)</span></code> ，
 以此来告知 Redis OM 我们想要为这两个字段添加索引：</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Optional</span>
-<span class="kn">from</span> <span class="nn">pydantic</span> <span class="k">import</span> <span class="n">EmailStr</span>
-<span class="kn">from</span> <span class="nn">redis_om</span> <span class="k">import</span> <span class="p">(</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">EmailStr</span>
+<span class="kn">from</span> <span class="nn">redis_om</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">Field</span><span class="p">,</span>
     <span class="n">HashModel</span><span class="p">,</span>
     <span class="n">Migrator</span>
@@ -341,19 +342,19 @@ Redis OM 还提供 <a class="reference external" href="https://github.com/redis/
 完全是由于 <strong>Redis OM 为我们自动完成了管理索引的工作</strong>。</p>
 <p>索引查询所使用的多样表达式语法参考了 Django ORM 、 SQLAlchemy 和 Peewee 的语法，
 我相信你会喜欢它们的！</p>
-</div>
-<div class="section" id="id6">
+</section>
+<section id="id6">
 <h3>嵌入式模型<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <p>Redis OM 可以让你像使用文档数据库那样对<strong>嵌套模型</strong>执行查询和储存操作，
 并且不失 Redis 的强大和快速。
 让我们看看它是如何做到这一点的。</p>
 <p>在下面这个例子中，
 新定义的 <code class="docutils literal notranslate"><span class="pre">Address</span></code> 模型将嵌入到 <code class="docutils literal notranslate"><span class="pre">Customer</span></code> 模型里面：</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
-<span class="kn">from</span> <span class="nn">redis_om</span> <span class="k">import</span> <span class="p">(</span>
+<span class="kn">from</span> <span class="nn">redis_om</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">EmbeddedJsonModel</span><span class="p">,</span>
     <span class="n">JsonModel</span><span class="p">,</span>
     <span class="n">Field</span><span class="p">,</span>
@@ -392,14 +393,14 @@ Redis OM 还提供 <a class="reference external" href="https://github.com/redis/
               <span class="n">Customer</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s2">&quot;TX&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="id7">
+</section>
+</section>
+<section id="id7">
 <h2>更多<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <p>关于 Redis OM 更详细的用法，
 请查阅<a class="reference external" href="https://github.com/redis/redis-om-python/blob/main/docs/index.md">项目文档</a>。</p>
-</div>
-</div>
+</section>
+</section>
 
 
     </div>
@@ -414,7 +415,7 @@ Redis OM 还提供 <a class="reference external" href="https://github.com/redis/
     </p>
     <p>
         &copy; Copyright 2022, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br/>
     </p>
   </div>
 </footer>

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Go Playground 与 Hello World &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
 <meta charset='utf-8'>
@@ -52,6 +52,7 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../2023/index.html">2023</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2022/index.html">2022</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2021/index.html">2021</a></li>
 <li class="toctree-l1"><a class="reference internal" href="index.html">2020</a></li>
@@ -109,13 +110,13 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="go-playground-hello-world">
+  <section id="go-playground-hello-world">
 <h1>Go Playground 与 Hello World<a class="headerlink" href="#go-playground-hello-world" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>本文摘录自《Go语言趣学指南》第 1 章，
 请访问 <a class="reference external" href="http://gpwgcn.com">gpwgcn.com</a>  以获取更多相关信息。</p>
-<a class="last reference internal image-reference" href="../_images/gpwgcn1.jpg"><img alt="../_images/gpwgcn1.jpg" src="../_images/gpwgcn1.jpg" style="width: 149.6px; height: 188.0px;" /></a>
+<a class="reference internal image-reference" href="../_images/gpwgcn1.jpg"><img alt="../_images/gpwgcn1.jpg" src="../_images/gpwgcn1.jpg" style="width: 149.6px; height: 188.0px;" /></a>
 </div>
 <p>上手学习 Go 语言最快捷的方式就是使用 Go 游乐场
 <a class="reference external" href="https://play.golang.org/">play.golang.org</a> ，
@@ -130,15 +131,15 @@
 语言的起点真的再合适不过了。</p>
 <hr class="docutils" />
 <p>代码清单 1-1 与游乐场的初次见面： <code class="docutils literal notranslate"><span class="pre">playground.go</span></code></p>
-<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>                            <span class="c1">// 声明本代码所属的包</span>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nx">main</span><span class="w">                            </span><span class="c1">// 声明本代码所属的包</span><span class="w"></span>
 
-<span class="kn">import</span> <span class="p">(</span>
-    <span class="s">&quot;fmt&quot;</span>                               <span class="c1">// 导入 fmt 包，使其可用（fmt是format的缩写）</span>
-<span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span><span class="w">                               </span><span class="c1">// 导入 fmt 包，使其可用（fmt是format的缩写）</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
 
-<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>                           <span class="c1">// 声明一个名为 main 的函数</span>
-    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Hello, playground&quot;</span><span class="p">)</span>    <span class="c1">// 在屏幕上打印出“Hello, playground”</span>
-<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">                           </span><span class="c1">// 声明一个名为 main 的函数</span><span class="w"></span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Hello, playground&quot;</span><span class="p">)</span><span class="w">    </span><span class="c1">// 在屏幕上打印出“Hello, playground”</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <hr class="docutils" />
@@ -178,7 +179,7 @@ playground”出现在游乐场的输出区域中。
 对于英语来说，即使是缺少一个逗号也有可能会让整个句子的意义变得完全不同。
 同样地，标点符号对于编程语言来说也是至关重要的：比如 Go
 就需要依靠引号、圆括号和大括号等符号来理解用户输入的代码。</p>
-</div>
+</section>
 
 
     </div>
@@ -193,7 +194,7 @@ playground”出现在游乐场的输出区域中。
     </p>
     <p>
         &copy; Copyright 2022, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br/>
     </p>
   </div>
 </footer>

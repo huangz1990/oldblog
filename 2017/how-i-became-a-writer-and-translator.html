@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>技术图书作译者的炼成方法 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="重分片对 Redis 集群的性能影响分析" href="redis-reshard-performance-issue.html" />
@@ -54,6 +54,7 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../2023/index.html">2023</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2022/index.html">2022</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2021/index.html">2021</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2020/index.html">2020</a></li>
@@ -127,7 +128,7 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="id1">
+  <section id="id1">
 <h1>技术图书作译者的炼成方法<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <p>前段时间，
 我接受了<a class="reference external" href="https://codetimecn.com/">《代码时间》</a>播客的邀请，
@@ -144,7 +145,7 @@
 不妨也去听听节目的录音，
 节目的内容比本文要丰富得多：
 <a class="reference external" href="https://codetimecn.com/episodes/publish">https://codetimecn.com/episodes/publish</a></p>
-<div class="section" id="id3">
+<section id="id3">
 <h2>你是谁，做过些什么<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>我叫黄健宏，
 网络 ID 为 huangz ，
@@ -164,8 +165,8 @@
 目前已经完成了一半左右。
 如果一切顺利不拖稿的话，
 这两本新书应该都会在 2017 年跟大家见面。</p>
-</div>
-<div class="section" id="id7">
+</section>
+<section id="id7">
 <h2>为什么会想到写《Redis设计与实现》这本书，以及这本书是如何出版的<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <p>刚开始只是随便写着玩。
 当时是 Redis 用得比较多，
@@ -195,8 +196,8 @@
 我答应了这个邀请，
 然后在经过一年多的写作之后，
 《Redis设计与实现》的正式版本终于在 2014 年 6 月份发布了。</p>
-</div>
-<div class="section" id="id10">
+</section>
+<section id="id10">
 <h2>为什么会翻译《Redis in Action》这本书，以及这本书的翻译过程<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
 <p>早在 2013 年的 4 月份，
 人民邮电出版社的<a class="reference external" href="http://weibo.com/turingbookyanggu">杨海玲编辑</a>就联系过我，
@@ -215,20 +216,20 @@
 但翻译图书对于我来说还是第一次，
 所以我在翻译《Redis实战》一书的过程中下了很大的功夫：</p>
 <ul class="simple">
-<li>比如说，
+<li><p>比如说，
 每当我开发出一种新的翻译技巧或技术时，
 我都会将这些技术记录到博客里面和大家分享，
 当我翻译完《Redis实战》的时候，
-类似的文章在我博客上已经发表了十多篇。</li>
-<li>另外对于《Redis实战》这种 300 页左右的图书来说，
+类似的文章在我博客上已经发表了十多篇。</p></li>
+<li><p>另外对于《Redis实战》这种 300 页左右的图书来说，
 出版社一般只会给译者三四个月，
 最多半年的时间来进行翻译，
-但是《Redis实战》的翻译工作却跨越了一年半之久。</li>
+但是《Redis实战》的翻译工作却跨越了一年半之久。</p></li>
 </ul>
 <p>对《Redis实战》的翻译过程感兴趣的读者，
 可以参考我之前写的<a class="reference external" href="http://blog.huangz.me/diary/2015/memories-of-redis-in-action-translation.html">《Redis in Action》翻译记事</a>以及<a class="reference external" href="http://blog.huangz.me/diary/2016/riacn-one-year-anniversary.html">《Redis实战》一周年回顾</a>这两篇文章。</p>
-</div>
-<div class="section" id="id14">
+</section>
+<section id="id14">
 <h2>专职作家如何才能养活自己<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
 <p>写一本书的收入主要跟书本的销量有关，
 具体收益可以通过以下公式计算：</p>
@@ -237,14 +238,14 @@
 </div>
 <p>其中：</p>
 <ul class="simple">
-<li>定价就是你书本的售价，
-比如 49、 59、 79 等等。</li>
-<li>销量就是你书本卖出的数量，
-比如 1 千册， 5 千册等等。</li>
-<li>版税率就是出版社买了你的版权之后，
+<li><p>定价就是你书本的售价，
+比如 49、 59、 79 等等。</p></li>
+<li><p>销量就是你书本卖出的数量，
+比如 1 千册， 5 千册等等。</p></li>
+<li><p>版税率就是出版社买了你的版权之后，
 每卖出一本书给你的报酬，
 通常是书本定价的 7% ~ 10% ，
-但不同出版社、不同作者的版税率可能会有所不同。</li>
+但不同出版社、不同作者的版税率可能会有所不同。</p></li>
 </ul>
 <p>以上三个数相乘，
 就得出了作者的税前收入。
@@ -269,8 +270,8 @@
 但都达不到我们这里所说的 3 万册的标准，
 所以把写书当做职业的话，
 比起当程序员的风险是要高不少的。</p>
-</div>
-<div class="section" id="id15">
+</section>
+<section id="id15">
 <h2>你是如何成为作译者的<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h2>
 <p>因为对计算机的喜爱，
 我在高中二年级就从学校退学了，
@@ -281,40 +282,40 @@
 并进行一些开源文档的翻译和写作工作，
 之后又接触到了数据库以及 Redis ，
 然后就发生了上面所说的一切。</p>
-</div>
-<div class="section" id="id16">
+</section>
+<section id="id16">
 <h2>对于想成为技术图书作者或者译者的人，有什么建议<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h2>
 <p>想要成为作者的朋友，
 一开始不要心急，
 可以像我一样，
 先定个小目标：</p>
 <ul class="simple">
-<li>刚开始先写几篇博客，
+<li><p>刚开始先写几篇博客，
 写完几篇之后再写几篇，
 写完几篇之后再写几篇，
-然后你就有了十篇八篇文章了。</li>
-<li>接着在这个基础上再扩展和修改，
+然后你就有了十篇八篇文章了。</p></li>
+<li><p>接着在这个基础上再扩展和修改，
 凑够十几二十篇文章，
-你就有了一本书。</li>
-<li>然后你就可以联系出版社的编辑，
+你就有了一本书。</p></li>
+<li><p>然后你就可以联系出版社的编辑，
 看他们是否有兴趣出版你的书；
 又或者，
-你也可以在网上书店又或者 GitBook 、 LeanPub 等平台上发布你的书。</li>
+你也可以在网上书店又或者 GitBook 、 LeanPub 等平台上发布你的书。</p></li>
 </ul>
 <p>至于译者来说，
 我感觉最重要的是“认真”：</p>
 <ul class="simple">
-<li>在进行翻译的时候，
+<li><p>在进行翻译的时候，
 遇到不认识的单词可以查，
 遇到不认识的语法也可以查，
 遇到不了解的内容可以在 Google 上搜索或者在维基百科上进行查找，
-所以你很少会遇到技术上的难题。</li>
-<li>既然技术上不会出现难题，
+所以你很少会遇到技术上的难题。</p></li>
+<li><p>既然技术上不会出现难题，
 那么决定翻译作品质量的就是译者的态度了：
 只要你足够认真地对待翻译工作，
 那么出来的作品就会比较好；
 但如果你不认真对待这个工作的话，
-那么出来的作品可能就会不如人意。</li>
+那么出来的作品可能就会不如人意。</p></li>
 </ul>
 <p>最后，
 因为出书跟编程以及其他所有事情一样，
@@ -330,8 +331,8 @@
 <div class="line">黄健宏</div>
 <div class="line">2017.1.25</div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
     </div>
@@ -346,7 +347,7 @@
     </p>
     <p>
         &copy; Copyright 2022, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br/>
     </p>
   </div>
 </footer>

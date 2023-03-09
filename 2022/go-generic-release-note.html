@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Go 1.18 关于泛型特性的说明 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="在 Ubuntu 上安装 Nvidia 专有驱动" href="install-nvidia-driver.html" />
@@ -54,6 +54,7 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../2023/index.html">2023</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">2022</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2021/index.html">2021</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2020/index.html">2020</a></li>
@@ -119,12 +120,12 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="go-1-18">
+  <section id="go-1-18">
 <h1>Go 1.18 关于泛型特性的说明<a class="headerlink" href="#go-1-18" title="Permalink to this headline">¶</a></h1>
 <img alt="../_images/flying-gopher.png" src="../_images/flying-gopher.png" />
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">本文由黄健宏翻译自 <a class="reference external" href="https://go.dev/doc/go1.18">《Go 1.18 Release Notes》</a> 。</p>
+<p class="admonition-title">Note</p>
+<p>本文由黄健宏翻译自 <a class="reference external" href="https://go.dev/doc/go1.18">《Go 1.18 Release Notes》</a> 。</p>
 </div>
 <p>Go 1.18
 实现了<a class="reference external" href="https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md">类型参数提案</a>中描述的泛型特性。
@@ -144,53 +145,53 @@ bug 违反了规范，那么当这个 bug 被修复时，依赖该 bug
 1.18 版本的程序。 我们会尽可能减少这种破坏，但并不保证这种破坏不会发生。</p>
 <p>以下是泛型特性带来的一些最为明显的变动。如果你想要知道更详细的介绍，那么可以参考<a class="reference external" href="https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md">泛型特性的提案</a>或者<a class="reference external" href="https://go.dev/ref/spec">语言规范</a>：</p>
 <ul class="simple">
-<li><a class="reference external" href="https://go.dev/ref/spec#Function_declarations">函数</a>和<a class="reference external" href="https://go.dev/ref/spec#Type_declarations">类型声明</a>的语法现在接受<a class="reference external" href="https://go.dev/ref/spec#Type_parameter_declarations">类型型参</a>.</li>
-<li>在参数化的函数和类型后面，可以通过用方括号包裹一系列类型参数来进行实例化</li>
-<li>新标记 <code class="docutils literal notranslate"><span class="pre">~</span></code>
-已经被添加到<a class="reference external" href="https://go.dev/ref/spec#Operators_and_punctuation">操作符和标点符号</a>集合中</li>
-<li><a class="reference external" href="https://go.dev/ref/spec#Interface_types">接口类型</a>的语法现在允许嵌入在任何类型里面（而不仅仅是类型名字），包括联合类型（union）和
-<code class="docutils literal notranslate"><span class="pre">~T</span></code> 类型。接口现在不仅定义方法也定义类型。</li>
-<li>新的<a class="reference external" href="https://go.dev/ref/spec#Predeclared_identifiers">预定义标志符</a>
-<code class="docutils literal notranslate"><span class="pre">any</span></code> 是空接口的别名（alias），它可以取代 <code class="docutils literal notranslate"><span class="pre">interface{}</span></code> 。</li>
-<li>新的<a class="reference external" href="https://go.dev/ref/spec#Predeclared_identifiers">预定义标志符</a>
+<li><p><a class="reference external" href="https://go.dev/ref/spec#Function_declarations">函数</a>和<a class="reference external" href="https://go.dev/ref/spec#Type_declarations">类型声明</a>的语法现在接受<a class="reference external" href="https://go.dev/ref/spec#Type_parameter_declarations">类型型参</a>.</p></li>
+<li><p>在参数化的函数和类型后面，可以通过用方括号包裹一系列类型参数来进行实例化</p></li>
+<li><p>新标记 <code class="docutils literal notranslate"><span class="pre">~</span></code>
+已经被添加到<a class="reference external" href="https://go.dev/ref/spec#Operators_and_punctuation">操作符和标点符号</a>集合中</p></li>
+<li><p><a class="reference external" href="https://go.dev/ref/spec#Interface_types">接口类型</a>的语法现在允许嵌入在任何类型里面（而不仅仅是类型名字），包括联合类型（union）和
+<code class="docutils literal notranslate"><span class="pre">~T</span></code> 类型。接口现在不仅定义方法也定义类型。</p></li>
+<li><p>新的<a class="reference external" href="https://go.dev/ref/spec#Predeclared_identifiers">预定义标志符</a>
+<code class="docutils literal notranslate"><span class="pre">any</span></code> 是空接口的别名（alias），它可以取代 <code class="docutils literal notranslate"><span class="pre">interface{}</span></code> 。</p></li>
+<li><p>新的<a class="reference external" href="https://go.dev/ref/spec#Predeclared_identifiers">预定义标志符</a>
 <code class="docutils literal notranslate"><span class="pre">comparable</span></code> 是一个接口，用于表示所有可以使用 <code class="docutils literal notranslate"><span class="pre">==</span></code> 或者 <code class="docutils literal notranslate"><span class="pre">!=</span></code>
-进行比较的类型。这一接口只能用作类型约束，又或者嵌入在类型约束当中。</li>
+进行比较的类型。这一接口只能用作类型约束，又或者嵌入在类型约束当中。</p></li>
 </ul>
 <p>现在有三个包在试验性地使用泛型，这些包都被放置在 <code class="docutils literal notranslate"><span class="pre">x/exp</span></code>
 库当中。这些包的 API 不在 Go 1
 的保证范围之内，随着我们对泛型的经验积累，它们可能会发生变化：</p>
 <ul class="simple">
-<li><a class="reference external" href="https://pkg.go.dev/golang.org/x/exp/constraints">golang.org/x/exp/constraints</a>
+<li><p><a class="reference external" href="https://pkg.go.dev/golang.org/x/exp/constraints">golang.org/x/exp/constraints</a>
 ——
-对泛型代码有用的一些约束，比如 <a class="reference external" href="https://pkg.go.dev/golang.org/x/exp/constraints#Ordered">constraints.Ordered</a></li>
-<li><a class="reference external" href="https://pkg.go.dev/golang.org/x/exp/slices">golang.org/x/exp/slices</a>
+对泛型代码有用的一些约束，比如 <a class="reference external" href="https://pkg.go.dev/golang.org/x/exp/constraints#Ordered">constraints.Ordered</a></p></li>
+<li><p><a class="reference external" href="https://pkg.go.dev/golang.org/x/exp/slices">golang.org/x/exp/slices</a>
 ——
-对任何元素类型的切片进行操作的泛型函数集合</li>
-<li><a class="reference external" href="https://pkg.go.dev/golang.org/x/exp/maps">golang.org/x/exp/maps</a>
+对任何元素类型的切片进行操作的泛型函数集合</p></li>
+<li><p><a class="reference external" href="https://pkg.go.dev/golang.org/x/exp/maps">golang.org/x/exp/maps</a>
 ——
-对键和值为任何类型的映射进行操作的泛型函数集合</li>
+对键和值为任何类型的映射进行操作的泛型函数集合</p></li>
 </ul>
 <p>当前的泛型实现具有以下限制：</p>
 <ul class="simple">
-<li>Go 编译器无法处理泛型函数或方法之内的类型声明，我们期望在 Go 1.19
-提供这一特性。</li>
-<li>Go 编译器不支持为预定义函数 <code class="docutils literal notranslate"><span class="pre">real</span></code> 、 <code class="docutils literal notranslate"><span class="pre">imag</span></code> 和 <code class="docutils literal notranslate"><span class="pre">complex</span></code>
+<li><p>Go 编译器无法处理泛型函数或方法之内的类型声明，我们期望在 Go 1.19
+提供这一特性。</p></li>
+<li><p>Go 编译器不支持为预定义函数 <code class="docutils literal notranslate"><span class="pre">real</span></code> 、 <code class="docutils literal notranslate"><span class="pre">imag</span></code> 和 <code class="docutils literal notranslate"><span class="pre">complex</span></code>
 的类型形参类型（type parameter type）设置实参（argument），我们期望在
-Go 1.19 移除这一限制。</li>
-<li>Go 编译器只有在类型形参类型 <code class="docutils literal notranslate"><span class="pre">P</span></code> 使用约束接口显式地声明了方法 <code class="docutils literal notranslate"><span class="pre">m</span></code>
+Go 1.19 移除这一限制。</p></li>
+<li><p>Go 编译器只有在类型形参类型 <code class="docutils literal notranslate"><span class="pre">P</span></code> 使用约束接口显式地声明了方法 <code class="docutils literal notranslate"><span class="pre">m</span></code>
 的情况下，才能调用类型为 <code class="docutils literal notranslate"><span class="pre">P</span></code> 的值 <code class="docutils literal notranslate"><span class="pre">x</span></code> 的方法 <code class="docutils literal notranslate"><span class="pre">m</span></code> 。
 与此类似，即使方法 <code class="docutils literal notranslate"><span class="pre">m</span></code> 已经事实上存在于所有实现了接口 <code class="docutils literal notranslate"><span class="pre">P</span></code>
 的类型中，方法 <code class="docutils literal notranslate"><span class="pre">x.m</span></code> 和方法表达式 <code class="docutils literal notranslate"><span class="pre">P.m</span></code> 也只能在 <code class="docutils literal notranslate"><span class="pre">P</span></code>
-显式地声明了它们的情况下使用。 我们期望在 Go 1.19 移除这一限制。</li>
-<li>Go 编译器不支持访问结构字段 <code class="docutils literal notranslate"><span class="pre">x.f</span></code> ， 当 <code class="docutils literal notranslate"><span class="pre">x</span></code>
+显式地声明了它们的情况下使用。 我们期望在 Go 1.19 移除这一限制。</p></li>
+<li><p>Go 编译器不支持访问结构字段 <code class="docutils literal notranslate"><span class="pre">x.f</span></code> ， 当 <code class="docutils literal notranslate"><span class="pre">x</span></code>
 为类型形参类型时，即使类型形参类型集合的所有类型都拥有字段 <code class="docutils literal notranslate"><span class="pre">f</span></code> ，Go
 编译器也不支持访问结构字段 <code class="docutils literal notranslate"><span class="pre">x.f</span></code> 。我们期望在 Go 1.19
-移除这一限制。</li>
-<li>不能将类型形参或者指向类型形参的指针嵌入到结构类型中用作匿名字段。
+移除这一限制。</p></li>
+<li><p>不能将类型形参或者指向类型形参的指针嵌入到结构类型中用作匿名字段。
 类似地，在接口类型中嵌入类型形参也是不允许的。
-目前尙不清楚何时会允许这些操作。</li>
-<li>拥有多种意义（term）的联合元素不能包含带有非空方法集合的接口类型。
-目前尚不清楚何时会允许这一操作。</li>
+目前尙不清楚何时会允许这些操作。</p></li>
+<li><p>拥有多种意义（term）的联合元素不能包含带有非空方法集合的接口类型。
+目前尚不清楚何时会允许这一操作。</p></li>
 </ul>
 <p>泛型还将对 Go 的生态系统产生巨大影响。
 尽管我们已经更新了几个核心工具以便让其支持泛型，但还有很多工作有待完成。
@@ -199,7 +200,7 @@ Go 1.19 移除这一限制。</li>
 <div class="line">觉得所有编程语言最终都难逃变成 C++ 命运的黄健宏</div>
 <div class="line">2022.3.19</div>
 </div>
-</div>
+</section>
 
 
     </div>
@@ -214,7 +215,7 @@ Go 1.19 移除这一限制。</li>
     </p>
     <p>
         &copy; Copyright 2022, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br/>
     </p>
   </div>
 </footer>

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>使用 Redis 流实现消息队列 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
 <meta charset='utf-8'>
@@ -52,6 +52,7 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../2023/index.html">2023</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2022/index.html">2022</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2021/index.html">2021</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2020/index.html">2020</a></li>
@@ -109,11 +110,11 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="redis">
+  <section id="redis">
 <h1>使用 Redis 流实现消息队列<a class="headerlink" href="#redis" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">本文摘录自《Redis使用手册》，
+<p class="admonition-title">Note</p>
+<p>本文摘录自《Redis使用手册》，
 更多信息请见： <a class="reference external" href="http://RedisGuide.com">RedisGuide.com</a> 。</p>
 </div>
 <p>在介绍了 Redis 流的基本功能之后，
@@ -124,13 +125,13 @@
 这个消息队列跟我们之前使用其他 Redis 数据结构构建的消息队列具有相似的功能。</p>
 <p>代码清单 10-1 展示了一个具有基本功能的消息队列实现：</p>
 <ul class="simple">
-<li>代码最开头的是几个转换函数，
-它们负责对程序的相关输入输出进行转换和格式化；</li>
-<li><code class="docutils literal notranslate"><span class="pre">MessageQueue</span></code> 类用于实现消息队列，
-它的添加消息、移除消息以及返回消息数量三个方法分别使用了流的 <code class="docutils literal notranslate"><span class="pre">XADD</span></code> 命令、 <code class="docutils literal notranslate"><span class="pre">XDEL</span></code> 命令和 <code class="docutils literal notranslate"><span class="pre">XLEN</span></code> 命令；</li>
-<li>消息队列的两个获取方法 <code class="docutils literal notranslate"><span class="pre">get_message()</span></code> 和 <code class="docutils literal notranslate"><span class="pre">get_by_range()</span></code> 分别以两种形式调用了流的 <code class="docutils literal notranslate"><span class="pre">XRANGE</span></code> 命令；</li>
-<li>最后，
-用于迭代消息的 <code class="docutils literal notranslate"><span class="pre">iterate()</span></code> 方法使用了 <code class="docutils literal notranslate"><span class="pre">XREAD</span></code> 命令对流进行迭代。</li>
+<li><p>代码最开头的是几个转换函数，
+它们负责对程序的相关输入输出进行转换和格式化；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MessageQueue</span></code> 类用于实现消息队列，
+它的添加消息、移除消息以及返回消息数量三个方法分别使用了流的 <code class="docutils literal notranslate"><span class="pre">XADD</span></code> 命令、 <code class="docutils literal notranslate"><span class="pre">XDEL</span></code> 命令和 <code class="docutils literal notranslate"><span class="pre">XLEN</span></code> 命令；</p></li>
+<li><p>消息队列的两个获取方法 <code class="docutils literal notranslate"><span class="pre">get_message()</span></code> 和 <code class="docutils literal notranslate"><span class="pre">get_by_range()</span></code> 分别以两种形式调用了流的 <code class="docutils literal notranslate"><span class="pre">XRANGE</span></code> 命令；</p></li>
+<li><p>最后，
+用于迭代消息的 <code class="docutils literal notranslate"><span class="pre">iterate()</span></code> 方法使用了 <code class="docutils literal notranslate"><span class="pre">XREAD</span></code> 命令对流进行迭代。</p></li>
 </ul>
 <hr class="docutils" />
 <p>代码清单 10-1 使用 Redis 流实现的消息队列：<code class="docutils literal notranslate"><span class="pre">/stream/message_queue.py</span></code></p>
@@ -159,7 +160,7 @@
 <span class="sd">    使用 Redis 流实现的消息队列。</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">stream_key</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">stream_key</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">client</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stream</span> <span class="o">=</span> <span class="n">stream_key</span>
 
@@ -212,8 +213,8 @@
 <p>对于这个消息队列实现，
 我们可以通过执行以下代码，
 创建出它的实例：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">redis</span> <span class="k">import</span> <span class="n">Redis</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">message_queue</span> <span class="k">import</span> <span class="n">MessageQueue</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">redis</span> <span class="kn">import</span> <span class="n">Redis</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">message_queue</span> <span class="kn">import</span> <span class="n">MessageQueue</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Redis</span><span class="p">(</span><span class="n">decode_responses</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mq</span> <span class="o">=</span> <span class="n">MessageQueue</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="s2">&quot;mq&quot;</span><span class="p">)</span>
 </pre></div>
@@ -256,7 +257,7 @@
 <span class="go">[{&#39;1554113926281-1&#39;: {&#39;key3&#39;: &#39;value3&#39;}}, {&#39;1554113926281-2&#39;: {&#39;key4&#39;: &#39;value4&#39;}}, {&#39;1554113926281-3&#39;: {&#39;key5&#39;: &#39;value5&#39;}}]</span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
     </div>
@@ -271,7 +272,7 @@
     </p>
     <p>
         &copy; Copyright 2022, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br/>
     </p>
   </div>
 </footer>

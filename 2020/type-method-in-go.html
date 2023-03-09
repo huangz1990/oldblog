@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>在 Go 语言中通过方法为类型添加行为 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
 <meta charset='utf-8'>
@@ -52,6 +52,7 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../2023/index.html">2023</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2022/index.html">2022</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2021/index.html">2021</a></li>
 <li class="toctree-l1"><a class="reference internal" href="index.html">2020</a></li>
@@ -109,10 +110,11 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="go">
+  <section id="go">
 <h1>在 Go 语言中通过方法为类型添加行为<a class="headerlink" href="#go" title="Permalink to this headline">¶</a></h1>
 <blockquote>
-<div>他的胡言乱语竟有方法自圆其说。 —— 莎士比亚，《哈姆雷特》</div></blockquote>
+<div><p>他的胡言乱语竟有方法自圆其说。 —— 莎士比亚，《哈姆雷特》</p>
+</div></blockquote>
 <a class="reference internal image-reference" href="../_images/sharks.png"><img alt="../_images/sharks.png" class="align-right" src="../_images/sharks.png" style="width: 310.0px; height: 345.0px;" /></a>
 <p>数十年以来，
 传统的面向对象语言总是说方法属于类，
@@ -130,7 +132,7 @@
 但是不能为 <code class="docutils literal notranslate"><span class="pre">int</span></code> 和 <code class="docutils literal notranslate"><span class="pre">float64</span></code> 之类的预声明类型关联方法。
 其中，
 声明类型的方法在前面已经介绍过了:</p>
-<div class="code go highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span> <span class="n">kelvin</span> <span class="n">float64</span>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span><span class="w"> </span><span class="nx">kelvin</span><span class="w"> </span><span class="kt">float64</span><span class="w"></span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">kelvin</span></code> 类型跟它的底层类型 <code class="docutils literal notranslate"><span class="pre">float64</span></code> 具有相同的行为，
@@ -139,12 +141,12 @@
 此外，
 声明一个将 <code class="docutils literal notranslate"><span class="pre">kelvin</span></code> 转换为 <code class="docutils literal notranslate"><span class="pre">celsius</span></code> 的方法就跟声明一个具有同等作用的函数一样简单——它们都以关键字 <code class="docutils literal notranslate"><span class="pre">func</span></code> 开头，
 并且函数体跟方法体完全一样:</p>
-<div class="code go highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">func</span> <span class="n">kelvinToCelsius</span><span class="p">(</span><span class="n">k</span> <span class="n">kelvin</span><span class="p">)</span> <span class="n">celsius</span> <span class="p">{</span>    <span class="o">//</span> <span class="n">kelvinToCelsius</span> <span class="n">函数</span>
-    <span class="k">return</span> <span class="n">celsius</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mf">273.15</span><span class="p">)</span>
-<span class="p">}</span>
-<span class="n">func</span> <span class="p">(</span><span class="n">k</span> <span class="n">kelvin</span><span class="p">)</span> <span class="n">celsius</span><span class="p">()</span> <span class="n">celsius</span> <span class="p">{</span>    <span class="o">//</span> <span class="n">kelvin</span> <span class="n">类型的</span> <span class="n">celsius</span> <span class="n">方法</span>
-    <span class="k">return</span> <span class="n">celsius</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mf">273.15</span><span class="p">)</span>
-<span class="p">}</span>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">func</span><span class="w"> </span><span class="nx">kelvinToCelsius</span><span class="p">(</span><span class="nx">k</span><span class="w"> </span><span class="nx">kelvin</span><span class="p">)</span><span class="w"> </span><span class="nx">celsius</span><span class="w"> </span><span class="p">{</span><span class="w">    </span><span class="c1">// kelvinToCelsius 函数</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">celsius</span><span class="p">(</span><span class="nx">k</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">273.15</span><span class="p">)</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">k</span><span class="w"> </span><span class="nx">kelvin</span><span class="p">)</span><span class="w"> </span><span class="nx">celsius</span><span class="p">()</span><span class="w"> </span><span class="nx">celsius</span><span class="w"> </span><span class="p">{</span><span class="w">    </span><span class="c1">// kelvin 类型的 celsius 方法</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">celsius</span><span class="p">(</span><span class="nx">k</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">273.15</span><span class="p">)</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>如图 13-1 所示，
@@ -155,18 +157,20 @@
 在 <code class="docutils literal notranslate"><span class="pre">celsius</span></code> 方法体中，
 接收者的行为就跟其他形参一样。</p>
 <hr class="docutils" />
-<div class="figure" id="id1">
+<figure class="align-default" id="id1">
 <img alt="../_images/13-1.png" src="../_images/13-1.png" />
-<p class="caption"><span class="caption-text">图 13-1 方法声明</span></p>
-</div>
+<figcaption>
+<p><span class="caption-text">图 13-1 方法声明</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 <hr class="docutils" />
 <p>除声明语法有些许不同之外，
 调用方法的语法与调用函数的语法也不一样:</p>
-<div class="code go highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="n">k</span> <span class="n">kelvin</span> <span class="o">=</span> <span class="mf">294.0</span>
-<span class="n">var</span> <span class="n">c</span> <span class="n">celsius</span>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">k</span><span class="w"> </span><span class="nx">kelvin</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">294.0</span><span class="w"></span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="nx">celsius</span><span class="w"></span>
 
-<span class="n">c</span> <span class="o">=</span> <span class="n">kelvinToCelsius</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>     <span class="o">//</span> <span class="n">调用</span> <span class="n">kelvinToCelsius</span> <span class="n">函数</span>
-<span class="n">c</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">celsius</span><span class="p">()</span>    <span class="o">//</span> <span class="n">调用celsius方法</span>
+<span class="nx">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">kelvinToCelsius</span><span class="p">(</span><span class="nx">k</span><span class="p">)</span><span class="w">     </span><span class="c1">// 调用 kelvinToCelsius 函数</span><span class="w"></span>
+<span class="nx">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">k</span><span class="p">.</span><span class="nx">celsius</span><span class="p">()</span><span class="w">    </span><span class="c1">// 调用celsius方法</span><span class="w"></span>
 </pre></div>
 </div>
 <p>跟调用其他包中的函数一样，
@@ -187,21 +191,21 @@
 如果我们使用的是方法，
 那么每种温度类型都可以具有自己的 <code class="docutils literal notranslate"><span class="pre">celsius</span></code> 方法，
 就像以下展示的 <code class="docutils literal notranslate"><span class="pre">fahrenheit</span></code> 类型一样:</p>
-<div class="code go highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span> <span class="n">fahrenheit</span> <span class="n">float64</span>
-<span class="o">//</span> <span class="n">celsius方法会将华氏度转换为摄氏度</span>
-<span class="n">func</span> <span class="p">(</span><span class="n">f</span> <span class="n">fahrenheit</span><span class="p">)</span> <span class="n">celsius</span><span class="p">()</span> <span class="n">celsius</span> <span class="p">{</span>
-<span class="k">return</span> <span class="n">celsius</span><span class="p">((</span><span class="n">f</span> <span class="o">-</span> <span class="mf">32.0</span><span class="p">)</span> <span class="o">*</span> <span class="mf">5.0</span> <span class="o">/</span> <span class="mf">9.0</span><span class="p">)</span> <span class="p">}</span>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span><span class="w"> </span><span class="nx">fahrenheit</span><span class="w"> </span><span class="kt">float64</span><span class="w"></span>
+<span class="c1">// celsius方法会将华氏度转换为摄氏度</span><span class="w"></span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">f</span><span class="w"> </span><span class="nx">fahrenheit</span><span class="p">)</span><span class="w"> </span><span class="nx">celsius</span><span class="p">()</span><span class="w"> </span><span class="nx">celsius</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">return</span><span class="w"> </span><span class="nx">celsius</span><span class="p">((</span><span class="nx">f</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">32.0</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">5.0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">9.0</span><span class="p">)</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>通过让每种温度类型都具有相应的 <code class="docutils literal notranslate"><span class="pre">celsius</span></code> 方法以转换为摄氏温度，
 我们可以创造出一种完美的对称。</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>本文摘录自《Go语言趣学指南》第 13 章，
 请访问 <a class="reference external" href="http://gpwgcn.com">gpwgcn.com</a>  以获取更多相关信息。</p>
-<a class="last reference internal image-reference" href="../_images/gpwgcn1.jpg"><img alt="../_images/gpwgcn1.jpg" src="../_images/gpwgcn1.jpg" style="width: 149.6px; height: 188.0px;" /></a>
+<a class="reference internal image-reference" href="../_images/gpwgcn1.jpg"><img alt="../_images/gpwgcn1.jpg" src="../_images/gpwgcn1.jpg" style="width: 149.6px; height: 188.0px;" /></a>
 </div>
-</div>
+</section>
 
 
     </div>
@@ -216,7 +220,7 @@
     </p>
     <p>
         &copy; Copyright 2022, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br/>
     </p>
   </div>
 </footer>

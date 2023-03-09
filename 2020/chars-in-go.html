@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Go 语言中的字符、代码点、符文和字节 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
 <meta charset='utf-8'>
@@ -52,6 +52,7 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../2023/index.html">2023</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2022/index.html">2022</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2021/index.html">2021</a></li>
 <li class="toctree-l1"><a class="reference internal" href="index.html">2020</a></li>
@@ -109,7 +110,7 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="go">
+  <section id="go">
 <h1>Go 语言中的字符、代码点、符文和字节<a class="headerlink" href="#go" title="Permalink to this headline">¶</a></h1>
 <p>统一码联盟(Unicode Consortium)把名为代码点的一系列数值赋值给了上百万个独一无二的字符。
 例如，
@@ -140,8 +141,8 @@ fmt.Printf(&quot;%v %v %v %v\n&quot;, pi, alpha, omega, bang)    // 打印出“
 </pre></div>
 </div>
 <div class="admonition tip">
-<p class="first admonition-title">Tip</p>
-<p class="last">虽然任意一种整数类型都可以使用格式化变量 <code class="docutils literal notranslate"><span class="pre">%c</span></code> ，
+<p class="admonition-title">Tip</p>
+<p>虽然任意一种整数类型都可以使用格式化变量 <code class="docutils literal notranslate"><span class="pre">%c</span></code> ，
 但是通过使用别名 <code class="docutils literal notranslate"><span class="pre">rune</span></code> ，
 表明数字 <code class="docutils literal notranslate"><span class="pre">960</span></code> 代表字符而不是数字。</p>
 </div>
@@ -152,7 +153,7 @@ Go 提供了相应的字符字面量句法。
 如果用户声明了一个字符变量却没有为其指定类型，
 那么 Go 将推断该变量的类型为 <code class="docutils literal notranslate"><span class="pre">rune</span></code> ，
 因此以下 3 行代码将是等效的:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grade</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;A&#39;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grade</span> <span class="o">:=</span> <span class="s1">&#39;A&#39;</span>
 <span class="n">var</span> <span class="n">grade</span> <span class="o">=</span> <span class="s1">&#39;A&#39;</span>
 <span class="n">var</span> <span class="n">grade</span> <span class="n">rune</span> <span class="o">=</span> <span class="s1">&#39;A&#39;</span>
 </pre></div>
@@ -167,12 +168,12 @@ Go 提供了相应的字符字面量句法。
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>本文摘录自《Go语言趣学指南》第 9 章，
 请访问 <a class="reference external" href="http://gpwgcn.com">gpwgcn.com</a>  以获取更多相关信息。</p>
-<a class="last reference internal image-reference" href="../_images/gpwgcn1.jpg"><img alt="../_images/gpwgcn1.jpg" src="../_images/gpwgcn1.jpg" style="width: 149.6px; height: 188.0px;" /></a>
+<a class="reference internal image-reference" href="../_images/gpwgcn1.jpg"><img alt="../_images/gpwgcn1.jpg" src="../_images/gpwgcn1.jpg" style="width: 149.6px; height: 188.0px;" /></a>
 </div>
-</div>
+</section>
 
 
     </div>
@@ -187,7 +188,7 @@ Go 提供了相应的字符字面量句法。
     </p>
     <p>
         &copy; Copyright 2022, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br/>
     </p>
   </div>
 </footer>

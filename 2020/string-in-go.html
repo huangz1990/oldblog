@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Go 语言中的字符串 &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
 <meta charset='utf-8'>
@@ -52,6 +52,7 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../2023/index.html">2023</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2022/index.html">2022</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2021/index.html">2021</a></li>
 <li class="toctree-l1"><a class="reference internal" href="index.html">2020</a></li>
@@ -112,7 +113,7 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="go">
+  <section id="go">
 <h1>Go 语言中的字符串<a class="headerlink" href="#go" title="Permalink to this headline">¶</a></h1>
 <p>我们从最初的 <code class="docutils literal notranslate"><span class="pre">&quot;Hello,</span> <span class="pre">playground&quot;</span></code> 开始就已经在程序里使用文本了。
 在 Go 程序中，
@@ -121,18 +122,18 @@
 我们就得到了字符串字面量。</p>
 <p>因为 Go 语言会把用双引号包围的字面值推断为 <code class="docutils literal notranslate"><span class="pre">string</span></code> 类型，
 所以以下 3 行代码的作用是相同的:</p>
-<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">peace</span> <span class="o">:=</span> <span class="s">&quot;peace&quot;</span>
-<span class="kd">var</span> <span class="nx">peace</span> <span class="p">=</span> <span class="s">&quot;peace&quot;</span>
-<span class="kd">var</span> <span class="nx">peace</span> <span class="kt">string</span> <span class="p">=</span> <span class="s">&quot;peace&quot;</span>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">peace</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;peace&quot;</span><span class="w"></span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">peace</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;peace&quot;</span><span class="w"></span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">peace</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;peace&quot;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>如果你声明了一个变量但是没有为它赋值，
 那么 Go 语言将使用变量类型的零值对其进行初始化，
 而 <code class="docutils literal notranslate"><span class="pre">string</span></code> 类型的零值就是空字符串 <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> :</p>
-<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">blank</span> <span class="kt">string</span>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">blank</span><span class="w"> </span><span class="kt">string</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="section" id="id1">
+<section id="id1">
 <h2>原始字符串字面量<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>字符串字面量可以包含转义字符，
 如第 2 章提到的 <code class="docutils literal notranslate"><span class="pre">\n</span></code> 。
@@ -142,8 +143,8 @@
 使用反引号包围的字符串被称为原始字符串字面量。</p>
 <hr class="docutils" />
 <p>代码清单 9-1 原始字符串字面量: <code class="docutils literal notranslate"><span class="pre">raw.go</span></code></p>
-<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;peace be upon you\nupon you be peace&quot;</span><span class="p">)</span>
-<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">`strings can span multiple lines with the \n escape sequence`</span><span class="p">)</span>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;peace be upon you\nupon you be peace&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">`strings can span multiple lines with the \n escape sequence`</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 <hr class="docutils" />
@@ -160,12 +161,11 @@ strings can span multiple lines with the \n escape sequence
 <p>代码清单 9-2 跨越多行的原始字符串字面量: <code class="docutils literal notranslate"><span class="pre">raw-lines.go</span></code></p>
 <div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">`</span>
 <span class="s">    peace be upon you</span>
-<span class="s">    upon you be peace`</span><span class="p">)</span>
+<span class="s">    upon you be peace`</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 <p>执行这段代码将产生以下输出，并且字符串中用于缩进的制表符也被正确地打印了出来:</p>
-<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>     peace be upon you
-     upon you be peace
+<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>peace be upon you     upon you be peace
 </pre></div>
 </div>
 <p>正如代码清单 9-3 所示，
@@ -173,19 +173,19 @@ strings can span multiple lines with the \n escape sequence
 最终都将变成字符串。</p>
 <hr class="docutils" />
 <p>代码清单 9-3 字符串类型: <code class="docutils literal notranslate"><span class="pre">raw-type.go</span></code></p>
-<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%v is a %[1]T\n&quot;</span><span class="p">,</span> <span class="s">&quot;literal string&quot;</span><span class="p">)</span>    <span class="c1">// 打印出 “literal string is a string”</span>
-<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%v is a %[1]T\n&quot;</span><span class="p">,</span> <span class="s">`raw string literal`</span><span class="p">)</span>    <span class="c1">//  打印出 “raw string literal is a string”</span>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%v is a %[1]T\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;literal string&quot;</span><span class="p">)</span><span class="w">    </span><span class="c1">// 打印出 “literal string is a string”</span><span class="w"></span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%v is a %[1]T\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">`raw string literal`</span><span class="p">)</span><span class="w">    </span><span class="c1">//  打印出 “raw string literal is a string”</span><span class="w"></span>
 </pre></div>
 </div>
 <hr class="docutils" />
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
+<p class="admonition-title">Note</p>
 <p>本文摘录自《Go语言趣学指南》第 9 章，
 请访问 <a class="reference external" href="http://gpwgcn.com">gpwgcn.com</a>  以获取更多相关信息。</p>
-<a class="last reference internal image-reference" href="../_images/gpwgcn1.jpg"><img alt="../_images/gpwgcn1.jpg" src="../_images/gpwgcn1.jpg" style="width: 149.6px; height: 188.0px;" /></a>
+<a class="reference internal image-reference" href="../_images/gpwgcn1.jpg"><img alt="../_images/gpwgcn1.jpg" src="../_images/gpwgcn1.jpg" style="width: 149.6px; height: 188.0px;" /></a>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
     </div>
@@ -200,7 +200,7 @@ strings can span multiple lines with the \n escape sequence
     </p>
     <p>
         &copy; Copyright 2022, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br/>
     </p>
   </div>
 </footer>

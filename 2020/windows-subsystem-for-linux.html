@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>通过 Linux 子系统在 Windows 10 上安装 Ubuntu &#8212; blog.huangz.me</title>
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="修改 Ubuntu 软件更新源" href="change-ubuntu-software-source.html" />
@@ -54,6 +54,7 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../2023/index.html">2023</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2022/index.html">2022</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../2021/index.html">2021</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">2020</a></li>
@@ -119,7 +120,7 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="linux-windows-10-ubuntu">
+  <section id="linux-windows-10-ubuntu">
 <h1>通过 Linux 子系统在 Windows 10 上安装 Ubuntu<a class="headerlink" href="#linux-windows-10-ubuntu" title="Permalink to this headline">¶</a></h1>
 <img alt="../_images/wsl-screenfetch.png" src="../_images/wsl-screenfetch.png" />
 <p>Windows 10 的 <a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/about">Linux 子系统</a>（Windows Subsystem for Linux，WSL）特性能够让我们在 Windows 平台上直接运行 Linux 系统及其之上的众多软件，
@@ -128,9 +129,9 @@
 所以我们在使用它之前必须先开启它，
 具体的步骤是：</p>
 <ol class="arabic simple">
-<li>在 Windows 系统的搜索框键入“powershell”，然后右键点击弹出的“Windows PowerShell“，选择“以管理员身份运行“。</li>
-<li>在弹出的 PowerShell 窗口输入命令 <code class="docutils literal notranslate"><span class="pre">Enable-WindowsOptionalFeature</span> <span class="pre">-Online</span> <span class="pre">-FeatureName</span> <span class="pre">Microsoft-Windows-Subsystem-Linux</span></code> ，然后回车。</li>
-<li>命令要求重启电脑以完成操作，再次按下回车键，重启电脑。</li>
+<li><p>在 Windows 系统的搜索框键入“powershell”，然后右键点击弹出的“Windows PowerShell“，选择“以管理员身份运行“。</p></li>
+<li><p>在弹出的 PowerShell 窗口输入命令 <code class="docutils literal notranslate"><span class="pre">Enable-WindowsOptionalFeature</span> <span class="pre">-Online</span> <span class="pre">-FeatureName</span> <span class="pre">Microsoft-Windows-Subsystem-Linux</span></code> ，然后回车。</p></li>
+<li><p>命令要求重启电脑以完成操作，再次按下回车键，重启电脑。</p></li>
 </ol>
 <img alt="../_images/enable-wsl.png" src="../_images/enable-wsl.png" />
 <p>重启系统之后，
@@ -153,7 +154,7 @@
 <div class="line">感叹 Windows 居然爱上了 Linux 的黄健宏</div>
 <div class="line">2020.2.6</div>
 </div>
-</div>
+</section>
 
 
     </div>
@@ -168,7 +169,7 @@
     </p>
     <p>
         &copy; Copyright 2022, 黄健宏.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br/>
     </p>
   </div>
 </footer>
